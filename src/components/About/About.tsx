@@ -8,7 +8,7 @@ export function About() {
     <div className="about flex flex-col items-center mt-12 px-4">
       {name && (
         <motion.h1
-          className="text-center"
+          className="text-center md:text-left"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}

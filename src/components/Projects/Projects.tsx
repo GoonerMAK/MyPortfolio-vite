@@ -1,8 +1,8 @@
-﻿import { motion } from 'motion/react'
+﻿import { motion, type Variants } from 'motion/react'
 import { projects } from '@/data/portfolio'
 import { ProjectContainer } from '../ProjectContainer/ProjectContainer'
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -12,7 +12,7 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,

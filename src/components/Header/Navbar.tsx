@@ -12,6 +12,7 @@ export function Navbar() {
   const [showNavList, setShowNavList] = useState(false)
 
   const toggleNavList = () => setShowNavList(!showNavList)
+  const closeNavList = () => setShowNavList(false)
 
   const navLinks = [
     { href: '#projects', label: 'Projects', show: projects.length > 0 },
@@ -41,7 +42,7 @@ export function Navbar() {
             >
               <a
                 href={link.href}
-                onClick={toggleNavList}
+                onClick={closeNavList}
                 className={cn(
                   'link link--nav text-[var(--clr-fg)] lowercase font-medium inline-flex items-center gap-1',
                   link.href === '/MyPortfolio/game' && 'text-[var(--clr-primary)]'

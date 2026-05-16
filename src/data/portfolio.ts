@@ -7,8 +7,8 @@ export const header: Header = {
 
 export const about: About = {
   name: 'Mashrur Ahsan',
-  role: 'Software Engineer Student',
-  description: `Your friendly neighborhood software student👋, always up for a challenge and eager to practice the art of coding.
+  role: 'Software Engineer',
+  description: `Your friendly neighborhood web developer👋, always up for a challenge and eager to practice the art of coding.
     Collaborate being my forte 🤝 - Always strive to interact with people, learn new things and create something awesome!
     Bit of a gaming enthusiast 🎮 and a lifeling Arsenal fan  #COYG`,
   social: {
@@ -68,58 +68,34 @@ export const projects: Project[] = [
 ]
 
 export const skillsList = [
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'TypeScript',
-  'React',
-  'Redux',
-  'SASS',
-  'Material UI',
-  'Git',
-  'CI/CD',
-  'Jest',
-  'Enzyme',
+  {
+    title: 'Backend Development',
+    skills: ['Node.js', 'Express.js', 'GraphQL', 'Apollo-GraphQL', 'Zod', 'Stripe', 'Postman', 'JavaScript', 'TypeScript']
+  },
+  {
+    title: 'Frontend Development',
+    skills: ['React', 'Next.js', 'Redux', 'React Query', 'HTML', 'CSS3', 'JavaScript', 'TypeScript', 'Vite']
+  },
+  {
+    title: 'Databases & ORMs',
+    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Supabase', 'Prisma', 'Sequelize']
+  },
+  {
+    title: 'UI Frameworks & Styling',
+    skills: ['Tailwind CSS', 'shadcn/ui', 'Chakra UI', 'Material UI']
+  },
+  {
+    title: 'DevOps, Cloud & Deployment',
+    skills: ['Git', 'GitHub Actions', 'Docker', 'AWS', 'Vercel', 'Netlify', 'Render']
+  },
+  {
+    title: 'Agentic Tools',
+    skills: ['Claude', 'GitHub Copilot', 'Google Gemini', 'HuggingFace', 'Ollama']
+  }
 ]
 
 export const skills = skillsList
 
-export const languages = [
-  'JavaScript',
-  'C',
-  'C#',
-  'Python',
-  'JAVA',
-  'C++',
-  'PHP',
-  'HTML',
-  'CSS',
-]
-
-export const frameworks = [
-  'React',
-  'Unity',
-  'Next JS',
-  'Node JS',
-  'Express',
-  'Laravel',
-]
-
-export const databases = [
-  'MongoDB',
-  'MySQL',
-  'Oracle',
-]
-
-export const mlAi = [
-  'Keras',
-  'Tensorflow',
-  'Numpy',
-  'Pandas',
-  'Scikit-learn',
-  'OpenCV',
-]
-
 export const contact: Contact = {
-  email: 'mashrurahsan@iut-dhaka.edu',
+  email: 'mash.ahsan81@gmail.com',
 }

@@ -47,7 +47,7 @@ export function Projects() {
         viewport={{ once: true, margin: "-50px" }}
       >
         {projects.map((project) => (
-          <motion.div key={crypto.randomUUID()} variants={itemVariants}>
+          <motion.div key={project.name || Math.random()} variants={itemVariants}>
             <ProjectContainer project={project} />
           </motion.div>
         ))}

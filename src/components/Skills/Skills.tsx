@@ -1,5 +1,5 @@
 ﻿import { motion } from 'motion/react'
-import { languages, frameworks, databases, mlAi } from '@/data/portfolio'
+import { skills } from '@/data/portfolio'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,112 +34,35 @@ export function Skills() {
       >
         Skills
       </motion.h2>
-      
-      <motion.h4
-        className="section__title"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        Languages
-      </motion.h4>
-      <motion.ul
-        className="max-w-[450px] w-[95%] mx-auto flex flex-wrap justify-center"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {languages.map((language) => (
-          <motion.li key={crypto.randomUUID()} variants={itemVariants}>
-            <span className="skills__list-item btn btn--plain m-2 inline-block">
-              {language}
-            </span>
-          </motion.li>
-        ))}
-      </motion.ul>
 
-      <br /><br />
-
-      <motion.h4
-        className="section__title"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        Frameworks &amp; Libraries
-      </motion.h4>
-      <motion.ul
-        className="max-w-[450px] w-[95%] mx-auto flex flex-wrap justify-center"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {frameworks.map((framework) => (
-          <motion.li key={crypto.randomUUID()} variants={itemVariants}>
-            <span className="skills__list-item btn btn--plain m-2 inline-block">
-              {framework}
-            </span>
-          </motion.li>
-        ))}
-      </motion.ul>
-
-      <br /><br />
-
-      <motion.h4
-        className="section__title"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        Databases
-      </motion.h4>
-      <motion.ul
-        className="max-w-[450px] w-[95%] mx-auto flex flex-wrap justify-center"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {databases.map((database) => (
-          <motion.li key={crypto.randomUUID()} variants={itemVariants}>
-            <span className="skills__list-item btn btn--plain m-2 inline-block">
-              {database}
-            </span>
-          </motion.li>
-        ))}
-      </motion.ul>
-      
-      <br /><br />
-
-      <motion.h4
-        className="section__title"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        Machine Learning &amp; AI
-      </motion.h4>
-      <motion.ul
-        className="max-w-[450px] w-[95%] mx-auto flex flex-wrap justify-center"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {mlAi.map((ml) => (
-          <motion.li key={crypto.randomUUID()} variants={itemVariants}>
-            <span className="skills__list-item btn btn--plain m-2 inline-block">
-              {ml}
-            </span>
-          </motion.li>
-        ))}
-      </motion.ul>
+      {skills.map((skillGroup, index) => (
+        <div key={skillGroup.title}>
+          <motion.h4
+            className="section__title"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index === 0 ? 0.1 : 0 }}
+          >
+            {skillGroup.title}
+          </motion.h4>
+          <motion.ul
+            className="max-w-[800px] w-[95%] mx-auto flex flex-wrap justify-center mb-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {skillGroup.skills.map((skill) => (
+              <motion.li key={skill} variants={itemVariants}>
+                <span className="skills__list-item btn btn--plain m-2 inline-block">
+                  {skill}
+                </span>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
+      ))}
     </section>
   )
 }

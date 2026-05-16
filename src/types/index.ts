@@ -20,6 +20,7 @@ export interface Project {
   stack: string[]
   sourceCode: string
   livePreview?: string
+  status?: 'active' | 'resolved' | 'archived'
 }
 
 export interface Contact {

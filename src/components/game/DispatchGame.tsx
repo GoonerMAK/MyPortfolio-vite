@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { Monitor, Database, Cloud, Shield, AlertTriangle, Zap, Clock, Trophy, RotateCcw, Radio } from 'lucide-react'
+import { Monitor, Database, Cloud, Shield, Zap, Clock, Trophy, RotateCcw, Radio } from 'lucide-react'
 
 type UnitType = 'frontend' | 'backend' | 'devops' | 'security'
 

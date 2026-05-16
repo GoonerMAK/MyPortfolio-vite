@@ -30,9 +30,9 @@ export function HomePage() {
           <div className="panel panel-hud p-8">
             <div className="pt-2">
               <Radio className="w-10 h-10 mx-auto mb-4 text-[var(--clr-accent-red)]" />
-              <h3 className="text-2xl mb-3">Incoming Dispatch</h3>
+              <h3 className="text-2xl mb-3">Tech Dispatch</h3>
               <p className="text-[var(--clr-fg)] mb-6 max-w-md mx-auto text-sm">
-                Emergency simulation available. Test your response time and decision-making under pressure.
+                Dispatch simulation available. Test your response time and decision-making under pressure.
               </p>
               <a href="/MyPortfolio/game">
                 <motion.span

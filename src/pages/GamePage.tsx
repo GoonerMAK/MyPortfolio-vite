@@ -34,10 +34,10 @@ export function GamePage() {
           className="text-center my-8"
         >
           <h1 className="text-3xl md:text-4xl mb-3">
-            Emergency Dispatch
+            Tech Dispatch
           </h1>
           <p className="text-[var(--clr-fg)] max-w-lg mx-auto text-sm">
-            Incoming emergencies require your immediate response. Triage each incident by selecting the correct response unit before time runs out.
+            Incoming requirements require your immediate response. Triage each incident by selecting the correct response unit before time runs out.
           </p>
         </motion.div>
 

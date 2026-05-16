@@ -17,7 +17,7 @@ export function About() {
           >
             <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-green)] shadow-[0_0_8px_var(--clr-accent-green)]" />
             <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-green)] uppercase tracking-widest">
-              Operator Online
+              Online
             </span>
           </motion.div>
 

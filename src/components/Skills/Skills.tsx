@@ -41,7 +41,7 @@ export function Skills() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.3 }}
       >
-        Capabilities
+        Skills
       </motion.h2>
 
       <div className="max-w-[900px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">

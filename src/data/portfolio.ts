@@ -2,7 +2,7 @@
 
 export const header: Header = {
   homepage: '',
-  title: 'DISPATCH',
+  title: 'Portfolio',
 }
 
 export const about: About = {
@@ -50,7 +50,7 @@ export const projects: Project[] = [
       'A 2D pixel art action adventure game with fictional narrative- made with Unity and deployed on Itch.io',
     stack: ['Unity', 'C#'],
     sourceCode: 'https://github.com/GoonerMAK/Whispering-Shadow',
-    livePreview: 'https://hwr-ml-report-mashrurahsan.netlify.app/',
+    livePreview: 'https://m-a-k.itch.io/whispering-shadow',
     status: 'resolved',
   },
   {

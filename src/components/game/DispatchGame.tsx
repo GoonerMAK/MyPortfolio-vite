@@ -185,9 +185,9 @@ export function DispatchGame() {
         >
           <div className="pt-2">
             <Radio className="w-12 h-12 mx-auto mb-4 text-[var(--clr-primary)]" />
-            <h3 className="text-xl mb-2">Dispatch Simulation</h3>
+            <h3 className="text-xl mb-2">Tech Dispatch Simulation</h3>
             <p className="text-sm text-[var(--clr-fg)] mb-2 max-w-md mx-auto">
-              You will receive <strong className="text-[var(--clr-fg-alt)]">{ROUNDS} emergency calls</strong>. 
+              You will receive <strong className="text-[var(--clr-fg-alt)]">{ROUNDS} requirement calls</strong>. 
               For each one, dispatch the correct response unit before time expires.
             </p>
             <div className="flex justify-center gap-4 my-6 flex-wrap">

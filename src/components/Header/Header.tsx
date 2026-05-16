@@ -12,7 +12,7 @@ export function Header() {
         transition={{ duration: 0.3 }}
       >
         <span className="text-[var(--clr-primary)] font-['Anton'] text-2xl tracking-wider uppercase">
-          DISPATCH
+          Portfolio
         </span>
         <span className="text-[var(--clr-border)] text-xl">//</span>
         <span className="text-[var(--clr-fg-alt)] font-['IBM_Plex_Sans'] text-sm font-semibold uppercase tracking-widest">

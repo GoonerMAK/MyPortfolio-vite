@@ -11,10 +11,10 @@ export function Navbar() {
   const closeNavList = () => setShowNavList(false)
 
   const navLinks = [
-    { href: '#about', label: 'Operator', show: true },
-    { href: '#projects', label: 'Emergencies', show: projects.length > 0 },
-    { href: '#skills', label: 'Capabilities', show: true },
-    { href: '#contact', label: 'Channel', show: !!contact.email },
+    { href: '#about', label: 'About', show: true },
+    { href: '#projects', label: 'Projects', show: projects.length > 0 },
+    { href: '#skills', label: 'Skills', show: true },
+    { href: '#contact', label: 'Contact', show: !!contact.email },
     { href: '/MyPortfolio/game', label: 'Simulation', show: true, highlight: true },
   ]
 

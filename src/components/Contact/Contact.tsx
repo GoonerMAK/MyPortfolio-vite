@@ -14,7 +14,7 @@ export function Contact() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.3 }}
       >
-        Open Channel
+        Contact
       </motion.h2>
       <motion.div
         className="panel panel-hud p-8 max-w-md mx-auto text-center"
@@ -37,7 +37,7 @@ export function Contact() {
               whileTap={{ scale: 0.97 }}
             >
               <Mail className="w-4 h-4" />
-              Transmit Message
+              Mail me
             </motion.span>
           </a>
         </div>

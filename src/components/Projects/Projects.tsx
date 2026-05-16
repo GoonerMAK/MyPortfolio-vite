@@ -36,7 +36,7 @@ export function Projects() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.3 }}
       >
-        Active Emergencies
+        Projects
       </motion.h2>
 
       <motion.div

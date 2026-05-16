@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { AlertTriangle, Shield, Flame, Zap, Clock, Trophy, RotateCcw, Heart, Radio } from 'lucide-react'
+import { Monitor, Database, Cloud, Shield, AlertTriangle, Zap, Clock, Trophy, RotateCcw, Radio } from 'lucide-react'
 
-type UnitType = 'police' | 'fire' | 'medical' | 'hazmat'
+type UnitType = 'frontend' | 'backend' | 'devops' | 'security'
 
 interface Emergency {
   id: string
@@ -26,31 +26,31 @@ interface GameState {
 }
 
 const UNITS: { type: UnitType; label: string; icon: typeof Shield; color: string }[] = [
-  { type: 'police', label: 'Police', icon: Shield, color: 'var(--clr-primary)' },
-  { type: 'fire', label: 'Fire Dept', icon: Flame, color: 'var(--clr-accent-red)' },
-  { type: 'medical', label: 'Medical', icon: Heart, color: 'var(--clr-accent-green)' },
-  { type: 'hazmat', label: 'Hazmat', icon: AlertTriangle, color: 'var(--clr-accent-gold)' },
+  { type: 'frontend', label: 'Frontend', icon: Monitor, color: 'var(--clr-primary)' },
+  { type: 'backend', label: 'Backend', icon: Database, color: 'var(--clr-accent-red)' },
+  { type: 'devops', label: 'DevOps', icon: Cloud, color: 'var(--clr-accent-green)' },
+  { type: 'security', label: 'Security', icon: Shield, color: 'var(--clr-accent-gold)' },
 ]
 
 const EMERGENCIES: Emergency[] = [
-  { id: '1', title: 'Armed Robbery in Progress', description: 'Silent alarm triggered at First National Bank, 5th Avenue. Multiple armed suspects reported inside.', correctUnit: 'police', severity: 'critical', timeLimit: 12 },
-  { id: '2', title: 'Structure Fire - Residential', description: 'Three-story apartment building fully engulfed. Multiple residents still inside upper floors.', correctUnit: 'fire', severity: 'critical', timeLimit: 10 },
-  { id: '3', title: 'Cardiac Arrest', description: 'Elderly male collapsed in grocery store. Bystander performing CPR. AED not available on site.', correctUnit: 'medical', severity: 'critical', timeLimit: 10 },
-  { id: '4', title: 'Chemical Spill on Highway', description: 'Tanker truck overturned on I-95. Unknown substance leaking. Visible vapor cloud forming.', correctUnit: 'hazmat', severity: 'critical', timeLimit: 12 },
-  { id: '5', title: 'Domestic Disturbance', description: 'Neighbors report screaming and sounds of breaking glass. Children may be present.', correctUnit: 'police', severity: 'high', timeLimit: 14 },
-  { id: '6', title: 'Vehicle Fire - Highway', description: 'Sedan engulfed in flames on shoulder of Route 9. No injuries reported. Traffic backing up.', correctUnit: 'fire', severity: 'medium', timeLimit: 15 },
-  { id: '7', title: 'Allergic Reaction', description: 'Child experiencing severe anaphylaxis at elementary school. EpiPen administered but symptoms persisting.', correctUnit: 'medical', severity: 'high', timeLimit: 12 },
-  { id: '8', title: 'Gas Leak - Commercial', description: 'Strong gas odor reported in downtown office building. Building being evacuated. 200+ occupants.', correctUnit: 'hazmat', severity: 'high', timeLimit: 12 },
-  { id: '9', title: 'Hit and Run', description: 'Pedestrian struck by vehicle that fled the scene. Victim conscious but unable to move. Witnesses have plate number.', correctUnit: 'police', severity: 'high', timeLimit: 14 },
-  { id: '10', title: 'Kitchen Fire - Restaurant', description: 'Grease fire spread to ventilation system at busy restaurant. Staff attempting to evacuate patrons.', correctUnit: 'fire', severity: 'high', timeLimit: 12 },
-  { id: '11', title: 'Multi-Vehicle Accident', description: 'Five-car pileup on freeway overpass. Multiple injuries reported. Possible fuel leak from one vehicle.', correctUnit: 'medical', severity: 'critical', timeLimit: 10 },
-  { id: '12', title: 'Suspicious Package', description: 'Unattended briefcase found in subway station. White powder visible through seams. Station being cleared.', correctUnit: 'hazmat', severity: 'critical', timeLimit: 10 },
-  { id: '13', title: 'Burglary in Progress', description: 'Homeowner called from closet. Two intruders heard ransacking the house. Family pet injured.', correctUnit: 'police', severity: 'high', timeLimit: 14 },
-  { id: '14', title: 'Wildfire Approaching', description: 'Brush fire moving toward residential neighborhood. Wind shifting. Evacuation may be necessary.', correctUnit: 'fire', severity: 'critical', timeLimit: 10 },
-  { id: '15', title: 'Drowning - Public Pool', description: 'Teenager pulled from pool, not breathing. Lifeguard performing rescue breathing.', correctUnit: 'medical', severity: 'critical', timeLimit: 10 },
-  { id: '16', title: 'Industrial Accident', description: 'Worker trapped in machinery at manufacturing plant. Chemical coolant leaking from damaged equipment.', correctUnit: 'hazmat', severity: 'high', timeLimit: 12 },
-  { id: '17', title: 'Shoplifting Turned Violent', description: 'Suspect brandished weapon at store security. Fled on foot into crowded mall. Civilians sheltering in place.', correctUnit: 'police', severity: 'high', timeLimit: 14 },
-  { id: '18', title: 'Electrical Fire - Substation', description: 'Transformer explosion at power substation. Flames and sparks visible. Surrounding blocks lost power.', correctUnit: 'fire', severity: 'high', timeLimit: 12 },
+  { id: '1', title: 'DDoS Attack', description: 'Massive traffic spike detected from multiple IPs targeting the main API gateway.', correctUnit: 'security', severity: 'critical', timeLimit: 12 },
+  { id: '2', title: 'Database Deadlock', description: 'Production database is entirely locked up. No writes are going through.', correctUnit: 'backend', severity: 'critical', timeLimit: 10 },
+  { id: '3', title: 'CI/CD Pipeline Failure', description: 'Deployment to production failed due to a missing environment variable in the runner.', correctUnit: 'devops', severity: 'high', timeLimit: 12 },
+  { id: '4', title: 'Mobile Layout Breaking', description: 'New hero section overlaps completely on iOS Safari, rendering the app unusable.', correctUnit: 'frontend', severity: 'high', timeLimit: 12 },
+  { id: '5', title: 'Ransomware Attempt', description: 'Automated script attempted to encrypt user storage buckets.', correctUnit: 'security', severity: 'critical', timeLimit: 10 },
+  { id: '6', title: 'High Memory Usage', description: 'Node.js server memory leak crashing instances every 5 minutes.', correctUnit: 'backend', severity: 'high', timeLimit: 12 },
+  { id: '7', title: 'Cluster Nodes Evicted', description: 'Kubernetes autoscaler is aggressively terminating pods without spinning up new ones.', correctUnit: 'devops', severity: 'critical', timeLimit: 10 },
+  { id: '8', title: 'Cross-Site Scripting (XSS)', description: 'User reported an injected script in the comment section bypassing sanitization.', correctUnit: 'security', severity: 'critical', timeLimit: 12 },
+  { id: '9', title: 'State Management Bug', description: 'Shopping cart empties itself immediately after adding an item.', correctUnit: 'frontend', severity: 'high', timeLimit: 14 },
+  { id: '10', title: 'API Rate Limit Exceeded', description: 'Third-party integration is rate-limiting our internal proxy due to improper caching.', correctUnit: 'backend', severity: 'medium', timeLimit: 15 },
+  { id: '11', title: 'Stale Cache on Edge CDN', description: 'Users across Europe are seeing last week’s deployment instead of the current one.', correctUnit: 'devops', severity: 'medium', timeLimit: 15 },
+  { id: '12', title: 'Auth Token Leak', description: 'Developer accidentally committed a live AWS admin token into a public repository.', correctUnit: 'security', severity: 'critical', timeLimit: 10 },
+  { id: '13', title: 'Broken Payment Form', description: 'The Stripe checkout iframe fails to render on the desktop Safari browser.', correctUnit: 'frontend', severity: 'critical', timeLimit: 10 },
+  { id: '14', title: 'Slow Queries', description: 'Search endpoint is taking 15+ seconds to resolve standard queries.', correctUnit: 'backend', severity: 'high', timeLimit: 14 },
+  { id: '15', title: 'Domain Expiration', description: 'Primary SSL cert and domain are expiring in 1 hour. Automated renewal script failed.', correctUnit: 'devops', severity: 'critical', timeLimit: 10 },
+  { id: '16', title: 'Accessibility Compliance', description: 'Screen readers completely failing to navigate the new modal dialog interface.', correctUnit: 'frontend', severity: 'high', timeLimit: 12 },
+  { id: '17', title: 'Suspicious Admin Logins', description: 'Multiple anomalous admin logins originating from abnormal geographic locations.', correctUnit: 'security', severity: 'high', timeLimit: 12 },
+  { id: '18', title: 'Unoptimized Bundle Size', description: 'Initial page load payload increased by 5MB, heavily impacting Lighthouse scores.', correctUnit: 'frontend', severity: 'medium', timeLimit: 15 },
 ]
 
 function shuffleArray<T>(array: T[]): T[] {

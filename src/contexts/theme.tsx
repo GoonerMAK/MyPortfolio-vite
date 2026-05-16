@@ -1,4 +1,4 @@
-﻿import { createContext, useEffect, useState, type ReactNode } from 'react'
+﻿import { createContext, useEffect, type ReactNode } from 'react'
 
 interface ThemeContextType {
   isDark: boolean
@@ -12,34 +12,13 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [isDark, setIsDark] = useState(false)
-
+  // Dispatch theme is always dark
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark')
-    } else {
-      setIsDark(prefersDark)
-    }
+    document.documentElement.classList.add('dark')
   }, [])
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    localStorage.setItem('theme', isDark ? 'dark' : 'light')
-  }, [isDark])
-
-  const toggleTheme = () => {
-    setIsDark((prev) => !prev)
-  }
-
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDark: true, toggleTheme: () => {} }}>
       {children}
     </ThemeContext.Provider>
   )

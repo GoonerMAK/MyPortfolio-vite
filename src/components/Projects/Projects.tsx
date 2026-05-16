@@ -7,18 +7,18 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.08,
     },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, x: -20 },
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: [0.215, 0.61, 0.355, 1],
     },
   },
@@ -28,27 +28,27 @@ export function Projects() {
   if (!projects.length) return null
 
   return (
-    <section id="projects" className="section projects px-4">
+    <section id="projects" className="section px-4">
       <motion.h2
         className="section__title"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
-        Projects
+        Active Emergencies
       </motion.h2>
 
       <motion.div
-        className="max-w-[1100px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-8"
+        className="max-w-[1100px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
       >
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <motion.div key={project.name || Math.random()} variants={itemVariants}>
-            <ProjectContainer project={project} />
+            <ProjectContainer project={project} index={index} />
           </motion.div>
         ))}
       </motion.div>

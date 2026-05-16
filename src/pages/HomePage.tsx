@@ -1,7 +1,5 @@
-﻿import { useContext } from 'react'
-import { motion } from 'motion/react'
-import { Gamepad2 } from 'lucide-react'
-import { ThemeContext } from '@/contexts/theme'
+﻿import { motion } from 'motion/react'
+import { Radio } from 'lucide-react'
 import { Header } from '@/components/Header/Header'
 import { About } from '@/components/About/About'
 import { Projects } from '@/components/Projects/Projects'
@@ -11,11 +9,8 @@ import { Footer } from '@/components/Footer/Footer'
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop'
 
 export function HomePage() {
-  const themeCtx = useContext(ThemeContext)
-  const isDark = themeCtx?.isDark ?? false
-
   return (
-    <div id="top" className={`${isDark ? 'dark' : ''} app`}>
+    <div id="top" className="app min-h-screen">
       <Header />
 
       <main className="max-w-[1100px] w-[95%] mx-auto">
@@ -24,35 +19,33 @@ export function HomePage() {
         <Skills />
         <Contact />
 
-        {/* Game CTA Section */}
+        {/* Simulation CTA Section */}
         <motion.section
-          className="section py-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="section py-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
         >
-          <motion.div
-            className="p-8 rounded-2xl bg-gradient-to-br from-[var(--clr-primary)]/10 to-[var(--clr-primary)]/5 border border-[var(--clr-primary)]/20"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Gamepad2 className="w-12 h-12 mx-auto mb-4 text-[var(--clr-primary)]" />
-            <h3 className="text-2xl mb-3">Take a Break!</h3>
-            <p className="text-[var(--clr-fg-alt)] mb-6 max-w-md mx-auto">
-              Ready for a quick challenge? Test your memory with Dev Dispatch - a card matching game built with React.
-            </p>
-            <a href="/MyPortfolio/game">
-              <motion.span
-                className="btn btn--outline inline-flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Gamepad2 className="w-4 h-4" />
-                Play Game
-              </motion.span>
-            </a>
-          </motion.div>
+          <div className="panel panel-hud p-8">
+            <div className="pt-2">
+              <Radio className="w-10 h-10 mx-auto mb-4 text-[var(--clr-accent-red)]" />
+              <h3 className="text-2xl mb-3">Incoming Dispatch</h3>
+              <p className="text-[var(--clr-fg)] mb-6 max-w-md mx-auto text-sm">
+                Emergency simulation available. Test your response time and decision-making under pressure.
+              </p>
+              <a href="/MyPortfolio/game">
+                <motion.span
+                  className="btn btn--outline inline-flex items-center gap-2"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <Radio className="w-4 h-4" />
+                  Enter Simulation
+                </motion.span>
+              </a>
+            </div>
+          </div>
         </motion.section>
       </main>
 

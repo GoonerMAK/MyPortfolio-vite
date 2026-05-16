@@ -2,7 +2,7 @@
 
 export const header: Header = {
   homepage: '',
-  title: 'WELCOME!',
+  title: 'DISPATCH',
 }
 
 export const about: About = {
@@ -25,6 +25,7 @@ export const projects: Project[] = [
     stack: ['JavaScript', 'Express.js', 'React', 'Node.js', 'MongoDB'],
     sourceCode: 'https://github.com/GoonerMAK/InternConnect/tree/main',
     livePreview: 'https://internconnect.netlify.app/',
+    status: 'resolved',
   },
   {
     name: 'English Handwriting Recognition Project',
@@ -33,6 +34,7 @@ export const projects: Project[] = [
     stack: ['Python', 'Pandas', 'Tensorflow', 'Numpy', 'Scikit-learn'],
     sourceCode: 'https://github.com/GoonerMAK/Handwriting-Recognition',
     livePreview: 'https://hwr-ml-report-mashrurahsan.netlify.app/',
+    status: 'resolved',
   },
   {
     name: 'Bongcloud - Chess Blog Site',
@@ -40,6 +42,7 @@ export const projects: Project[] = [
       'Chess blog website for chess enthusiasts - to explore, discuss opening strategies, unconventional tactics, and many more',
     stack: ['Express.js', 'Node.js', 'MongoDB', 'JavaScript'],
     sourceCode: 'https://github.com/GoonerMAK/SWE-4537-Server-Programming/tree/main/Project',
+    status: 'active',
   },
   {
     name: 'Whispering Shadow',
@@ -48,6 +51,7 @@ export const projects: Project[] = [
     stack: ['Unity', 'C#'],
     sourceCode: 'https://github.com/GoonerMAK/Whispering-Shadow',
     livePreview: 'https://hwr-ml-report-mashrurahsan.netlify.app/',
+    status: 'resolved',
   },
   {
     name: 'CO2 Emission Prediction Model',
@@ -56,6 +60,7 @@ export const projects: Project[] = [
     stack: ['Python', 'Numpy', 'Pandas', 'Tensorflow'],
     sourceCode: 'https://github.com/GoonerMAK/CO2_Emissions_Prediction',
     livePreview: 'https://www.kaggle.com/code/shantamaria/co2-prediction-using-time-series-forecasting-lstm',
+    status: 'archived',
   },
   {
     name: 'Cosmic Dodge',
@@ -64,6 +69,7 @@ export const projects: Project[] = [
     stack: ['Unity', 'C#'],
     sourceCode: 'https://github.com/GoonerMAK/BrackeysGameJam23',
     livePreview: 'https://m-a-k.itch.io/cosmic-dodge',
+    status: 'active',
   },
 ]
 

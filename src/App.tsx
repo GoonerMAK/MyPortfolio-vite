@@ -21,7 +21,7 @@ function LoadingSpinner() {
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter basename="/MyPortfolio">
+      <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route

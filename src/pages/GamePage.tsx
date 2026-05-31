@@ -12,7 +12,7 @@ export function GamePage() {
         transition={{ duration: 0.3 }}
       >
         <a
-          href="/MyPortfolio"
+          href="/"
           className="link inline-flex items-center gap-2 text-sm uppercase tracking-wider"
         >
           <ArrowLeft className="w-4 h-4" />

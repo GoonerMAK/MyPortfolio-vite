@@ -15,7 +15,7 @@ export function Navbar() {
     { href: '#projects', label: 'Projects', show: projects.length > 0 },
     { href: '#skills', label: 'Skills', show: true },
     { href: '#contact', label: 'Contact', show: !!contact.email },
-    { href: '/MyPortfolio/game', label: 'Simulation', show: true, highlight: true },
+    { href: '/game', label: 'Simulation', show: true, highlight: true },
   ]
 
   return (

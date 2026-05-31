@@ -1,9 +1,9 @@
 {
-  "name": "MyPortfolio",
+  "name": "Portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://goonermak.github.io/MyPortfolio",
+  "homepage": "https://goonermak.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

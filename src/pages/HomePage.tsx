@@ -34,7 +34,7 @@ export function HomePage() {
               <p className="text-[var(--clr-fg)] mb-6 max-w-md mx-auto text-sm">
                 Dispatch simulation available. Test your response time and decision-making under pressure.
               </p>
-              <a href="/MyPortfolio/game">
+              <a href="/game">
                 <motion.span
                   className="btn btn--outline inline-flex items-center gap-2"
                   whileHover={{ scale: 1.03 }}

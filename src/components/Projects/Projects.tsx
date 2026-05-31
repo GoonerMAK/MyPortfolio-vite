@@ -40,7 +40,7 @@ export function Projects() {
       </motion.h2>
 
       <motion.div
-        className="max-w-[1100px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6"
+        className="max-w-[1400px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

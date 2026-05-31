@@ -40,12 +40,12 @@ export function About() {
               transition={{ duration: 0.3, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
             >
               <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase tracking-wider">Designation:</span>
-              <span className="font-['JetBrains_Mono'] text-sm text-[var(--clr-primary)]">{role}</span>
+              <span className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)]">{role}</span>
             </motion.div>
           )}
 
           <motion.p
-            className="mt-6 max-w-[660px] text-sm leading-relaxed text-[var(--clr-fg)]"
+            className="mt-6 max-w-[1050px] text-base leading-relaxed text-[var(--clr-fg)]"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}

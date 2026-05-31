@@ -27,6 +27,21 @@ export interface Contact {
   email: string
 }
 
+export interface ExperienceRole {
+  title: string
+  type: string
+  dateRange: string
+  duration: string
+  mode: string
+  achievements: string[]
+}
+
+export interface ExperienceCompany {
+  name: string
+  totalTenure: string
+  roles: ExperienceRole[]
+}
+
 export interface Skills {
   skills: string[]
   languages: string[]

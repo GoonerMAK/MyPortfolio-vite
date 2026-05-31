@@ -6,7 +6,7 @@ export function GamePage() {
   return (
     <div className="min-h-screen">
       <motion.header
-        className="h-20 md:h-24 max-w-[1100px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]"
+        className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]"
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
@@ -26,7 +26,7 @@ export function GamePage() {
         </div>
       </motion.header>
 
-      <main className="max-w-[1100px] w-[95%] mx-auto px-4 pb-12">
+      <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export function GamePage() {
           <h1 className="text-3xl md:text-4xl mb-3">
             Tech Dispatch
           </h1>
-          <p className="text-[var(--clr-fg)] max-w-lg mx-auto text-sm">
+          <p className="text-[var(--clr-fg)] max-w-xl mx-auto text-base">
             Incoming requirements require your immediate response. Triage each incident by selecting the correct response unit before time runs out.
           </p>
         </motion.div>

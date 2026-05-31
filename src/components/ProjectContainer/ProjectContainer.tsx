@@ -65,7 +65,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-[var(--clr-fg)] leading-relaxed mb-4 flex-1">
+        <p className="text-base text-[var(--clr-fg)] leading-relaxed mb-4 flex-1">
           {project.description}
         </p>
 

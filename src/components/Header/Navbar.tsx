@@ -12,8 +12,9 @@ export function Navbar() {
 
   const navLinks = [
     { href: '#about', label: 'About', show: true },
-    { href: '#projects', label: 'Projects', show: projects.length > 0 },
     { href: '#skills', label: 'Skills', show: true },
+    { href: '#experience', label: 'Experience', show: true },
+    { href: '#projects', label: 'Projects', show: projects.length > 0 },
     { href: '#contact', label: 'Contact', show: !!contact.email },
     { href: '/game', label: 'Simulation', show: true, highlight: true },
   ]

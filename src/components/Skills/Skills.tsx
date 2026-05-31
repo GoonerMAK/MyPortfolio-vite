@@ -1,5 +1,6 @@
 ﻿import { motion } from 'motion/react'
 import { skills } from '@/data/portfolio'
+import { skillIconMap } from '@/data/skillIcons'
 
 const CATEGORY_COLORS = [
   'var(--clr-primary)',
@@ -44,7 +45,7 @@ export function Skills() {
         Skills
       </motion.h2>
 
-      <div className="max-w-[900px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         {skills.map((skillGroup, index) => (
           <motion.div
             key={skillGroup.title}
@@ -68,11 +69,17 @@ export function Skills() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {skillGroup.skills.map((skill) => (
-                <motion.li key={skill} variants={itemVariants}>
-                  <span className="btn btn--plain">{skill}</span>
-                </motion.li>
-              ))}
+              {skillGroup.skills.map((skill) => {
+                const Icon = skillIconMap[skill]
+                return (
+                  <motion.li key={skill} variants={itemVariants}>
+                    <span className="btn btn--plain flex flex-col items-center gap-1.5 py-2 px-3">
+                      {Icon && <Icon className="w-4.5 h-4.5 text-[var(--clr-fg)]" />}
+                      <span className="text-center">{skill}</span>
+                    </span>
+                  </motion.li>
+                )
+              })}
             </motion.ul>
           </motion.div>
         ))}

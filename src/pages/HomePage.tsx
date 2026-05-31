@@ -4,6 +4,7 @@ import { Header } from '@/components/Header/Header'
 import { About } from '@/components/About/About'
 import { Projects } from '@/components/Projects/Projects'
 import { Skills } from '@/components/Skills/Skills'
+import { Experience } from '@/components/Experience/Experience'
 import { Contact } from '@/components/Contact/Contact'
 import { Footer } from '@/components/Footer/Footer'
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop'
@@ -13,10 +14,11 @@ export function HomePage() {
     <div id="top" className="app min-h-screen">
       <Header />
 
-      <main className="max-w-[1100px] w-[95%] mx-auto">
+      <main className="max-w-[1400px] w-[95%] mx-auto">
         <About />
-        <Projects />
         <Skills />
+        <Experience />
+        <Projects />
         <Contact />
 
         {/* Simulation CTA Section */}
@@ -31,7 +33,7 @@ export function HomePage() {
             <div className="pt-2">
               <Radio className="w-10 h-10 mx-auto mb-4 text-[var(--clr-accent-red)]" />
               <h3 className="text-2xl mb-3">Tech Dispatch</h3>
-              <p className="text-[var(--clr-fg)] mb-6 max-w-md mx-auto text-sm">
+              <p className="text-[var(--clr-fg)] mb-6 max-w-lg mx-auto text-base">
                 Dispatch simulation available. Test your response time and decision-making under pressure.
               </p>
               <a href="/game">

@@ -1,5 +1,5 @@
 ﻿import { motion } from 'motion/react'
-import { Menu, X, Radio } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { projects, contact } from '@/data/portfolio'
 import { cn } from '@/lib/utils'
@@ -16,7 +16,6 @@ export function Navbar() {
     { href: '#experience', label: 'Experience', show: true },
     { href: '#projects', label: 'Projects', show: projects.length > 0 },
     { href: '#contact', label: 'Contact', show: !!contact.email },
-    { href: '/game', label: 'Simulation', show: true, highlight: true },
   ]
 
   return (
@@ -42,11 +41,9 @@ export function Navbar() {
                 href={link.href}
                 onClick={closeNavList}
                 className={cn(
-                  'link link--nav inline-flex items-center gap-1.5',
-                  link.highlight && 'text-[var(--clr-accent-red)]'
+                  'link link--nav inline-flex items-center gap-1.5'
                 )}
               >
-                {link.highlight && <Radio className="w-3.5 h-3.5" />}
                 {link.label}
               </a>
             </motion.li>

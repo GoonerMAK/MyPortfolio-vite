@@ -5,7 +5,7 @@ export function About() {
   const { name, role, description, resume, social } = about
 
   return (
-    <section id="about" className="mt-12 px-4">
+    <section id="about" className="mt-12 px-20">
       <div className="panel panel-hud p-8 md:p-10">
         <div className="pt-2">
           {/* Status indicator */}

@@ -5,7 +5,7 @@ import { about } from '@/data/portfolio'
 export function Header() {
   return (
     <div className="sticky top-0 z-40 bg-[var(--clr-bg)]/95 backdrop-blur-md">
-      <header className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]">
+      <header className="h-20 md:h-24 max-w-[1200px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]">
         <motion.div
           className="flex items-center gap-2"
           initial={{ opacity: 0, x: -20 }}

@@ -45,11 +45,11 @@ export function Skills() {
         Skills
       </motion.h2>
 
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {skills.map((skillGroup, index) => (
           <motion.div
             key={skillGroup.title}
-            className="panel p-5"
+            className="panel p-5 flex flex-col"
             style={{ borderLeftWidth: '3px', borderLeftColor: CATEGORY_COLORS[index % CATEGORY_COLORS.length] }}
             initial={{ opacity: 0, x: -15 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ export function Skills() {
               {skillGroup.title}
             </h4>
             <motion.ul
-              className="flex flex-wrap gap-2"
+              className="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-1"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -72,10 +72,12 @@ export function Skills() {
               {skillGroup.skills.map((skill) => {
                 const Icon = skillIconMap[skill]
                 return (
-                  <motion.li key={skill} variants={itemVariants}>
-                    <span className="btn btn--plain flex flex-col items-center gap-1.5 py-2 px-3">
-                      {Icon && <Icon className="w-4.5 h-4.5 text-[var(--clr-fg)]" />}
-                      <span className="text-center">{skill}</span>
+                  <motion.li key={skill} variants={itemVariants} className="flex">
+                    <span className="btn btn--plain flex flex-col items-center justify-center gap-2 w-full aspect-square p-2">
+                      {Icon && <Icon className="w-6 h-6 text-[var(--clr-fg)]" />}
+                      <span className="text-center text-[12px] leading-tight break-words">
+                        {skill}
+                      </span>
                     </span>
                   </motion.li>
                 )

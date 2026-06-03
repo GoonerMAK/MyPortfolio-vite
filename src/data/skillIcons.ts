@@ -34,7 +34,6 @@ import {
   SiNetlify,
   SiRender,
   SiGooglegemini,
-  SiHuggingface,
   SiOllama,
   SiGithubcopilot,
   SiClaude,
@@ -79,6 +78,5 @@ export const skillIconMap: Record<string, IconType> = {
   'Claude': SiClaude,
   'GitHub Copilot': SiGithubcopilot,
   'Google Gemini': SiGooglegemini,
-  'HuggingFace': SiHuggingface,
   'Ollama': SiOllama,
 }

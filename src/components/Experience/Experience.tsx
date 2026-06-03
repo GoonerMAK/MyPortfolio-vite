@@ -15,7 +15,7 @@ export function Experience() {
         Work Experience
       </motion.h2>
 
-      <div className="max-w-[1000px] mx-auto flex flex-col gap-6">
+      <div className="max-w-[1050px] mx-auto flex flex-col gap-6">
         {experience.map((company, index) => (
           <motion.div
             key={company.name}

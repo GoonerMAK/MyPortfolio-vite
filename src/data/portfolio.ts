@@ -96,7 +96,7 @@ export const skillsList = [
   },
   {
     title: 'Agentic Tools',
-    skills: ['Claude', 'GitHub Copilot', 'Google Gemini', 'HuggingFace', 'Ollama']
+    skills: ['Claude', 'GitHub Copilot', 'Google Gemini', 'Ollama']
   }
 ]
 
@@ -108,15 +108,17 @@ export const experience: ExperienceCompany[] = [
     totalTenure: '5 mos',
     roles: [
       {
-        title: 'Back End Developer',
+        title: 'Backend Developer',
         type: 'Full-time',
         dateRange: 'Jan 2026 – Present',
         duration: '5 mos',
         mode: 'On-site',
         achievements: [
-          'Contributed to three SaaS platforms — an HRMS, a helpdesk, and a CRM — building and maintaining backend services across all three simultaneously.',
-          'Integrated AI-assisted coding tools into the development workflow, improving pre-QA smoke test coverage and reducing bug escalation rate, achieving 70% faster feature delivery.',
-          'Architected service-to-service communication pipelines using AWS SNS and SQS; optimized database queries and introduced parallelization, achieving ~30% faster average API response times.',
+          'Drove end-to-end performance improvements — optimized database queries and introduced parallelization techniques, achieving ∼30% faster average API response times; implemented UI virtualization, reducing average render time by ∼150ms across data-heavy interfaces',
+          'Built features utilizing 6+ AWS Lambda workers and AWS SNS/SQS pipelines to implement asynchronous background jobs, ensuring long-running operations ran in the background without slowing down the core API server',
+          'Optimized the AI coding workflow across full-stack modules by integrating compressed agentic prompts and a codebase knowledge graph — scoping model context to relevant nodes rather than full file trees, achieving top-21% amongst developers for AI token efficiency',
+          'Contributed to three SaaS platforms — an HR management system, a helpdesk platform, and a CRM — building and maintaining backend services across all three products simultaneously',
+          'Integrated AI-assisted coding tools into the development cycle, improving pre-QA smoke test coverage and reducing bug escalation rate to QA, achieving a 67% acceleration in overall feature delivery',
         ],
       },
     ],
@@ -132,9 +134,9 @@ export const experience: ExperienceCompany[] = [
         duration: '10 mos',
         mode: 'Hybrid',
         achievements: [
-          'Developed full-stack modules consisting of 25+ RESTful API endpoints and 10+ PostgreSQL schemas using Express.js and Redux.',
-          'Migrated legacy React + Material UI code to React/Tailwind/shadcn UI, contributing 54% of migration efforts toward 88% overall project completion.',
-          'Built 7+ responsive interfaces with lazy API fetching, improving Lighthouse Performance scores by an average of 12% across five modules.',
+          'Developed full-stack modules for a web application consisting of 25+ RESTful API endpoints and 10+ managed database schemas in PostgreSQL, using Express.js (Node.js) for backend services and Redux for state management',
+          'Migrated legacy code from older versions of React and Material UI to the React/Tailwind/shadcn UI stack, contributing 54% of the migration efforts towards 88% of overall project completion',
+          'Built 7+ responsive interfaces with React while writing optimized backend code, implementing lazy API fetching that improved Lighthouse Performance scores by an average of 12% across five modules',
         ],
       },
       {
@@ -144,9 +146,9 @@ export const experience: ExperienceCompany[] = [
         duration: '6 mos',
         mode: 'On-site',
         achievements: [
-          'Built a project expenditure app using React, TypeScript, Express, Prisma, Jest, and Zod with 80%+ test coverage.',
-          'Implemented RTK Query and state management, delivering 71% of the team\'s frontend output.',
-          'Collaborated in a five-person team and served as team lead on a rotational basis.',
+          'Created a project expenditure app using React, TypeScript, Express, Prisma; ensured 80%+ test coverage through unit & integration testing using Jest, while enforcing runtime type safety with Zod',
+          'Contributed to the development of a project module — implemented RTK Query, ensured proper state management, and maintained UI consistency, delivering 71% of the team\'s frontend output',
+          'Actively collaborated with a five-person team on full-stack development and took on the role of team lead on a rotational basis',
         ],
       },
     ],

@@ -12,7 +12,7 @@ export function Contact() {
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         Contact
       </motion.h2>
@@ -21,7 +21,7 @@ export function Contact() {
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3, delay: 0.1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         <div className="pt-2">
           <p className="font-['JetBrains_Mono'] text-sm text-[var(--clr-fg)] mb-1 uppercase tracking-wider">

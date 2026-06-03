@@ -10,7 +10,7 @@ export function Experience() {
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         Work Experience
       </motion.h2>
@@ -23,7 +23,7 @@ export function Experience() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
           >
             {/* Company Header */}
             <div className="flex items-center gap-3 mb-4">

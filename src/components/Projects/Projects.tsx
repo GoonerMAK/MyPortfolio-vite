@@ -18,7 +18,7 @@ const itemVariants: Variants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.6,
       ease: [0.215, 0.61, 0.355, 1],
     },
   },
@@ -34,7 +34,7 @@ export function Projects() {
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         Projects
       </motion.h2>

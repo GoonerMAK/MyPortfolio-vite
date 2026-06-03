@@ -181,7 +181,7 @@ export function DispatchGame() {
           className="panel panel-hud p-8 text-center"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.6 }}
         >
           <div className="pt-2">
             <Radio className="w-12 h-12 mx-auto mb-4 text-[var(--clr-primary)]" />
@@ -308,7 +308,7 @@ export function DispatchGame() {
             boxShadow: timerPct < 30 ? '0 0 8px var(--clr-accent-red)' : '0 0 8px var(--clr-primary)',
           }}
           animate={{ width: `${timerPct}%` }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.6 }}
         />
       </div>
 
@@ -325,7 +325,7 @@ export function DispatchGame() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.5 }}
           >
             <div className="p-6 pt-5">
               <div className="flex items-center justify-between mb-3">

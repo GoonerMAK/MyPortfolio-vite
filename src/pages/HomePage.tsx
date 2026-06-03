@@ -23,13 +23,13 @@ export function HomePage() {
 
         {/* Simulation CTA Section */}
         <motion.section
-          className="section py-12 text-center"
+          className="section py-2 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="panel panel-hud p-8">
+          <div className="panel panel-hud p-8 max-w-2xl mx-auto w-full">
             <div className="pt-2">
               <Radio className="w-10 h-10 mx-auto mb-4 text-[var(--clr-accent-red)]" />
               <h3 className="text-2xl mb-3">Tech Dispatch</h3>

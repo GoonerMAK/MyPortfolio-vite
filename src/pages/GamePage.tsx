@@ -9,7 +9,7 @@ export function GamePage() {
         className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]"
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         <a
           href="/"
@@ -30,7 +30,7 @@ export function GamePage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="text-center my-8"
         >
           <h1 className="text-3xl md:text-4xl mb-3">

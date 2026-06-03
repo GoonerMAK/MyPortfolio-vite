@@ -13,7 +13,7 @@ export function About() {
             className="flex items-center gap-2 mb-6"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.6 }}
           >
             <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-green)] shadow-[0_0_8px_var(--clr-accent-green)]" />
             <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-green)] uppercase tracking-widest">
@@ -26,7 +26,7 @@ export function About() {
               className="text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: [0.215, 0.61, 0.355, 1] }}
+              transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
             >
               {name}
             </motion.h1>
@@ -37,7 +37,7 @@ export function About() {
               className="mt-3 flex items-center gap-2"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
             >
               <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase tracking-wider">Designation:</span>
               <span className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)]">{role}</span>
@@ -48,7 +48,7 @@ export function About() {
             className="mt-6 max-w-[1050px] text-base leading-relaxed text-[var(--clr-fg)]"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
           >
             {description && description}
           </motion.p>
@@ -57,7 +57,7 @@ export function About() {
             className="mt-8 flex items-center gap-3 flex-wrap"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.3, ease: [0.215, 0.61, 0.355, 1] }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.215, 0.61, 0.355, 1] }}
           >
             {resume && (
               <a href={resume}>

@@ -56,12 +56,17 @@ export function Skills() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <h4
-              className="text-sm mb-5 pt-1 font-['JetBrains_Mono'] tracking-widest"
-              style={{ color: CATEGORY_COLORS[index] }}
-            >
-              {skillGroup.title}
-            </h4>
+            <div className="relative inline-block self-start mb-5">
+              <h4
+                className="text-sm pt-1 font-['JetBrains_Mono'] tracking-widest"
+                style={{ color: CATEGORY_COLORS[index] }}
+              >
+                {skillGroup.title}
+              </h4>
+              <div className="absolute -bottom-1 left-0 w-full h-[3px] border-b border-dotted border-[var(--clr-primary)]/20 overflow-hidden">
+                <div className="h-full w-full bg-[var(--clr-primary)] animate-sweep" />
+              </div>
+            </div>
             <motion.ul
               className="grid grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-2"
               variants={containerVariants}

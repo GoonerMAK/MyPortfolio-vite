@@ -6,7 +6,31 @@ export function About() {
 
   return (
     <section id="about" className="mt-12 px-20">
-      <div className="panel panel-hud p-8 md:p-10">
+      <div className="panel panel-hud p-8 md:p-10 relative overflow-hidden">
+        {/* Border trace animation using SVG for smooth cornering with long trails */}
+        <svg className="about-trace-svg">
+          <rect
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            rx="8"
+            ry="8"
+            pathLength="1000"
+            className="trace-path trace-path-1"
+          />
+          <rect
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            rx="8"
+            ry="8"
+            pathLength="1000"
+            className="trace-path trace-path-2"
+          />
+        </svg>
+        
         <div className="pt-2">
           {/* Status indicator */}
           <motion.div

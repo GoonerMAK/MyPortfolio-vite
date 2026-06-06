@@ -58,7 +58,6 @@ export function Projects() {
         if (container) {
           const cardWidth = container.querySelector('.panel')?.clientWidth || 320
           const gap = 24
-          const maxScroll = container.scrollWidth - container.clientWidth
           
           if (next === 0) {
             // Wrap to start - scroll to beginning

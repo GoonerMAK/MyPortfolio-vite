@@ -284,6 +284,62 @@ button {
   margin-top: 5em;
 }
 
+/* ---- Custom Animations ---- */
+
+@keyframes sweep-underline {
+  0% { transform: scaleX(0); transform-origin: left; }
+  25% { transform: scaleX(1); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: right; }
+  75% { transform: scaleX(0); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: left; }
+}
+
+.animate-sweep {
+  animation: sweep-underline 4s ease-in-out infinite;
+}
+
+@keyframes dash-move {
+  0% { stroke-dashoffset: 0; opacity: 0; }
+  5% { opacity: 1; }
+  45% { stroke-dashoffset: -1000; opacity: 1; }
+  50% { stroke-dashoffset: -1000; opacity: 0; }
+  100% { stroke-dashoffset: -1000; opacity: 0; }
+}
+
+.about-trace-svg {
+  position: absolute;
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  pointer-events: none;
+  z-index: 10;
+  fill: none;
+}
+
+.trace-path {
+  stroke: var(--clr-primary);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  /* 100px trail length relative to pathLength=1000 */
+  stroke-dasharray: 100 900; 
+  filter: drop-shadow(0 0 5px var(--clr-primary));
+  animation: dash-move 8s linear infinite;
+}
+
+.trace-path-2 {
+  /* Offset start position by half path length */
+  stroke-dashoffset: -500;
+  animation: dash-move-offset 8s linear infinite;
+}
+
+@keyframes dash-move-offset {
+  0% { stroke-dashoffset: -500; opacity:0; }
+  5% { opacity: 1; }
+  45% { stroke-dashoffset: -1500; opacity: 1; }
+  50% { stroke-dashoffset: -1500; opacity: 0; }
+  100% { stroke-dashoffset: -1500; opacity: 0; }
+}
+
 /* ---- Scrollbar Hide ---- */
 
 .scrollbar-hide {

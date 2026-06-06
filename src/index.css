@@ -284,6 +284,17 @@ button {
   margin-top: 5em;
 }
 
+/* ---- Scrollbar Hide ---- */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ---- Status Badges ---- */
 
 .badge {

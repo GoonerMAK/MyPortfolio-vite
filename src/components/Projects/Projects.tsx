@@ -58,10 +58,17 @@ export function Projects() {
         if (container) {
           const cardWidth = container.querySelector('.panel')?.clientWidth || 320
           const gap = 24
-          container.scrollTo({
-            left: next * (cardWidth + gap),
-            behavior: 'smooth',
-          })
+          const maxScroll = container.scrollWidth - container.clientWidth
+          
+          if (next === 0) {
+            // Wrap to start - scroll to beginning
+            container.scrollTo({ left: 0, behavior: 'smooth' })
+          } else {
+            container.scrollTo({
+              left: next * (cardWidth + gap),
+              behavior: 'smooth',
+            })
+          }
         }
 
         return next
@@ -82,16 +89,28 @@ export function Projects() {
     const cardWidth = container.querySelector('.panel')?.clientWidth || 320
     const gap = 24
     const scrollAmount = cardWidth + gap
+    const maxScroll = container.scrollWidth - container.clientWidth
 
     if (direction === 'right') {
-      const maxScroll = container.scrollWidth - container.clientWidth
-      const newScroll = Math.min(container.scrollLeft + scrollAmount, maxScroll)
-      container.scrollTo({ left: newScroll, behavior: 'smooth' })
-      setCurrentIndex(Math.min(currentIndex + 1, visibleDotCount - 1))
+      if (currentIndex >= visibleDotCount - 1) {
+        // Wrap to start
+        container.scrollTo({ left: 0, behavior: 'smooth' })
+        setCurrentIndex(0)
+      } else {
+        const newScroll = Math.min(container.scrollLeft + scrollAmount, maxScroll)
+        container.scrollTo({ left: newScroll, behavior: 'smooth' })
+        setCurrentIndex(currentIndex + 1)
+      }
     } else {
-      const newScroll = Math.max(container.scrollLeft - scrollAmount, 0)
-      container.scrollTo({ left: newScroll, behavior: 'smooth' })
-      setCurrentIndex(Math.max(currentIndex - 1, 0))
+      if (currentIndex <= 0) {
+        // Wrap to end
+        container.scrollTo({ left: maxScroll, behavior: 'smooth' })
+        setCurrentIndex(visibleDotCount - 1)
+      } else {
+        const newScroll = Math.max(container.scrollLeft - scrollAmount, 0)
+        container.scrollTo({ left: newScroll, behavior: 'smooth' })
+        setCurrentIndex(currentIndex - 1)
+      }
     }
   }
 
@@ -111,8 +130,7 @@ export function Projects() {
         {/* Navigation arrows */}
         <button
           onClick={() => scrollTo('left')}
-          disabled={currentIndex === 0}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
           aria-label="Previous project"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -120,8 +138,7 @@ export function Projects() {
 
         <button
           onClick={() => scrollTo('right')}
-          disabled={currentIndex >= visibleDotCount - 1}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
           aria-label="Next project"
         >
           <ChevronRight className="w-5 h-5" />

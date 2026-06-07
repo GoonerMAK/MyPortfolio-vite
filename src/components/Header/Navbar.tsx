@@ -24,7 +24,7 @@ export function Navbar() {
         className={cn(
           'nav__list flex mr-4 space-x-5 items-center',
           showNavList
-            ? 'flex-col fixed inset-0 bg-[var(--clr-bg)] z-50 justify-center items-center space-y-6 space-x-0'
+            ? 'flex-col fixed inset-0 bg-[var(--clr-bg)] z-[50] justify-center items-center space-y-6 space-x-0 pt-40 overflow-y-auto'
             : 'hidden md:flex'
         )}
       >
@@ -55,7 +55,7 @@ export function Navbar() {
         onClick={toggleNavList}
         className={cn(
           'btn btn--icon p-0 md:hidden text-[var(--clr-primary)]',
-          showNavList && 'z-50'
+          showNavList && 'z-[60] relative'
         )}
         aria-label="toggle navigation"
         whileHover={{ scale: 1.1 }}

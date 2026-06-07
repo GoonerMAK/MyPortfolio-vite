@@ -299,14 +299,14 @@ button {
 
 @keyframes sweep-underline {
   0% { transform: scaleX(0); transform-origin: left; }
-  25% { transform: scaleX(1); transform-origin: left; }
+  20% { transform: scaleX(1); transform-origin: left; }
   50% { transform: scaleX(1); transform-origin: right; }
-  75% { transform: scaleX(0); transform-origin: right; }
+  80% { transform: scaleX(0); transform-origin: right; }
   100% { transform: scaleX(0); transform-origin: left; }
 }
 
 .animate-sweep {
-  animation: sweep-underline 8s ease-in-out infinite;
+  animation: sweep-underline 10s ease-in-out infinite;
 }
 
 @keyframes dash-move {

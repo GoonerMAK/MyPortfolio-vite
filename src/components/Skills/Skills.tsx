@@ -63,7 +63,7 @@ export function Skills() {
               >
                 {skillGroup.title}
               </h4>
-              <div className="absolute -bottom-1 left-0 w-full h-[3px] border-b border-dotted border-[var(--clr-primary)]/20 overflow-hidden">
+              <div className="absolute -bottom-1 left-0 w-full h-[2px] border-b border-dotted border-[var(--clr-primary)]/20 overflow-hidden">
                 <div className="h-full w-full bg-[var(--clr-primary)] animate-sweep" />
               </div>
             </div>

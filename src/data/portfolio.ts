@@ -11,7 +11,7 @@ export const about: About = {
   name: 'Mashrur Ahsan',
   role: 'Software Engineer',
   description: `Your friendly neighborhood web developer👋, always up for a challenge and eager to practice the art of coding.
-    Collaborate being my forte 🤝 - Always strive to interact with people, learn new things and create something awesome!
+    Collaboration being my forte 🤝 - Always strive to interact with people, learn new things and create something awesome!
     Bit of a gaming enthusiast 🎮 and a lifeling Arsenal fan  #COYG`,
   social: {
     linkedin: 'https://www.linkedin.com/in/mak-/',

@@ -1,4 +1,6 @@
 ﻿import type { Header, About, Project, Contact, ExperienceCompany } from '@/types'
+import gainSolutionsLogo from '@/assets/gain-solutions-logo.svg'
+import binduLogicLogo from '@/assets/bindulogic-logo.svg'
 
 export const header: Header = {
   homepage: '',
@@ -105,7 +107,7 @@ export const skills = skillsList
 export const experience: ExperienceCompany[] = [
   {
     name: 'Gain Solutions',
-    logo: '/src/assets/gain-solutions-logo.svg',
+    logo: gainSolutionsLogo,
     totalTenure: '5 mos',
     roles: [
       {
@@ -133,7 +135,7 @@ export const experience: ExperienceCompany[] = [
   },
   {
     name: 'BinduLogic LLC',
-    logo: '/src/assets/bindulogic-logo.svg',
+    logo: binduLogicLogo,
     totalTenure: '1 yr 4 mos',
     roles: [
       {

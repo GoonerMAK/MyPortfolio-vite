@@ -351,6 +351,33 @@ button {
   100% { stroke-dashoffset: -1500; opacity: 0; }
 }
 
+@keyframes timeline-trace {
+  0% { stroke-dashoffset: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { stroke-dashoffset: -1200; opacity: 1; }
+  100% { stroke-dashoffset: -1200; opacity: 0; }
+}
+
+.timeline-trace-svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.timeline-trace-path {
+  stroke: var(--clr-primary);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dasharray: 40 1160;
+  filter: drop-shadow(0 0 4px var(--clr-primary));
+  animation: timeline-trace 4s linear infinite;
+}
+
 /* ---- Scrollbar Hide ---- */
 
 .scrollbar-hide {

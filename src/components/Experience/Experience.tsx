@@ -48,7 +48,19 @@ export function Experience() {
             </div>
 
             {/* Roles Timeline */}
-            <div className="relative ml-5 pl-5 border-l-2 border-[var(--clr-border)]">
+            <div className="relative ml-5 pl-5 border-l-2 border-[var(--clr-border)] group/timeline">
+              {/* Timeline Sweep Animation */}
+              <svg className="timeline-trace-svg">
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="100%"
+                  pathLength="1200"
+                  className="timeline-trace-path"
+                />
+              </svg>
+
               {company.roles.map((role, roleIndex) => (
                 <div
                   key={role.title}

@@ -1,6 +1,4 @@
-﻿import { motion } from 'motion/react'
-import { Radio } from 'lucide-react'
-import { Header } from '@/components/Header/Header'
+﻿import { Header } from '@/components/Header/Header'
 import { About } from '@/components/About/About'
 import { Projects } from '@/components/Projects/Projects'
 import { Skills } from '@/components/Skills/Skills'
@@ -22,7 +20,7 @@ export function HomePage() {
         <Contact />
 
         {/* Simulation CTA Section */}
-        <motion.section
+        {/* <motion.section
           className="section py-2 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +46,7 @@ export function HomePage() {
               </a>
             </div>
           </div>
-        </motion.section>
+        </motion.section> */}
       </main>
 
       <ScrollToTop />

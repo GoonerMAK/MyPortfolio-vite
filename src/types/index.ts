@@ -34,10 +34,12 @@ export interface ExperienceRole {
   duration: string
   mode: string
   achievements: string[]
+  highlights?: string[][]
 }
 
 export interface ExperienceCompany {
   name: string
+  logo: string
   totalTenure: string
   roles: ExperienceRole[]
 }

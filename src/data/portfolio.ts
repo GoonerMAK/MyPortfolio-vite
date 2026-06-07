@@ -105,13 +105,14 @@ export const skills = skillsList
 export const experience: ExperienceCompany[] = [
   {
     name: 'Gain Solutions',
+    logo: '/src/assets/gain-solutions-logo.svg',
     totalTenure: '5 mos',
     roles: [
       {
         title: 'Backend Developer',
         type: 'Full-time',
         dateRange: 'Jan 2026 – Present',
-        duration: '5 mos',
+        duration: '6 mos',
         mode: 'On-site',
         achievements: [
           'Drove end-to-end performance improvements — optimized database queries and introduced parallelization techniques, achieving ∼30% faster average API response times; implemented UI virtualization, reducing average render time by ∼150ms across data-heavy interfaces',
@@ -120,11 +121,19 @@ export const experience: ExperienceCompany[] = [
           'Contributed to three SaaS platforms — an HR management system, a helpdesk platform, and a CRM — building and maintaining backend services across all three products simultaneously',
           'Integrated AI-assisted coding tools into the development cycle, improving pre-QA smoke test coverage and reducing bug escalation rate to QA, achieving a 67% acceleration in overall feature delivery',
         ],
+        highlights: [
+          ['Drove end-to-end performance improvements', 'achieving ∼30% faster average API response times', 'reducing average render time by ∼150ms'],
+          ['6+ AWS Lambda workers', 'asynchronous background jobs'],
+          ['compressed agentic prompts', 'codebase knowledge graph', 'achieving top-21%'],
+          ['three SaaS platforms', 'building and maintaining backend services'],
+          ['improving pre-QA smoke test coverage', 'achieving a 67% acceleration'],
+        ],
       },
     ],
   },
   {
     name: 'BinduLogic LLC',
+    logo: '/src/assets/bindulogic-logo.svg',
     totalTenure: '1 yr 4 mos',
     roles: [
       {
@@ -138,6 +147,11 @@ export const experience: ExperienceCompany[] = [
           'Migrated legacy code from older versions of React and Material UI to the React/Tailwind/shadcn UI stack, contributing 54% of the migration efforts towards 88% of overall project completion',
           'Built 7+ responsive interfaces with React while writing optimized backend code, implementing lazy API fetching that improved Lighthouse Performance scores by an average of 12% across five modules',
         ],
+        highlights: [
+          ['25+ RESTful API endpoints', '10+ managed database schemas', 'PostgreSQL'],
+          ['contributing 54%', 'towards 88% of overall project completion'],
+          ['7+ responsive interfaces', 'improved Lighthouse Performance scores by an average of 12%'],
+        ],
       },
       {
         title: 'Software Engineer Intern',
@@ -149,6 +163,11 @@ export const experience: ExperienceCompany[] = [
           'Created a project expenditure app using React, TypeScript, Express, Prisma; ensured 80%+ test coverage through unit & integration testing using Jest, while enforcing runtime type safety with Zod',
           'Contributed to the development of a project module — implemented RTK Query, ensured proper state management, and maintained UI consistency, delivering 71% of the team\'s frontend output',
           'Actively collaborated with a five-person team on full-stack development and took on the role of team lead on a rotational basis',
+        ],
+        highlights: [
+          ['ensured 80%+ test coverage', 'runtime type safety with Zod'],
+          ['implemented RTK Query', 'delivering 71% of the team\'s frontend output'],
+          ['five-person team', 'team lead on a rotational basis'],
         ],
       },
     ],

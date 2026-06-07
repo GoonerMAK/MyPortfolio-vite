@@ -34,6 +34,7 @@ export interface ExperienceRole {
   duration: string
   mode: string
   achievements: string[]
+  highlights?: string[][]
 }
 
 export interface ExperienceCompany {

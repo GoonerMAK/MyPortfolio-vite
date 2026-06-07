@@ -305,8 +305,52 @@ button {
   100% { transform: scaleX(0); transform-origin: left; }
 }
 
+@keyframes sweep-underline-ease-in {
+  0% { transform: scaleX(0); transform-origin: left; }
+  20% { transform: scaleX(1); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: right; }
+  80% { transform: scaleX(0); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: left; }
+}
+
 .animate-sweep {
   animation: sweep-underline 10s ease-in-out infinite;
+}
+
+.animate-sweep-in {
+  animation: sweep-underline-ease-in 10s ease-in infinite;
+}
+
+/* Achievement highlight hover - trigger on parent hover */
+@keyframes sweep-hover-in {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+.animate-sweep-hover {
+  animation: sweep-hover-in 6s ease-in forwards;
+}
+
+/* Achievement highlight sweep on hover */
+.highlight-sweep {
+  display: inline-block;
+}
+
+.highlight-sweep::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--clr-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease-in;
+}
+
+/* Animate when parent achievement is hovered */
+li:hover .highlight-sweep::after {
+  transform: scaleX(1);
 }
 
 @keyframes dash-move {

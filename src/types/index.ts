@@ -38,6 +38,7 @@ export interface ExperienceRole {
 
 export interface ExperienceCompany {
   name: string
+  logo: string
   totalTenure: string
   roles: ExperienceRole[]
 }

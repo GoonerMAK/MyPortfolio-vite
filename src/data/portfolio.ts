@@ -105,13 +105,14 @@ export const skills = skillsList
 export const experience: ExperienceCompany[] = [
   {
     name: 'Gain Solutions',
+    logo: '/src/assets/gain-solutions-logo.svg',
     totalTenure: '5 mos',
     roles: [
       {
         title: 'Backend Developer',
         type: 'Full-time',
         dateRange: 'Jan 2026 – Present',
-        duration: '5 mos',
+        duration: '6 mos',
         mode: 'On-site',
         achievements: [
           'Drove end-to-end performance improvements — optimized database queries and introduced parallelization techniques, achieving ∼30% faster average API response times; implemented UI virtualization, reducing average render time by ∼150ms across data-heavy interfaces',
@@ -125,6 +126,7 @@ export const experience: ExperienceCompany[] = [
   },
   {
     name: 'BinduLogic LLC',
+    logo: '/src/assets/bindulogic-logo.svg',
     totalTenure: '1 yr 4 mos',
     roles: [
       {

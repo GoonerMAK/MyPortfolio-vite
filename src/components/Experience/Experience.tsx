@@ -1,5 +1,4 @@
 import { motion } from 'motion/react'
-import { Briefcase } from 'lucide-react'
 import { experience } from '@/data/portfolio'
 
 export function Experience() {
@@ -15,7 +14,7 @@ export function Experience() {
         Work Experience
       </motion.h2>
 
-      <div className="max-w-[1050px] mx-auto flex flex-col gap-6">
+      <div className="max-w-[1250px] mx-auto flex flex-col gap-6">
         {experience.map((company, index) => (
           <motion.div
             key={company.name}
@@ -27,16 +26,24 @@ export function Experience() {
           >
             {/* Company Header */}
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-11 h-11 rounded-md bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] flex items-center justify-center shrink-0">
-                <Briefcase className="w-5 h-5 text-[var(--clr-primary)]" />
+              <div className="w-11 h-11 rounded-md bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] flex items-center justify-center shrink-0 overflow-hidden">
+                <img src={company.logo} alt={`${company.name} logo`} className="w-full h-full object-contain p-1" />
               </div>
-              <div>
-                <h3 className="text-base font-semibold text-[var(--clr-fg-alt)] font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
-                  {company.name}
+              <div className="flex flex-col">
+                <h3 className="text-sm font-semibold text-[var(--clr-fg-alt)] !font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
+                  {company.name === 'Gain Solutions' ? (
+                    <a href="https://gainhq.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
+                      Gain Solutions
+                    </a>
+                  ) : company.name === 'BinduLogic LLC' ? (
+                    <a href="https://www.bindulogic.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
+                      BinduLogic LLC
+                    </a>
+                  ) : company.name}
                 </h3>
-                <span className="text-xs text-[var(--clr-fg)] font-['JetBrains_Mono']">
+                {/* <span className="text-xs text-[var(--clr-fg)] font-['JetBrains_Mono']">
                   {company.totalTenure}
-                </span>
+                </span> */}
               </div>
             </div>
 
@@ -45,28 +52,28 @@ export function Experience() {
               {company.roles.map((role, roleIndex) => (
                 <div
                   key={role.title}
-                  className={roleIndex < company.roles.length - 1 ? 'pb-5' : ''}
+                  className={roleIndex < company.roles.length - 1 ? 'pb-10' : ''}
                 >
                   {/* Timeline Dot */}
                   <div className="absolute -left-[7px] mt-1.5 w-3 h-3 rounded-full border-2 border-[var(--clr-primary)] bg-[var(--clr-bg-panel)]" />
 
                   {/* Role Info */}
-                  <h4 className="text-sm font-semibold text-[var(--clr-fg-alt)] font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
+                  <h4 className="text-sm font-semibold !text-[var(--clr-primary)] font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
                     {role.title}
                   </h4>
                   <p className="text-xs text-[var(--clr-fg)] mt-0.5 font-['JetBrains_Mono']">
-                    {role.type} · {role.dateRange} · {role.duration} · {role.mode}
+                    {role.dateRange} · {role.duration}
                   </p>
 
                   {/* Achievements */}
-                  <ul className="mt-2 space-y-1.5">
+                  <ul className="mt-2 space-y-3">
                     {role.achievements.map((achievement, i) => (
-                      <li
+                      <motion.li
                         key={i}
-                        className="text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm"
+                        className="text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] hover:scale-[1.03] hover:shadow-sm rounded-sm px-4 py-1 -ml-4"
                       >
                         {achievement}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>

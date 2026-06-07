@@ -1,6 +1,6 @@
 ﻿import { motion } from 'motion/react'
 import { skills } from '@/data/portfolio'
-import { skillIconMap } from '@/data/skillIcons'
+import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 
 const CATEGORY_COLORS = [
   'var(--clr-primary)',
@@ -76,10 +76,18 @@ export function Skills() {
             >
               {skillGroup.skills.map((skill) => {
                 const Icon = skillIconMap[skill]
+                const brandColor = skillColorMap[skill]
                 return (
                   <motion.li key={skill} variants={itemVariants} className="flex">
-                    <span className="btn btn--plain cursor-default flex flex-col items-center justify-center gap-3 w-full aspect-square p-3 border-[var(--clr-border)] hover:border-[var(--clr-primary)] hover:shadow-[0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300">
-                      {Icon && <Icon className="w-8 h-8 brightness-190 drop-shadow-[0_0_8px_rgba(0,229,255,0.3)]" />}
+                    <span 
+                      className="btn btn--plain cursor-default flex flex-col items-center justify-center gap-3 w-full aspect-square p-3 border-[var(--clr-border)] hover:border-[var(--clr-primary)] hover:shadow-[0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300 group"
+                      style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                    >
+                      {Icon && (
+                        <Icon 
+                          className="w-8 h-8 transition-all duration-300 skill-icon"
+                        />
+                      )}
                       <span className="text-center text-[13px] font-['JetBrains_Mono'] font-medium leading-tight break-words text-[var(--clr-fg-alt)]">
                         {skill}
                       </span>

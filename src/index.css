@@ -278,6 +278,17 @@ button {
   transform: translateY(-2px);
 }
 
+/* ---- Skill Icon Hover ---- */
+
+.skill-icon {
+  filter: grayscale(100%) brightness(190%);
+}
+
+.group:hover .skill-icon {
+  filter: none;
+  color: var(--icon-color) !important;
+}
+
 /* ---- Sections ---- */
 
 .section {
@@ -295,7 +306,7 @@ button {
 }
 
 .animate-sweep {
-  animation: sweep-underline 4s ease-in-out infinite;
+  animation: sweep-underline 8s ease-in-out infinite;
 }
 
 @keyframes dash-move {

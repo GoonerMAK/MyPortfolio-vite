@@ -80,3 +80,49 @@ export const skillIconMap: Record<string, IconType> = {
   'Google Gemini': SiGooglegemini,
   'Ollama': SiOllama,
 }
+
+export const skillColorMap: Record<string, string> = {
+  'Node.js': '#339933',
+  'Express.js': '#FFFFFF',
+  'GraphQL': '#E10098',
+  'Apollo-GraphQL': '#311C87',
+  'Zod': '#3E67B1',
+  'Stripe': '#635BFF',
+  'Postman': '#FF6C37',
+
+  'JavaScript': '#F7DF1E',
+  'TypeScript': '#3178C6',
+  'React': '#61DAFB',
+  'Next.js': '#FFFFFF',
+  'Redux': '#764ABC',
+  'React Query': '#FF4154',
+  'HTML': '#E34F26',
+  'CSS3': '#1572B6',
+  'Vite': '#646CFF',
+
+  'PostgreSQL': '#4169E1',
+  'MongoDB': '#47A248',
+  'MySQL': '#4479A1',
+  'Redis': '#DC382D',
+  'Supabase': '#3ECF8E',
+  'Prisma': '#2D3748',
+  'Sequelize': '#52B0E7',
+
+  'Tailwind CSS': '#06B6D4',
+  'shadcn/ui': '#FFFFFF',
+  'Chakra UI': '#319795',
+  'Material UI': '#007FFF',
+
+  'Git': '#F05032',
+  'GitHub Actions': '#2088FF',
+  'Docker': '#2496ED',
+  'AWS': '#FF9900',
+  'Vercel': '#FFFFFF',
+  'Netlify': '#00C7B7',
+  'Render': '#46E3B7',
+
+  'Claude': '#D97757',
+  'GitHub Copilot': '#8957E5',
+  'Google Gemini': '#4285F4',
+  'Ollama': '#FFFFFF',
+}

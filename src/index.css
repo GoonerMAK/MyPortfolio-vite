@@ -341,11 +341,12 @@ button {
   content: '';
   display: block;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: var(--clr-primary);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s ease-in;
+  transition: transform 1.4s ease-in;
+  filter: blur(1px) drop-shadow(0 0 4px var(--clr-primary));
 }
 
 /* Animate when parent achievement is hovered */

@@ -97,7 +97,7 @@ export function Experience() {
               {company.roles.map((role, roleIndex) => (
                 <div
                   key={role.title}
-                  className={roleIndex < company.roles.length - 1 ? 'pb-10' : ''}
+                  className={roleIndex < company.roles.length - 1 ? 'pb-12' : ''}
                 >
                   {/* Timeline Dot */}
                   <div className="absolute -left-[7px] mt-1.5 w-3 h-3 rounded-full border-2 border-[var(--clr-primary)] bg-[var(--clr-bg-panel)]" />
@@ -115,7 +115,7 @@ export function Experience() {
                     {role.achievements.map((achievement, i) => (
                       <li
                         key={i}
-                        className="text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] hover:scale-[1.03] hover:shadow-sm rounded-sm px-4 py-1 -ml-4"
+                        className="text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] hover:scale-[1.03] hover:shadow-sm rounded-sm px-4 py-2 -ml-4"
                       >
                         <HighlightedText 
                           text={achievement} 

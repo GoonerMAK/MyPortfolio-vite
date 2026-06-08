@@ -1,15 +1,8 @@
 ﻿import { motion } from 'motion/react'
-import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
 import { projects, contact } from '@/data/portfolio'
 import { cn } from '@/lib/utils'
 
 export function Navbar() {
-  const [showNavList, setShowNavList] = useState(false)
-
-  const toggleNavList = () => setShowNavList(!showNavList)
-  const closeNavList = () => setShowNavList(false)
-
   const navLinks = [
     { href: '#about', label: 'About', show: true },
     { href: '#skills', label: 'Skills', show: true },
@@ -20,14 +13,7 @@ export function Navbar() {
 
   return (
     <nav className="flex items-center">
-      <ul
-        className={cn(
-          'nav__list flex mr-4 space-x-5 items-center',
-          showNavList
-            ? 'flex-col fixed inset-0 bg-[var(--clr-bg)] z-[50] justify-center items-center space-y-6 space-x-0 pt-40 overflow-y-auto'
-            : 'hidden md:flex'
-        )}
-      >
+      <ul className={cn('nav__list flex mr-4 space-x-5 items-center')}>
         {navLinks
           .filter((link) => link.show)
           .map((link, index) => (
@@ -39,30 +25,13 @@ export function Navbar() {
             >
               <a
                 href={link.href}
-                onClick={closeNavList}
-                className={cn(
-                  'link link--nav inline-flex items-center gap-1.5'
-                )}
+                className={cn('link link--nav inline-flex items-center gap-1.5')}
               >
                 {link.label}
               </a>
             </motion.li>
           ))}
       </ul>
-
-      <motion.button
-        type="button"
-        onClick={toggleNavList}
-        className={cn(
-          'btn btn--icon p-0 md:hidden text-[var(--clr-primary)]',
-          showNavList && 'z-[60] relative'
-        )}
-        aria-label="toggle navigation"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        {showNavList ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-      </motion.button>
     </nav>
   )
 }

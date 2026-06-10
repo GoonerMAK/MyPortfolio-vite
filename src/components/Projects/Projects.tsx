@@ -35,9 +35,10 @@ export function Projects() {
     const handleResize = () => {
       if (scrollRef.current) {
         const width = scrollRef.current.clientWidth
-        if (width < 640) setItemsPerView(1)
-        else if (width < 1024) setItemsPerView(2)
-        else setItemsPerView(3)
+        // Card: 500px + 24px gap = 524px per item
+        if (width < 768) setItemsPerView(1)
+        else if (width < 1280) setItemsPerView(2)
+        else setItemsPerView(2) // Max 2 cards for 500px width
       }
     }
     handleResize()
@@ -72,7 +73,7 @@ export function Projects() {
 
         return next
       })
-    }, 3000)
+    }, 8000)
 
     return () => clearInterval(interval)
   }, [isPaused, visibleDotCount, autoplayKey])
@@ -96,9 +97,10 @@ export function Projects() {
         container.scrollTo({ left: 0, behavior: 'smooth' })
         setCurrentIndex(0)
       } else {
-        const newScroll = Math.min(container.scrollLeft + scrollAmount, maxScroll)
+        const targetIndex = currentIndex + 1
+        const newScroll = Math.min(targetIndex * scrollAmount, maxScroll)
         container.scrollTo({ left: newScroll, behavior: 'smooth' })
-        setCurrentIndex(currentIndex + 1)
+        setCurrentIndex(targetIndex)
       }
     } else {
       if (currentIndex <= 0) {
@@ -106,9 +108,10 @@ export function Projects() {
         container.scrollTo({ left: maxScroll, behavior: 'smooth' })
         setCurrentIndex(visibleDotCount - 1)
       } else {
-        const newScroll = Math.max(container.scrollLeft - scrollAmount, 0)
+        const targetIndex = currentIndex - 1
+        const newScroll = Math.max(targetIndex * scrollAmount, 0)
         container.scrollTo({ left: newScroll, behavior: 'smooth' })
-        setCurrentIndex(currentIndex - 1)
+        setCurrentIndex(targetIndex)
       }
     }
   }
@@ -125,7 +128,7 @@ export function Projects() {
         Projects
       </motion.h2>
 
-      <div className="max-w-[1200px] mx-auto relative">
+      <div className="max-w-[1250px] mx-auto relative">
         {/* Navigation arrows */}
         <button
           onClick={() => scrollTo('left')}
@@ -155,8 +158,9 @@ export function Projects() {
             const container = e.currentTarget
             const cardWidth = container.querySelector('.panel')?.clientWidth || 320
             const gap = 24
-            const index = Math.round(container.scrollLeft / (cardWidth + gap))
-            setCurrentIndex(Math.min(index, visibleDotCount - 1))
+            const scrollAmount = cardWidth + gap
+            const index = Math.round(container.scrollLeft / scrollAmount)
+            setCurrentIndex(Math.min(Math.max(0, index), visibleDotCount - 1))
           }}
           style={{ scrollBehavior: 'smooth' }}
         >
@@ -167,7 +171,7 @@ export function Projects() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex-shrink-0 w-[300px] sm:w-[340px] snap-center"
+              className="flex-shrink-0 w-[400px] sm:w-[500px] snap-center"
             >
               <ProjectContainer project={project} index={index} />
             </motion.div>

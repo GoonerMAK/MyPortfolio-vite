@@ -36,7 +36,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
 
   return (
     <motion.div
-      className="panel relative flex flex-col h-full"
+      className="panel relative flex flex-col h-full min-h-[400px]"
       style={{ borderLeftWidth: '4px', borderLeftColor: borderColor }}
       whileHover={{
         scale: 1.02,
@@ -44,7 +44,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
         transition: { duration: 0.15 },
       }}
     >
-      <div className="p-6 pt-5 flex flex-col h-full">
+      <div className="p-8 pt-6 flex flex-col h-full">
         {/* Header row: incident number + status */}
         <div className="flex items-center justify-between mb-3">
           <span

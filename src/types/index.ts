@@ -18,7 +18,7 @@ export interface Project {
   name: string
   description: string
   stack: string[]
-  sourceCode: string
+  sourceCode?: string
   livePreview?: string
   status?: 'active' | 'resolved' | 'archived'
 }

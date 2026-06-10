@@ -21,12 +21,29 @@ export const about: About = {
 
 export const projects: Project[] = [
   {
+    name: 'EasyDesk',
+    description:
+      'Customer support platform that integrates AI-powered agents, ticketing automation, and team collaboration into a single workspace  so support teams can reduce manual work, reply faster and handle more customer conversations with less pressure.',
+    stack: ['Node.js', 'Express.js', 'PostgreSQL', 'Next.js', 'JavaScript'],
+    livePreview: 'https://easydesk.app/',
+    status: 'resolved',
+  },
+  {
     name: 'InternConnect',
     description:
-      'A user-friendly Web Application that would streamline the entire internship placement process of Islamic University of Technology',
+      'A user-friendly Web Application that would streamline the entire internship placement process of a university - from application to onboarding, providing a seamless experience for students, employers, and the university administration.',
     stack: ['JavaScript', 'Express.js', 'React', 'Node.js', 'MongoDB'],
     sourceCode: 'https://github.com/GoonerMAK/InternConnect/tree/main',
     livePreview: 'https://internconnect.netlify.app/',
+    status: 'resolved',
+  },
+  {
+    name: 'CoGraph',
+    description:
+      'VS code extension that renders your project as a live call graph inside VS Code — updating in real-time as AI agents rewrite your codebase. Making the invisible visible.',
+    stack: ['Node.js', 'TypeScript', 'Python', 'HTML & CSS', 'JavaScript'],
+    sourceCode: 'https://github.com/thraenbe/cograph',
+    livePreview: 'https://www.cograph.co/',
     status: 'resolved',
   },
   {

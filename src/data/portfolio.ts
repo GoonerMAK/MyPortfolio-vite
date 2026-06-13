@@ -125,13 +125,13 @@ export const experience: ExperienceCompany[] = [
   {
     name: 'Gain Solutions',
     logo: gainSolutionsLogo,
-    totalTenure: '5 mos',
+    totalTenure: '6 months',
     roles: [
       {
         title: 'Backend Developer',
         type: 'Full-time',
         dateRange: 'Jan 2026 – Present',
-        duration: '6 mos',
+        duration: '6 months',
         mode: 'On-site',
         achievements: [
           'Drove end-to-end performance improvements — optimized database queries and introduced parallelization techniques, achieving ∼30% faster average API response times; implemented UI virtualization, reducing average render time by ∼150ms across data-heavy interfaces',
@@ -153,13 +153,13 @@ export const experience: ExperienceCompany[] = [
   {
     name: 'BinduLogic LLC',
     logo: binduLogicLogo,
-    totalTenure: '1 yr 4 mos',
+    totalTenure: '1 yr 4 months',
     roles: [
       {
         title: 'Junior Software Engineer',
         type: 'Full-time',
         dateRange: 'Dec 2024 – Sept 2025',
-        duration: '10 mos',
+        duration: '10 months',
         mode: 'Hybrid',
         achievements: [
           'Developed full-stack modules for a web application consisting of 25+ RESTful API endpoints and 10+ managed database schemas in PostgreSQL, using Express.js (Node.js) for backend services and Redux for state management',
@@ -176,7 +176,7 @@ export const experience: ExperienceCompany[] = [
         title: 'Software Engineer Intern',
         type: 'Internship',
         dateRange: 'Jun 2024 – Nov 2024',
-        duration: '6 mos',
+        duration: '6 months',
         mode: 'On-site',
         achievements: [
           'Created a project expenditure app using React, TypeScript, Express, Prisma; ensured 80%+ test coverage through unit & integration testing using Jest, while enforcing runtime type safety with Zod',

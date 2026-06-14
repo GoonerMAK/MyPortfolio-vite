@@ -143,7 +143,7 @@ export const experience: ExperienceCompany[] = [
         highlights: [
           ['Drove end-to-end performance improvements', 'achieving ∼30% faster average API response times', 'reducing average render time by ∼150ms'],
           ['6+ AWS Lambda workers', 'asynchronous background jobs'],
-          ['compressed agentic prompts', 'codebase knowledge graph', 'achieving top-21%'],
+          ['codebase knowledge graph', 'achieving top-21%'],
           ['SaaS products', 'Led the development'],
           ['improving pre-QA smoke test coverage', 'achieving a 67% acceleration'],
         ],

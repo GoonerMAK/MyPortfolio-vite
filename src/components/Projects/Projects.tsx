@@ -24,6 +24,7 @@ const itemVariants: Variants = {
   },
 }
 
+// Carousel: Displays a list of projects in a responsive carousel with navigation arrows and dot indicators.
 export function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(3)
@@ -31,13 +32,14 @@ export function Projects() {
   const [autoplayKey, setAutoplayKey] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
 
+  // Resize effect: update the number of items per view based on container width
   useEffect(() => {
     const handleResize = () => {
       if (scrollRef.current) {
         const width = scrollRef.current.clientWidth
-        // Card: 500px + 24px gap = 524px per item
-        if (width < 768) setItemsPerView(1)
-        else if (width < 1280) setItemsPerView(2)
+         // Card: 500px width + 24px gap = 524px per item
+         if (width < 768) setItemsPerView(1)
+         else if (width < 1280) setItemsPerView(2)
         else setItemsPerView(2) // Max 2 cards for 500px width
       }
     }
@@ -46,8 +48,10 @@ export function Projects() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Calculate the number of visible dots (for pagination) based on total items and items per view
   const visibleDotCount = projects.length - itemsPerView + 1
 
+  // Autoplay effect: automatically advance the carousel every 8 seconds
   useEffect(() => {
     if (isPaused || !projects.length) return
 
@@ -81,7 +85,8 @@ export function Projects() {
   if (!projects.length) return null
 
   const scrollTo = (direction: 'left' | 'right') => {
-    setAutoplayKey((prev) => prev + 1)
+
+    setAutoplayKey((prev) => prev + 1)      // Reset autoplay key to restart the interval
 
     const container = scrollRef.current
     if (!container) return

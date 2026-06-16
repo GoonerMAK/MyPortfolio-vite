@@ -2,33 +2,22 @@
 import { skills } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 
-const CATEGORY_COLORS = [
-  'var(--clr-primary)',
-  'var(--clr-primary)',
-  'var(--clr-primary)',
-  'var(--clr-primary)',
-  'var(--clr-primary)',
-  'var(--clr-primary)',
-]
-
+// Animation: stagger each skill item as it appears
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
+    transition: { staggerChildren: 0.05 },
   },
 }
 
+// Animation: slide up individual skill items
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.4,
-    },
+    transition: { duration: 0.4 },
   },
 }
 
@@ -50,7 +39,7 @@ export function Skills() {
           <motion.div
             key={skillGroup.title}
             className="panel p-6 flex flex-col"
-            style={{ borderLeftWidth: '4px', borderLeftColor: CATEGORY_COLORS[index] }}
+            style={{ borderLeftWidth: '4px', borderLeftColor: 'var(--clr-primary)' }}
             initial={{ opacity: 0, x: -15 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -59,7 +48,7 @@ export function Skills() {
             <div className="relative inline-block self-start mb-5">
               <h4
                 className="text-sm pt-1 font-['JetBrains_Mono'] tracking-widest"
-                style={{ color: CATEGORY_COLORS[index] }}
+                style={{ color: 'var(--clr-primary)' }}
               >
                 {skillGroup.title}
               </h4>

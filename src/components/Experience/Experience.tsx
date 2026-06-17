@@ -1,5 +1,7 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import { experience } from '@/data/portfolio'
+import { DeepDiveZone } from './DeepDiveZone'
 
 // Helper: Parse achievement text and wrap highlighted phrases
 function HighlightedText({ text, highlights }: { text: string; highlights?: string[] }) {
@@ -49,8 +51,10 @@ export function Experience() {
 
       <div className="max-w-[1250px] mx-auto flex flex-col gap-6">
         {experience.map((company, index) => (
+          // Non-clipping wrapper: the card uses .panel (overflow:hidden), so the
+          // off-card DeepDiveZone must be a sibling here, not a child of the card.
+          <div key={company.name} className="relative">
           <motion.div
-            key={company.name}
             className="panel p-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +131,19 @@ export function Experience() {
                 </div>
               ))}
             </div>
+
+            {/* Fallback entry point for small screens (no gutter for the spotlight zone) */}
+            <Link
+              to="/deepdive"
+              className="btn btn--outline mt-6 2xl:hidden inline-flex items-center self-start text-xs"
+            >
+              Deep Dive
+            </Link>
           </motion.div>
+
+          {/* Desktop-only pointer-tracked spotlight in the right margin */}
+          <DeepDiveZone />
+          </div>
         ))}
       </div>
     </section>

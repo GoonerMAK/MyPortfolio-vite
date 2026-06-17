@@ -1,4 +1,4 @@
-﻿import type { Header, About, Project, Contact, ExperienceCompany } from '@/types'
+﻿import type { Header, About, Project, Contact, ExperienceCompany, DeepDiveRole } from '@/types'
 import gainSolutionsLogo from '@/assets/gain-solutions-logo.svg'
 import binduLogicLogo from '@/assets/bindulogic-logo.svg'
 
@@ -188,6 +188,86 @@ export const experience: ExperienceCompany[] = [
           ['Contributed to the development', 'delivering 71% of the team\'s frontend output'],
           ['five-person team', 'team lead on a rotational basis'],
         ],
+      },
+    ],
+  },
+]
+
+export const deepDive: DeepDiveRole[] = [
+  {
+    company: 'Gain Solutions',
+    title: 'Backend Developer',
+    dateRange: 'Jan 2026 – Present',
+    overview:
+      'Backend-focused role across three concurrent SaaS products — a helpdesk platform, an HR management system, and a CRM. Work spans API performance, event-driven background processing, and embedding AI tooling deep into the delivery cycle.',
+    items: [
+      {
+        detail:
+          'Drove end-to-end performance work on data-heavy interfaces: profiled and rewrote slow database queries, parallelized independent I/O paths, and added UI virtualization for large lists. Net effect was ∼30% faster average API response times and ∼150ms lower average render time on the heaviest screens.',
+        skills: ['Node.js', 'PostgreSQL', 'React', 'TypeScript'],
+      },
+      {
+        detail:
+          'Built an asynchronous processing layer using 6+ AWS Lambda workers fed by SNS/SQS pipelines, moving long-running operations off the request path. The core API server stayed responsive under load while heavy jobs ran in the background and retried safely on failure.',
+        skills: ['AWS', 'Node.js'],
+      },
+      {
+        detail:
+          'Optimized the AI coding workflow across full-stack modules by feeding compressed agentic prompts and a codebase knowledge graph to the model — scoping its context to the relevant nodes instead of whole file trees. Ranked top-21% among developers for AI token efficiency.',
+        skills: ['Claude', 'GitHub Copilot', 'TypeScript'],
+      },
+      {
+        detail:
+          'Integrated AI-assisted tooling into the everyday cycle to raise pre-QA smoke-test coverage and cut the bug escalation rate to QA, contributing to a 67% acceleration in overall feature delivery across the three products.',
+        skills: ['Claude', 'GitHub Actions', 'Node.js'],
+      },
+    ],
+  },
+  {
+    company: 'BinduLogic LLC',
+    title: 'Junior Software Engineer',
+    dateRange: 'Dec 2024 – Sept 2025',
+    overview:
+      'Full-stack delivery on a production web application, plus a large legacy modernization effort moving the UI to a modern React/Tailwind/shadcn stack.',
+    items: [
+      {
+        detail:
+          'Developed full-stack modules covering 25+ RESTful endpoints and 10+ managed PostgreSQL schemas — Express.js services on the backend with Redux managing client state. Owned the modules end to end from schema design through API to UI wiring.',
+        skills: ['Express.js', 'Node.js', 'PostgreSQL', 'Redux', 'React'],
+      },
+      {
+        detail:
+          'Led a chunk of a legacy migration off older React and Material UI onto the React/Tailwind/shadcn stack — contributing 54% of the migration effort toward 88% overall project completion while keeping the app shippable throughout.',
+        skills: ['React', 'Tailwind CSS', 'shadcn/ui', 'Material UI'],
+      },
+      {
+        detail:
+          'Built 7+ responsive interfaces and paired them with optimized backend code, introducing lazy API fetching that lifted Lighthouse Performance scores by an average of 12% across five modules.',
+        skills: ['React', 'Node.js', 'Vite'],
+      },
+    ],
+  },
+  {
+    company: 'BinduLogic LLC',
+    title: 'Software Engineer Intern',
+    dateRange: 'Jun 2024 – Nov 2024',
+    overview:
+      'Internship on a five-person team building a project-expenditure app and a shared project module, rotating into team-lead duties.',
+    items: [
+      {
+        detail:
+          'Created a project-expenditure app with React, TypeScript, Express, and Prisma. Held 80%+ test coverage through unit and integration tests in Jest, and enforced runtime type safety with Zod at the boundaries.',
+        skills: ['React', 'TypeScript', 'Express.js', 'Prisma', 'Zod'],
+      },
+      {
+        detail:
+          'Contributed to a shared project module — wired up RTK Query, kept state management consistent, and maintained UI consistency across the team, delivering 71% of the team’s frontend output.',
+        skills: ['React', 'React Query', 'Redux'],
+      },
+      {
+        detail:
+          'Collaborated closely on full-stack work with a five-person team and took the team-lead role on a rotational basis, coordinating tasks and reviews during those stints.',
+        skills: ['Git', 'JavaScript'],
       },
     ],
   },

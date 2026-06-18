@@ -435,44 +435,49 @@ li:hover .highlight-sweep::after {
   cursor: pointer;
 }
 
-/* Uniform dot field, revealed only inside a radial mask under the cursor */
+/* Uniform dot field (dim, so the label reads on top of it), revealed only
+   inside a radial mask under the cursor */
 .deepdive-dots {
   position: absolute;
   inset: 0;
   opacity: 0;
   transition: opacity 0.25s ease;
-  background-image: radial-gradient(circle, rgba(0, 229, 255, 0.55) 1.2px, transparent 1.5px);
-  background-size: 14px 14px;
-  -webkit-mask-image: radial-gradient(circle 110px at var(--mx, -999px) var(--my, -999px), #000 30%, transparent 68%);
-          mask-image: radial-gradient(circle 110px at var(--mx, -999px) var(--my, -999px), #000 30%, transparent 68%);
+  background-image: radial-gradient(circle, rgba(0, 229, 255, 0.28) 1px, transparent 1.4px);
+  background-size: 15px 15px;
+  -webkit-mask-image: radial-gradient(circle 120px at var(--mx, -999px) var(--my, -999px), #000 35%, transparent 70%);
+          mask-image: radial-gradient(circle 120px at var(--mx, -999px) var(--my, -999px), #000 35%, transparent 70%);
   pointer-events: none;
 }
 
 .deepdive-zone:hover .deepdive-dots {
-  opacity: 0.9;
+  opacity: 1;
 }
 
-/* "DEEP DIVE" drawn at the cursor, letters filled with dots via background-clip */
+/* "DEEP DIVE" drawn from dots via background-clip, sitting just above the
+   cursor (so the pointer never covers it). Large glyphs + coarse dot grid +
+   bright fill + glow = readable as words, not noise. */
 .deepdive-label {
   position: absolute;
   left: var(--mx, -999px);
   top: var(--my, -999px);
-  transform: translate(-50%, -50%);
+  /* sit just above the cursor's pointy tip */
+  transform: translate(-50%, calc(-100% - 10px));
   text-align: center;
-  line-height: 1;
+  line-height: 0.95;
   white-space: nowrap;
   font-family: 'Anton', system-ui, sans-serif;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 2rem;
   letter-spacing: 0.12em;
-  background-image: radial-gradient(circle, var(--clr-primary) 1px, transparent 1.3px);
+  /* finer dot grid → more dots per glyph → letters stay readable */
+  background-image: radial-gradient(circle, #8ffaff 1.5px, transparent 1.9px);
   background-size: 4px 4px;
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
   opacity: 0;
-  transition: opacity 0.25s ease;
-  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.4));
+  transition: opacity 0.2s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.85)) drop-shadow(0 0 2px rgba(0, 229, 255, 0.6));
   pointer-events: none;
 }
 

@@ -20,8 +20,16 @@ export function DeepDiveZone() {
     const el = ref.current
     if (!el) return
     const rect = el.getBoundingClientRect()
-    el.style.setProperty('--mx', `${e.clientX - rect.left}px`)
-    el.style.setProperty('--my', `${e.clientY - rect.top}px`)
+    // Clamp the anchor point to stay inside the zone so the "DEEP DIVE" label
+    // (rendered above the cursor tip) never spills over the section title or card.
+    // Extra top room because the label sits above this point.
+    const padX = Math.min(72, rect.width / 2)
+    const padTop = 84
+    const padBottom = 24
+    const x = Math.max(padX, Math.min(e.clientX - rect.left, rect.width - padX))
+    const y = Math.max(padTop, Math.min(e.clientY - rect.top, rect.height - padBottom))
+    el.style.setProperty('--mx', `${x}px`)
+    el.style.setProperty('--my', `${y}px`)
   }
 
   return (

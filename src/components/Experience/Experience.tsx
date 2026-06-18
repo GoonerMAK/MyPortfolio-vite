@@ -1,5 +1,4 @@
 import { motion } from 'motion/react'
-import { Link } from 'react-router-dom'
 import { experience } from '@/data/portfolio'
 import { DeepDiveZone } from './DeepDiveZone'
 
@@ -131,14 +130,6 @@ export function Experience() {
                 </div>
               ))}
             </div>
-
-            {/* Fallback entry point for small screens (no gutter for the spotlight zone) */}
-            <Link
-              to="/deepdive"
-              className="btn btn--outline mt-6 2xl:hidden inline-flex items-center self-start text-xs"
-            >
-              Deep Dive
-            </Link>
           </motion.div>
 
           {/* Desktop-only pointer-tracked spotlight in the right margin */}

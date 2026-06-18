@@ -1,4 +1,6 @@
-﻿export interface Header {
+﻿import type { LucideIcon } from 'lucide-react'
+
+export interface Header {
   homepage: string
   title: string
 }
@@ -58,6 +60,35 @@ export interface DeepDiveRole {
   /** High-level summary of the role's scope */
   overview: string
   items: DeepDiveItem[]
+}
+
+/** A single concept inside a "My Stuff" topic card */
+export interface MyStuffNote {
+  /** Short concept name, rendered emphasised */
+  term: string
+  /** Plain-English explainer. Wrap inline code in backticks — the carousel
+   *  renders `…` segments as styled <code> chips. */
+  detail: string
+}
+
+/** One themed card in the "My Stuff" field-notes carousel */
+export interface MyStuffTopic {
+  /** Stable id — also used to wire up tab/tabpanel aria attributes */
+  id: string
+  /** Short label shown on the pill / tab */
+  label: string
+  /** Card headline */
+  title: string
+  /** One-line intro under the headline */
+  blurb: string
+  /** Lucide glyph representing the topic */
+  icon: LucideIcon
+  /** Accent colour (any valid CSS colour value, incl. CSS vars) */
+  accent: string
+  /** The concepts grouped under this topic */
+  notes: MyStuffNote[]
+  /** Related skills — names must match keys in `skillIconMap` */
+  skills: string[]
 }
 
 export interface Skills {

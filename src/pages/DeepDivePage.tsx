@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { deepDive } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop'
+import { MyStuffCarousel } from '@/components/DeepDive/MyStuffCarousel'
 
 // Company → external site (mirrors the links in the Experience section)
 const companyUrls: Record<string, string> = {
@@ -51,10 +52,21 @@ export function DeepDivePage() {
         >
           <h1 className="text-3xl md:text-4xl mb-3">Experience Deep Dive</h1>
           <p className="text-[var(--clr-fg)] max-w-xl mx-auto text-base">
-            A closer look at the work behind each role — what was built, why it
-            mattered, and the skills each piece exercised.
+            A closer look behind the experience — the engineering lessons I
+            picked up along the way, and the work that produced them.
           </p>
         </motion.div>
+
+        {/* Field-notes showcase carousel */}
+        <MyStuffCarousel />
+
+        {/* By-role breakdown */}
+        <div className="text-center mt-16 mb-8">
+          <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
+            // By Role
+          </span>
+          <h2 className="text-2xl md:text-3xl mt-2">The Work</h2>
+        </div>
 
         <div className="max-w-[1250px] mx-auto flex flex-col gap-6">
           {deepDive.map((role, index) => {

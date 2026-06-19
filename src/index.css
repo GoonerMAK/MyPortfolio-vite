@@ -423,6 +423,68 @@ li:hover .highlight-sweep::after {
   animation: timeline-trace 4s linear infinite;
 }
 
+/* ---- Deep Dive Spotlight Zone ---- */
+
+/* Absorb any spill from the off-card zone reaching toward the viewport edge */
+.app {
+  overflow-x: hidden;
+}
+
+.deepdive-zone {
+  overflow: visible;
+  cursor: pointer;
+}
+
+/* Uniform dot field (dim, so the label reads on top of it), revealed only
+   inside a radial mask under the cursor */
+.deepdive-dots {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background-image: radial-gradient(circle, rgba(0, 229, 255, 0.28) 1px, transparent 1.4px);
+  background-size: 15px 15px;
+  -webkit-mask-image: radial-gradient(circle 120px at var(--mx, -999px) var(--my, -999px), #000 35%, transparent 70%);
+          mask-image: radial-gradient(circle 120px at var(--mx, -999px) var(--my, -999px), #000 35%, transparent 70%);
+  pointer-events: none;
+}
+
+.deepdive-zone:hover .deepdive-dots {
+  opacity: 1;
+}
+
+/* "DEEP DIVE" drawn from dots via background-clip, sitting just above the
+   cursor (so the pointer never covers it). Large glyphs + coarse dot grid +
+   bright fill + glow = readable as words, not noise. */
+.deepdive-label {
+  position: absolute;
+  left: var(--mx, -999px);
+  top: var(--my, -999px);
+  /* sit just above the cursor's pointy tip */
+  transform: translate(-50%, calc(-100% - 10px));
+  text-align: center;
+  line-height: 0.95;
+  white-space: nowrap;
+  font-family: 'Anton', system-ui, sans-serif;
+  text-transform: uppercase;
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  /* finer dot grid → more dots per glyph → letters stay readable */
+  background-image: radial-gradient(circle, #8ffaff 1.5px, transparent 1.9px);
+  background-size: 4px 4px;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.85)) drop-shadow(0 0 2px rgba(0, 229, 255, 0.6));
+  pointer-events: none;
+}
+
+.deepdive-zone:hover .deepdive-label {
+  opacity: 1;
+}
+
 /* ---- Scrollbar Hide ---- */
 
 .scrollbar-hide {

@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/contexts/theme'
 import { HomePage } from './pages/HomePage'
 
 const GamePage = lazy(() => import('./pages/GamePage'))
+const DeepDivePage = lazy(() => import('./pages/DeepDivePage'))
 
 function LoadingSpinner() {
   return (
@@ -29,6 +30,14 @@ function App() {
             element={
               <Suspense fallback={<LoadingSpinner />}>
                 <GamePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/deepdive"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <DeepDivePage />
               </Suspense>
             }
           />

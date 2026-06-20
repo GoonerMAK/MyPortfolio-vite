@@ -5,11 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { myStuff } from '@/data/myStuff'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 
-/**
- * Detect the user's reduced-motion preference and keep it in sync.
- * Returns true when the OS asks for reduced motion, so callers can shorten
- * or drop transitions (per WCAG / prefers-reduced-motion).
- */
+/** Tracks OS reduced-motion preference; returns true when active. */
 function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false)
   useEffect(() => {
@@ -22,10 +18,7 @@ function usePrefersReducedMotion(): boolean {
   return reduced
 }
 
-/**
- * Render an explainer string, turning `backtick` segments into styled <code>
- * chips. Split() yields code at every odd index, plain text at every even one.
- */
+/** Splits on backticks; odd segments become styled `<code>` chips. */
 function renderWithCode(text: string): ReactNode[] {
   return text.split('`').map((segment, i) =>
     i % 2 === 1 ? (
@@ -43,13 +36,7 @@ function renderWithCode(text: string): ReactNode[] {
 
 const TOTAL = myStuff.length
 
-/**
- * "My Stuff" — a pill/tab-driven showcase carousel. One large focal card holds
- * the active topic; a row of pills beneath switches topics; faint neighbour
- * cards peek at the edges for depth. Implemented as an ARIA tablist
- * (roving tabindex + arrow-key navigation) and rendered in the site's
- * Dispatch terminal theme.
- */
+/** Pill-driven carousel showcasing personal topics. ARIA tablist with roving tabindex + arrow-key nav. */
 export function MyStuffCarousel() {
   const reduced = usePrefersReducedMotion()
   const [index, setIndex] = useState(0)

@@ -60,7 +60,7 @@ export function MyStuffCarousel() {
     [index],
   )
 
-  // Keep the active pill on screen (matters once the row scrolls on mobile),
+  // Ensure the pill stays on-screen when the row scrolls (mobile),
   // and return keyboard focus to it after an arrow-key move.
   useEffect(() => {
     const el = activeTabRef.current

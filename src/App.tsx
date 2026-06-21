@@ -5,6 +5,7 @@ import { HomePage } from './pages/HomePage'
 
 const GamePage = lazy(() => import('./pages/GamePage'))
 const DeepDivePage = lazy(() => import('./pages/DeepDivePage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function LoadingSpinner() {
   return (
@@ -38,6 +39,14 @@ function App() {
             element={
               <Suspense fallback={<LoadingSpinner />}>
                 <DeepDivePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <NotFoundPage />
               </Suspense>
             }
           />

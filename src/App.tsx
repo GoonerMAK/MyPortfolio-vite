@@ -1,6 +1,7 @@
 ﻿import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from '@/contexts/theme'
+import { GameSkeleton, DeepDiveSkeleton } from '@/components/Skeletons/RouteSkeletons'
 import { HomePage } from './pages/HomePage'
 
 const GamePage = lazy(() => import('./pages/GamePage'))
@@ -29,7 +30,7 @@ function App() {
           <Route
             path="/game"
             element={
-              <Suspense fallback={<LoadingSpinner />}>
+              <Suspense fallback={<GameSkeleton />}>
                 <GamePage />
               </Suspense>
             }
@@ -37,7 +38,7 @@ function App() {
           <Route
             path="/deepdive"
             element={
-              <Suspense fallback={<LoadingSpinner />}>
+              <Suspense fallback={<DeepDiveSkeleton />}>
                 <DeepDivePage />
               </Suspense>
             }

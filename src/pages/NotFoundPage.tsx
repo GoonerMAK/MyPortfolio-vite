@@ -55,7 +55,7 @@ export function NotFoundPage() {
         >
           <a
             href="/"
-            className="link inline-flex items-center gap-2 text-sm uppercase tracking-wider border border-[var(--clr-border)] px-5 py-2.5 rounded-lg hover:border-[var(--clr-primary)] transition-colors"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-[var(--clr-primary)]! border border-[var(--clr-border)] px-5 py-2.5 rounded-lg hover:border-[var(--clr-primary)] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to HQ

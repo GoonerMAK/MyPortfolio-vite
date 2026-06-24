@@ -1,11 +1,11 @@
-﻿import { motion } from 'motion/react'
+﻿import { m } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
 import { DispatchGame } from '@/components/game/DispatchGame'
 
 export function GamePage() {
   return (
     <div className="min-h-screen">
-      <motion.header
+      <m.header
         className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]"
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,10 +24,10 @@ export function GamePage() {
             Simulation Active
           </span>
         </div>
-      </motion.header>
+      </m.header>
 
       <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-12">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -39,7 +39,7 @@ export function GamePage() {
           <p className="text-[var(--clr-fg)] max-w-xl mx-auto text-base">
             Incoming requirements require your immediate response. Triage each incident by selecting the correct response unit before time runs out.
           </p>
-        </motion.div>
+        </m.div>
 
         <DispatchGame />
       </main>

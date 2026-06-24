@@ -1,4 +1,4 @@
-﻿import { motion } from 'motion/react'
+﻿import { m } from 'motion/react'
 import { skills } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 
@@ -24,7 +24,7 @@ const itemVariants = {
 export function Skills() {
   return (
     <section className="section px-4" id="skills">
-      <motion.h2
+      <m.h2
         className="section__title"
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -32,11 +32,11 @@ export function Skills() {
         transition={{ duration: 0.6 }}
       >
         Skills
-      </motion.h2>
+      </m.h2>
 
       <div className="max-w-[1250px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {skills.map((skillGroup, index) => (
-          <motion.div
+          <m.div
             key={skillGroup.title}
             className="panel p-6 flex flex-col"
             style={{ borderLeftWidth: '4px', borderLeftColor: 'var(--clr-primary)' }}
@@ -56,7 +56,7 @@ export function Skills() {
                 <div className="h-full w-full bg-[var(--clr-primary)] animate-sweep" />
               </div>
             </div>
-            <motion.ul
+            <m.ul
               className="grid grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-2"
               variants={containerVariants}
               initial="hidden"
@@ -67,7 +67,7 @@ export function Skills() {
                 const Icon = skillIconMap[skill]
                 const brandColor = skillColorMap[skill]
                 return (
-                  <motion.li key={skill} variants={itemVariants} className="flex">
+                  <m.li key={skill} variants={itemVariants} className="flex">
                     <span 
                       className="btn btn--plain cursor-default flex flex-col items-center justify-center gap-3 w-full aspect-square p-3 border-[var(--clr-border)] hover:border-[var(--clr-primary)] hover:shadow-[0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300 group"
                       style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
@@ -81,11 +81,11 @@ export function Skills() {
                         {skill}
                       </span>
                     </span>
-                  </motion.li>
+                  </m.li>
                 )
               })}
-            </motion.ul>
-          </motion.div>
+            </m.ul>
+          </m.div>
         ))}
       </div>
     </section>

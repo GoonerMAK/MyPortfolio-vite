@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { motion } from 'motion/react'
+import { LazyMotion, domMax, m } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { deepDive } from '@/data/portfolio'
@@ -21,8 +21,9 @@ export function DeepDivePage() {
   }, [])
 
   return (
+    <LazyMotion features={domMax}>
     <div id="top" className="app min-h-screen">
-      <motion.header
+      <m.header
         className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]"
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -41,10 +42,10 @@ export function DeepDivePage() {
             Deep Dive
           </span>
         </div>
-      </motion.header>
+      </m.header>
 
       <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-12">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -55,7 +56,7 @@ export function DeepDivePage() {
             A closer look behind the experience — the engineering lessons I
             picked up along the way, and the work that produced them.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Field-notes showcase carousel */}
         <MyStuffCarousel />
@@ -72,7 +73,7 @@ export function DeepDivePage() {
           {deepDive.map((role, index) => {
             const companyUrl = companyUrls[role.company]
             return (
-              <motion.div
+              <m.div
                 key={`${role.company}-${role.title}`}
                 className="panel p-6 md:p-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -135,7 +136,7 @@ export function DeepDivePage() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </m.div>
             )
           })}
         </div>
@@ -143,6 +144,7 @@ export function DeepDivePage() {
 
       <ScrollToTop />
     </div>
+    </LazyMotion>
   )
 }
 

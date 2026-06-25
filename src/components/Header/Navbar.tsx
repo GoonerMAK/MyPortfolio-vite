@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { m, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { projects, contact } from '@/data/portfolio'
 import { cn } from '@/lib/utils'
@@ -20,7 +20,7 @@ export function Navbar() {
       {/* Desktop nav */}
       <ul className={cn('nav__list hidden md:flex mr-4 space-x-5 items-center')}>
         {navLinks.map((link, index) => (
-          <motion.li
+          <m.li
             key={link.href}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ export function Navbar() {
             >
               {link.label}
             </a>
-          </motion.li>
+          </m.li>
         ))}
       </ul>
 
@@ -51,7 +51,7 @@ export function Navbar() {
       {/* Mobile slide-down menu */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </nav>

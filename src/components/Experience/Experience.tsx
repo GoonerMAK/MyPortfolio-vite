@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { experience } from '@/data/portfolio'
 import { DeepDiveZone } from './DeepDiveZone'
 
@@ -38,7 +38,7 @@ function HighlightedText({ text, highlights }: { text: string; highlights?: stri
 export function Experience() {
   return (
     <section className="section px-4" id="experience">
-      <motion.h2
+      <m.h2
         className="section__title"
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -46,14 +46,14 @@ export function Experience() {
         transition={{ duration: 0.6 }}
       >
         Work Experience
-      </motion.h2>
+      </m.h2>
 
       <div className="max-w-[1250px] mx-auto flex flex-col gap-6">
         {experience.map((company, index) => (
           // Non-clipping wrapper: the card uses .panel (overflow:hidden), so the
           // off-card DeepDiveZone must be a sibling here, not a child of the card.
           <div key={company.name} className="relative">
-          <motion.div
+          <m.div
             className="panel p-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -130,7 +130,7 @@ export function Experience() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Desktop-only pointer-tracked spotlight in the right margin */}
           <DeepDiveZone />

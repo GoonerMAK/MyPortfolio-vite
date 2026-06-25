@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent, ReactNode } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { myStuff } from '@/data/myStuff'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
@@ -129,7 +129,7 @@ export function MyStuffCarousel() {
           {/* Focal card */}
           <div className="relative z-10">
           <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <motion.div
+            <m.div
               key={topic.id}
               custom={direction}
               variants={cardVariants}
@@ -230,7 +230,7 @@ export function MyStuffCarousel() {
                   })}
                 </div>
               )}
-            </motion.div>
+            </m.div>
           </AnimatePresence>
           </div>
         </div>
@@ -268,7 +268,7 @@ export function MyStuffCarousel() {
                 }`}
               >
                 {active && (
-                  <motion.span
+                  <m.span
                     layoutId="mystuff-pill"
                     className="absolute inset-0 -z-10 rounded-[4px]"
                     style={{

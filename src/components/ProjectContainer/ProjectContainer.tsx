@@ -1,4 +1,4 @@
-﻿import { motion } from 'motion/react'
+﻿import { m } from 'motion/react'
 import { ExternalLink, Github } from 'lucide-react'
 import type { Project } from '@/types'
 
@@ -35,7 +35,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
   const status = getStatusBadge(project.status)
 
   return (
-    <motion.div
+    <m.div
       className="panel relative flex flex-col h-full min-h-[400px]"
       style={{ borderLeftWidth: '4px', borderLeftColor: borderColor }}
       whileHover={{
@@ -83,7 +83,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
         {/* Action buttons */}
         <div className="flex items-center gap-3 pt-2 border-t border-[var(--clr-border)]">
           {project.sourceCode && (
-            <motion.a
+            <m.a
               href={project.sourceCode}
               aria-label="source code"
               className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-primary)] transition-colors duration-150"
@@ -94,11 +94,11 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
             >
               <Github className="w-4 h-4" />
               Source
-            </motion.a>
+            </m.a>
           )}
 
           {project.livePreview && (
-            <motion.a
+            <m.a
               href={project.livePreview}
               aria-label="live preview"
               className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-accent-green)] transition-colors duration-150"
@@ -109,11 +109,11 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
             >
               <ExternalLink className="w-4 h-4" />
               Live Deploy
-            </motion.a>
+            </m.a>
           )}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 

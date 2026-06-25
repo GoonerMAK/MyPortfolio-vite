@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { m, AnimatePresence } from 'motion/react'
 import { Monitor, Database, Cloud, Shield, Zap, Clock, Trophy, RotateCcw, Radio } from 'lucide-react'
 
 type UnitType = 'frontend' | 'backend' | 'devops' | 'security'
@@ -177,7 +177,7 @@ export function DispatchGame() {
   if (gameState.phase === 'idle') {
     return (
       <div className="max-w-2xl mx-auto">
-        <motion.div
+        <m.div
           className="panel panel-hud p-8 text-center"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -201,16 +201,16 @@ export function DispatchGame() {
             <p className="text-xs text-[var(--clr-fg)] mb-6 font-['JetBrains_Mono']">
               Score = 100 base + time bonus + streak bonus
             </p>
-            <motion.button
+            <m.button
               className="btn btn--outline"
               onClick={startGame}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
               Begin Simulation
-            </motion.button>
+            </m.button>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     )
   }
@@ -223,7 +223,7 @@ export function DispatchGame() {
 
     return (
       <div className="max-w-2xl mx-auto">
-        <motion.div
+        <m.div
           className="panel panel-hud p-8 text-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -254,7 +254,7 @@ export function DispatchGame() {
               </div>
             </div>
 
-            <motion.button
+            <m.button
               className="btn btn--outline inline-flex items-center gap-2"
               onClick={startGame}
               whileHover={{ scale: 1.03 }}
@@ -262,9 +262,9 @@ export function DispatchGame() {
             >
               <RotateCcw className="w-4 h-4" />
               Run Again
-            </motion.button>
+            </m.button>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     )
   }
@@ -301,7 +301,7 @@ export function DispatchGame() {
 
       {/* Timer bar */}
       <div className="w-full h-1 bg-[var(--clr-border)] mb-6 rounded-full overflow-hidden">
-        <motion.div
+        <m.div
           className="h-full rounded-full"
           style={{
             background: timerPct < 30 ? 'var(--clr-accent-red)' : 'var(--clr-primary)',
@@ -315,7 +315,7 @@ export function DispatchGame() {
       {/* Emergency Card */}
       <AnimatePresence mode="wait">
         {currentEmergency && (
-          <motion.div
+          <m.div
             key={currentEmergency.id}
             className="panel mb-6"
             style={{
@@ -346,14 +346,14 @@ export function DispatchGame() {
                 {currentEmergency.description}
               </p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* Feedback overlay */}
       <AnimatePresence>
         {gameState.feedback && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
@@ -366,14 +366,14 @@ export function DispatchGame() {
             {gameState.feedback === 'correct'
               ? `Correct! +${100 + Math.ceil((currentEmergency?.timeLimit ?? 0) * 10) + (gameState.streak > 1 ? (gameState.streak - 1) * 5 : 0)} pts`
               : `Wrong — Needed: ${UNITS.find((u) => u.type === currentEmergency?.correctUnit)?.label}`}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* Dispatch Buttons */}
       <div className="grid grid-cols-2 gap-3">
         {UNITS.map((unit) => (
-          <motion.button
+          <m.button
             key={unit.type}
             onClick={() => handleDispatch(unit.type)}
             disabled={!!gameState.feedback}
@@ -396,7 +396,7 @@ export function DispatchGame() {
             <span className="font-['JetBrains_Mono'] text-xs uppercase tracking-wider font-semibold" style={{ color: unit.color }}>
               Dispatch {unit.label}
             </span>
-          </motion.button>
+          </m.button>
         ))}
       </div>
     </div>

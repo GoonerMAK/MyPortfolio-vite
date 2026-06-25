@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence, type Variants } from 'motion/react'
+import { m, AnimatePresence, type Variants } from 'motion/react'
 import { RotateCcw, Trophy, Clock, Zap } from 'lucide-react'
 
 type CardType = {
@@ -146,7 +146,7 @@ export function MemoryGame() {
           </div>
         </div>
 
-        <motion.button
+        <m.button
           onClick={initializeGame}
           className="btn btn--outline flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
@@ -154,12 +154,12 @@ export function MemoryGame() {
         >
           <RotateCcw className="w-4 h-4" />
           Reset
-        </motion.button>
+        </m.button>
       </div>
 
       <div className="grid grid-cols-4 gap-4">
         {cards.map((card) => (
-          <motion.button
+          <m.button
             key={card.id}
             onClick={() => handleCardClick(card.id)}
             className={`aspect-square rounded-xl text-3xl flex items-center justify-center transition-all duration-300 ${card.isFlipped || card.isMatched ? 'bg-[var(--clr-bg-alt)]' : 'bg-[var(--clr-primary)]'}`}
@@ -172,29 +172,29 @@ export function MemoryGame() {
           >
             <AnimatePresence mode="wait">
               {(card.isFlipped || card.isMatched) && (
-                <motion.span
+                <m.span
                   initial={{ rotateY: 90, opacity: 0 }}
                   animate={{ rotateY: 0, opacity: 1 }}
                   exit={{ rotateY: -90, opacity: 0 }}
                   transition={{ duration: 0.6 }}
                 >
                   {card.value}
-                </motion.span>
+                </m.span>
               )}
             </AnimatePresence>
-          </motion.button>
+          </m.button>
         ))}
       </div>
 
       <AnimatePresence>
         {isGameComplete && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
           >
-            <motion.div
+            <m.div
               className="bg-[var(--clr-bg)] p-8 rounded-2xl shadow-[var(--shadow)] text-center max-w-sm mx-4"
               initial={{ y: 20 }}
               animate={{ y: 0 }}
@@ -204,16 +204,16 @@ export function MemoryGame() {
               <p className="text-[var(--clr-fg-alt)] mb-6">
                 Completed in {formatTime(time)} with {moves} moves
               </p>
-              <motion.button
+              <m.button
                 onClick={initializeGame}
                 className="btn btn--outline"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Play Again
-              </motion.button>
-            </motion.div>
-          </motion.div>
+              </m.button>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

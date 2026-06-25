@@ -1,5 +1,5 @@
 ﻿import { useState, useRef, useEffect } from 'react'
-import { motion, type Variants } from 'motion/react'
+import { m, type Variants } from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { projects } from '@/data/portfolio'
 import { ProjectContainer } from '../ProjectContainer/ProjectContainer'
@@ -123,7 +123,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="section px-4">
-      <motion.h2
+      <m.h2
         className="section__title"
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export function Projects() {
         transition={{ duration: 0.6 }}
       >
         Projects
-      </motion.h2>
+      </m.h2>
 
       <div className="max-w-[1250px] mx-auto relative">
         {/* Navigation arrows */}
@@ -170,7 +170,7 @@ export function Projects() {
           style={{ scrollBehavior: 'smooth' }}
         >
           {projects.map((project, index) => (
-            <motion.div
+            <m.div
               key={project.name || Math.random()}
               variants={itemVariants}
               initial="hidden"
@@ -179,7 +179,7 @@ export function Projects() {
               className="flex-shrink-0 w-[400px] sm:w-[500px] snap-center"
             >
               <ProjectContainer project={project} index={index} />
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

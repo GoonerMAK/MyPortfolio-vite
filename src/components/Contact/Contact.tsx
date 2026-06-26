@@ -6,8 +6,9 @@ export function Contact() {
   if (!contact.email) return null
 
   return (
-    <section className="section px-4" id="contact">
+    <section className="section px-4" id="contact" aria-labelledby="contact-title">
       <m.h2
+        id="contact-title"
         className="section__title"
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -25,21 +26,21 @@ export function Contact() {
       >
         <div className="pt-2">
           <p className="font-['JetBrains_Mono'] text-sm text-[var(--clr-fg)] mb-1 uppercase tracking-wider">
-            Secure Line Available
+            Get in Touch
           </p>
           <p className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)] mb-6">
             {contact.email}
           </p>
-          <a href={`mailto:${contact.email}`}>
-            <m.span
-              className="btn btn--outline inline-flex items-center gap-2"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Mail className="w-4 h-4" />
-              Mail me
-            </m.span>
-          </a>
+          <m.a
+            href={`mailto:${contact.email}`}
+            aria-label={`Send email to ${contact.email}`}
+            className="btn btn--outline inline-flex items-center gap-2"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <Mail className="w-4 h-4" aria-hidden="true" />
+            Mail me
+          </m.a>
         </div>
       </m.div>
     </section>

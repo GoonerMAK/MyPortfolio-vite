@@ -5,8 +5,8 @@ export function About() {
   const { name, role, description, resume, social } = about
 
   return (
-    <section id="about" className="mt-12 px-20">
-      <div className="panel panel-hud p-8 md:p-10 relative overflow-hidden">
+    <section id="about" className="mt-12 px-4 sm:px-8 lg:px-20">
+      <div className="panel panel-hud p-5 sm:p-8 md:p-10 relative overflow-hidden">
         {/* Border trace animation using SVG for smooth cornering with long trails */}
         <svg className="about-trace-svg">
           <rect
@@ -58,7 +58,7 @@ export function About() {
 
           {role && (
             <m.div
-              className="mt-3 flex items-center gap-2"
+              className="mt-3 flex items-center gap-2 flex-wrap"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}

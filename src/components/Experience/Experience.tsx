@@ -54,7 +54,7 @@ export function Experience() {
           // off-card DeepDiveZone must be a sibling here, not a child of the card.
           <div key={company.name} className="relative">
           <m.div
-            className="panel p-6"
+            className="panel p-4 sm:p-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -84,7 +84,7 @@ export function Experience() {
             </div>
 
             {/* Roles Timeline */}
-            <div className="relative ml-5 pl-5 border-l-2 border-[var(--clr-border)] group/timeline">
+            <div className="relative ml-3 pl-4 sm:ml-5 sm:pl-5 border-l-2 border-[var(--clr-border)] group/timeline">
               {/* Timeline Sweep Animation */}
               <svg className="timeline-trace-svg">
                 <line
@@ -118,7 +118,7 @@ export function Experience() {
                     {role.achievements.map((achievement, i) => (
                       <li
                         key={i}
-                        className="text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] hover:scale-[1.03] hover:shadow-sm rounded-sm px-4 py-2 -ml-4"
+                        className="text-sm sm:text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] sm:hover:scale-[1.03] hover:shadow-sm rounded-sm px-2 py-2 -ml-2 sm:px-4 sm:-ml-4"
                       >
                         <HighlightedText 
                           text={achievement} 

@@ -77,7 +77,7 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'Background jobs',
         detail:
-          "Long-running work belongs off the request path — Lambda workers fed by SNS/SQS — so the core API stays responsive and failed jobs retry safely instead of blocking a user's request.",
+          "Long-running work belongs off the request path — independently-deployed Lambda workers fed by SQS, running scheduled and queue-triggered jobs — so the core API stays responsive and failed jobs retry safely instead of blocking a user's request.",
       },
       {
         term: 'Multi-tenant SaaS',

@@ -135,17 +135,17 @@ export const experience: ExperienceCompany[] = [
         mode: 'On-site',
         achievements: [
           'Drove end-to-end performance improvements — optimized database queries and introduced parallelization techniques, achieving ∼30% faster average API response times; implemented UI virtualization, reducing average render time by ∼150ms across data-heavy interfaces',
-          'Built features utilizing 6+ AWS Lambda workers and AWS SNS/SQS pipelines to implement asynchronous background jobs, ensuring long-running operations ran in the background without slowing down the core API server',
+          'Built features utilizing 6+ independently-deployed AWS Lambda workers and AWS SQS pipelines, including scheduled and queue-triggered jobs, to run asynchronous background operations without slowing down the core API server',
           'Optimized the AI coding workflow across full-stack modules by integrating compressed agentic prompts and a codebase knowledge graph — scoping model context to relevant nodes rather than full file trees, achieving top-21% amongst developers for AI token efficiency',
           'Led the development of a helpdesk platform while concurrently contributing to backend systems for an HR management system and a CRM — all three being SaaS products',
-          'Integrated AI-assisted coding tools into the development cycle, improving pre-QA smoke test coverage and reducing bug escalation rate to QA, achieving a 67% acceleration in overall feature delivery',
+          'Integrated AI-assisted coding tools into the development cycle, backed by structured logging and error handling surfaced in cloud logs for faster debugging, improving pre-QA smoke test coverage and reducing bug escalation rate to QA, achieving a 67% acceleration in overall feature delivery',
         ],
         highlights: [
           ['Drove end-to-end performance improvements', 'achieving ∼30% faster average API response times', 'reducing average render time by ∼150ms'],
-          ['6+ AWS Lambda workers', 'asynchronous background jobs'],
+          ['6+ independently-deployed AWS Lambda workers', 'scheduled and queue-triggered jobs', 'asynchronous background operations'],
           ['codebase knowledge graph', 'achieving top-21%'],
           ['SaaS products', 'Led the development'],
-          ['improving pre-QA smoke test coverage', 'achieving a 67% acceleration'],
+          ['structured logging and error handling', 'improving pre-QA smoke test coverage', 'achieving a 67% acceleration'],
         ],
       },
     ],
@@ -208,7 +208,7 @@ export const deepDive: DeepDiveRole[] = [
       },
       {
         detail:
-          'Built an asynchronous processing layer using 6+ AWS Lambda workers fed by SNS/SQS pipelines, moving long-running operations off the request path. The core API server stayed responsive under load while heavy jobs ran in the background and retried safely on failure.',
+          'Built an asynchronous processing layer using 6+ independently-deployed AWS Lambda workers fed by SQS pipelines — including scheduled and queue-triggered jobs — moving long-running operations off the request path. The core API server stayed responsive under load while heavy jobs ran in the background and retried safely on failure.',
         skills: ['AWS', 'Node.js'],
       },
       {
@@ -218,7 +218,7 @@ export const deepDive: DeepDiveRole[] = [
       },
       {
         detail:
-          'Integrated AI-assisted tooling into the everyday cycle to raise pre-QA smoke-test coverage and cut the bug escalation rate to QA, contributing to a 67% acceleration in overall feature delivery across the three products.',
+          'Integrated AI-assisted tooling into the everyday cycle — backed by structured logging and error handling surfaced in cloud logs for faster debugging — to raise pre-QA smoke-test coverage and cut the bug escalation rate to QA, contributing to a 67% acceleration in overall feature delivery across the three products.',
         skills: ['Claude', 'GitHub Actions', 'Node.js'],
       },
     ],

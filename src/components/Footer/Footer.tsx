@@ -1,4 +1,6 @@
 ﻿export function Footer() {
+  const year = new Date().getFullYear()
+
   return (
     <footer className="py-8 mt-16 border-t-2 border-[var(--clr-border)]">
       <div className="max-w-[1400px] w-[95%] mx-auto flex items-center justify-between text-xs font-['JetBrains_Mono'] text-[var(--clr-fg)]">
@@ -12,7 +14,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          &copy; 2026 // Mashrur Ahsan
+          &copy; {year} // Mashrur Ahsan
         </a>
       </div>
     </footer>

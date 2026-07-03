@@ -6,6 +6,7 @@ import { deepDive } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop'
 import { MyStuffCarousel } from '@/components/DeepDive/MyStuffCarousel'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 // Company → external site (mirrors the links in the Experience section)
 const companyUrls: Record<string, string> = {
@@ -14,6 +15,8 @@ const companyUrls: Record<string, string> = {
 }
 
 export function DeepDivePage() {
+  useDocumentTitle('Deep Dive // Portfolio')
+
   // Open at the top — navigation from a scrolled-down card would otherwise
   // land the new page at whatever scroll offset the browser kept.
   useEffect(() => {

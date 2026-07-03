@@ -1,7 +1,10 @@
 import { m } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 export function NotFoundPage() {
+  useDocumentTitle('404 // Portfolio')
+
   return (
     <div className="min-h-screen flex flex-col">
       <m.header

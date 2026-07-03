@@ -1,8 +1,11 @@
 ﻿import { m } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
 import { DispatchGame } from '@/components/game/DispatchGame'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 export function GamePage() {
+  useDocumentTitle('Tech Dispatch // Portfolio')
+
   return (
     <div className="min-h-screen">
       <m.header

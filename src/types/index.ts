@@ -37,6 +37,9 @@ export interface ExperienceRole {
   mode: string
   achievements: string[]
   highlights?: string[][]
+  /** Related skills per achievement (parallel to `achievements`).
+   *  Names must match keys in `skillIconMap`. */
+  skills?: string[][]
 }
 
 export interface ExperienceCompany {

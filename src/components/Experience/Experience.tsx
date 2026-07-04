@@ -1,5 +1,6 @@
 import { m } from 'motion/react'
 import { experience } from '@/data/portfolio'
+import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import { DeepDiveZone } from './DeepDiveZone'
 
 // Helper: Parse achievement text and wrap highlighted phrases
@@ -120,10 +121,34 @@ export function Experience() {
                         key={i}
                         className="text-sm sm:text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] sm:hover:scale-[1.03] hover:shadow-sm rounded-sm px-2 py-2 -ml-2 sm:px-4 sm:-ml-4"
                       >
-                        <HighlightedText 
-                          text={achievement} 
-                          highlights={role.highlights?.[i]} 
+                        <HighlightedText
+                          text={achievement}
+                          highlights={role.highlights?.[i]}
                         />
+
+                        {/* Related-skill chips (icon + label) for this achievement */}
+                        {role.skills?.[i] && role.skills[i].length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {role.skills[i].map((skill) => {
+                              const Icon = skillIconMap[skill]
+                              const brandColor = skillColorMap[skill]
+                              return (
+                                <span
+                                  key={skill}
+                                  className="btn btn--plain cursor-default inline-flex items-center gap-2 group !py-1.5 !px-2.5"
+                                  style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                                >
+                                  {Icon && (
+                                    <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
+                                  )}
+                                  <span className="text-[12px] font-['JetBrains_Mono'] text-[var(--clr-fg-alt)] leading-none">
+                                    {skill}
+                                  </span>
+                                </span>
+                              )
+                            })}
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>

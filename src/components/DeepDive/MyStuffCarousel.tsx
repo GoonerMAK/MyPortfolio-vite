@@ -35,6 +35,7 @@ function renderWithCode(text: string): ReactNode[] {
 }
 
 const TOTAL = myStuff.length
+const SLIDE_OFFSET = 48
 
 /** Pill-driven carousel showcasing personal topics. ARIA tablist with roving tabindex + arrow-key nav. */
 export function MyStuffCarousel() {
@@ -101,9 +102,9 @@ export function MyStuffCarousel() {
   }
 
   const cardVariants = {
-    enter: (dir: number) => ({ opacity: 0, x: reduced ? 0 : dir > 0 ? 48 : -48 }),
+    enter: (dir: number) => ({ opacity: 0, x: reduced ? 0 : dir > 0 ? SLIDE_OFFSET : -SLIDE_OFFSET }),
     center: { opacity: 1, x: 0 },
-    exit: (dir: number) => ({ opacity: 0, x: reduced ? 0 : dir > 0 ? -48 : 48 }),
+    exit: (dir: number) => ({ opacity: 0, x: reduced ? 0 : dir > 0 ? -SLIDE_OFFSET : SLIDE_OFFSET }),
   }
 
   return (

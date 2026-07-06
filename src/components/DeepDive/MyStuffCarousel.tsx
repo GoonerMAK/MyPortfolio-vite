@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent, ReactNode } from 'react'
 import { AnimatePresence, m } from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -29,7 +29,14 @@ function renderWithCode(text: string): ReactNode[] {
         {segment}
       </code>
     ) : (
-      <span key={i}>{segment}</span>
+      <span key={i}>
+        {segment.split('\n').map((line, j, arr) => (
+          <Fragment key={j}>
+            {line}
+            {j < arr.length - 1 && <br />}
+          </Fragment>
+        ))}
+      </span>
     ),
   )
 }

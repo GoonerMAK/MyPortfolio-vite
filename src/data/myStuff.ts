@@ -250,6 +250,11 @@ export const myStuff: MyStuffTopic[] = [
         detail:
           "`{ ...(condition && { field: value }) }` adds a key only when it's needed — cleaner than building the object and mutating it afterwards.",
       },
+      {
+        term: 'for..of vs for..in',
+        detail:
+          "`for..in` gives you keys, `for..of` gives you values. `for (i in [3,4,5])` → `0,1,2`; `for (v of [3,4,5])` → `3,4,5`.\nOnly `for..of` works with `await` inside the loop, letting you build entries one by one before a single bulk insert — `.forEach` and `for..in` can't pause per item: \n`for (const id of ids) { const row = await fetchUser(id); rows.push(row); } await db.insertMany(rows);`",
+      },
     ],
   },
   {

@@ -255,6 +255,11 @@ export const myStuff: MyStuffTopic[] = [
         detail:
           "`for..in` gives you keys, `for..of` gives you values. `for (i in [3,4,5])` → `0,1,2`; `for (v of [3,4,5])` → `3,4,5`.\nOnly `for..of` works with `await` inside the loop, letting you build entries one by one before a single bulk insert — `.forEach` and `for..in` can't pause per item: \n`for (const id of ids) { const row = await fetchUser(id); rows.push(row); } await db.insertMany(rows);`",
       },
+      {
+        term: 'ES6 Symbol()',
+        detail:
+          "`Symbol()` mints a unique, immutable value every call — `Symbol('id') !== Symbol('id')`. Solves naming collisions and lets you attach \"invisible,\" collision-proof metadata to objects: symbol keys are skipped by `for..in`, `Object.keys` and `JSON.stringify`, so `obj[mySym] = 'meta'` won't clash with other libs or leak into serialisation.",
+      },
     ],
   },
   {

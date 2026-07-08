@@ -260,6 +260,11 @@ export const myStuff: MyStuffTopic[] = [
         detail:
           "`Symbol()` mints a unique, immutable value every call — `Symbol('id') !== Symbol('id')`. Solves naming collisions and lets you attach \"invisible,\" collision-proof metadata to objects: symbol keys are skipped by `for..in`, `Object.keys` and `JSON.stringify`, so `obj[mySym] = 'meta'` won't clash with other libs or leak into serialisation.",
       },
+      {
+        term: 'Babel transpiling',
+        detail:
+          "Babel compiles modern JS/TS down to a version older engines understand, so you write today's syntax without dropping support for older browsers. Arrow functions, optional chaining and the rest get rewritten:\n`const f = (a) => a?.x` → `var f = function (a) { return a == null ? undefined : a.x; };`",
+      },
     ],
   },
   {

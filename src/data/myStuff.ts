@@ -265,6 +265,16 @@ export const myStuff: MyStuffTopic[] = [
         detail:
           "Babel compiles modern JS/TS down to a version older engines understand, so you write today's syntax without dropping support for older browsers. Arrow functions, optional chaining and the rest get rewritten:\n`const f = (a) => a?.x` → `var f = function (a) { return a == null ? undefined : a.x; };`",
       },
+      {
+        term: 'ES6 array methods',
+        detail:
+          "`Array.from()` — iterables/array-likes → array. `Array.from('abc')` → `['a','b','c']`\n`Array.of()` — new array from args, no type/count quirks. `Array.of(7)` → `[7]` (vs `Array(7)` → empty length-7 array)\n`.copyWithin()` — copy a slice within same array. `[1,2,3,4,5].copyWithin(0,3)` → `[4,5,3,4,5]`\n`.find()` — first element matching predicate. `[1,5,10].find(n => n > 4)` → `5`\n`.findIndex()` — index of first match. `[1,5,10].findIndex(n => n > 4)` → `1`\n`.entries()` — iterator of `[index, value]` pairs. `[...['a','b'].entries()]` → `[[0,'a'],[1,'b']]`\n`.keys()` — iterator of indices. `[...['a','b'].keys()]` → `[0,1]`\n`.values()` — iterator of values. `[...['a','b'].values()]` → `['a','b']`\n`.fill()` — overwrite elements with a static value. `[1,2,3].fill(0,1)` → `[1,0,0]`",
+      },
+      {
+        term: 'ES6 string methods',
+        detail:
+          "`.startsWith()` — true if string begins with given chars. `'hello'.startsWith('he')` → `true`\n`.endsWith()` — true if string ends with given chars. `'hello'.endsWith('lo')` → `true`\n`.includes()` — true if given substring appears anywhere. `'hello'.includes('ell')` → `true`\n`.repeat()` — new string with the original repeated n times. `'ab'.repeat(3)` → `'ababab'`",
+      },
     ],
   },
   {

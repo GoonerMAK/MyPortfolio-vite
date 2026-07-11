@@ -261,9 +261,9 @@ export const myStuff: MyStuffTopic[] = [
           "`Symbol()` mints a unique, immutable value every call — `Symbol('id') !== Symbol('id')`. Solves naming collisions and lets you attach \"invisible,\" collision-proof metadata to objects: symbol keys are skipped by `for..in`, `Object.keys` and `JSON.stringify`, so `obj[mySym] = 'meta'` won't clash with other libs or leak into serialisation.",
       },
       {
-        term: 'Babel transpiling',
+        term: 'Spread operator (...)',
         detail:
-          "Babel compiles modern JS/TS down to a version older engines understand, so you write today's syntax without dropping support for older browsers. Arrow functions, optional chaining and the rest get rewritten:\n`const f = (a) => a?.x` → `var f = function (a) { return a == null ? undefined : a.x; };`",
+          "Copy an array (shallow). `const b = [...a]`\nMerge arrays. `[...arr1, ...arr2]` → combined array, later duplicates win\nCopy an object (shallow). `const clone = { ...obj }`\nMerge objects, later keys override earlier ones. `{ ...defaults, ...overrides }`\nPass array elements as individual function args. `Math.max(...[3,1,4])` → `4`\nBuild a new array/string from an iterable. `[...'abc']` → `['a','b','c']`\nCollect the rest of an array/object into one var. `const [first, ...rest] = [1,2,3]` → `rest = [2,3]`",
       },
       {
         term: 'ES6 array methods',
@@ -274,6 +274,11 @@ export const myStuff: MyStuffTopic[] = [
         term: 'ES6 string methods',
         detail:
           "`.startsWith()` — true if string begins with given chars. `'hello'.startsWith('he')` → `true`\n`.endsWith()` — true if string ends with given chars. `'hello'.endsWith('lo')` → `true`\n`.includes()` — true if given substring appears anywhere. `'hello'.includes('ell')` → `true`\n`.repeat()` — new string with the original repeated n times. `'ab'.repeat(3)` → `'ababab'`",
+      },
+      {
+        term: 'Babel transpiling',
+        detail:
+          "Babel compiles modern JS/TS down to a version older engines understand, so you write today's syntax without dropping support for older browsers. Arrow functions, optional chaining and the rest get rewritten:\n`const f = (a) => a?.x` → `var f = function (a) { return a == null ? undefined : a.x; };`",
       },
     ],
   },

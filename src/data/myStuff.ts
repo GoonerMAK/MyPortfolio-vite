@@ -246,6 +246,11 @@ export const myStuff: MyStuffTopic[] = [
           "Know the difference between them, and when `hasOwnProperty` is the correct check rather than a plain truthiness test that `0` or `''` would slip through.",
       },
       {
+        term: 'var vs let vs const',
+        detail:
+          "`var` — function-scoped: it leaks out of `if`/`for` blocks into the whole enclosing function (no block scope).\n`let` — block-scoped and mutable: only exists inside the nearest `{ }`, but its value can be reassigned.\n`const` — block-scoped like `let`, but the binding is immutable — can't reassign `x`, though a `const` object/array's contents can still be mutated.",
+      },
+      {
         term: 'Conditional fields via spread',
         detail:
           "`{ ...(condition && { field: value }) }` adds a key only when it's needed — cleaner than building the object and mutating it afterwards.",

@@ -426,7 +426,7 @@ export function MyStuffCarousel() {
 }
 
 /** One row in the topic sidebar — same stable position in the list whether
- *  it's active or not; only its styling changes. */
+ *  it's active or not, only its styling changes. */
 const TopicListItem = forwardRef<
   HTMLButtonElement,
   {

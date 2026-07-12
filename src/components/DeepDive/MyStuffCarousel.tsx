@@ -149,7 +149,7 @@ export function MyStuffCarousel() {
               id={`mystuff-panel-${topic.id}`}
               aria-labelledby={`mystuff-tab-${topic.id}`}
               tabIndex={0}
-              className="panel panel-hud p-5 md:p-8 flex flex-col lg:h-[620px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)]"
+              className="panel panel-hud p-5 md:p-8 flex flex-col lg:h-[720px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)]"
             >
               {/* Card header: icon · title · counter */}
               <div className="flex items-start gap-4 mb-5 shrink-0">

@@ -39,7 +39,7 @@ export function DeepDivePage() {
         </div>
       </m.header>
 
-      <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-12">
+      <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-48">
         <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

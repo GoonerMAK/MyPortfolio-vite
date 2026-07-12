@@ -72,6 +72,10 @@ export interface MyStuffNote {
   /** Plain-English explainer. Wrap inline code in backticks — the carousel
    *  renders `…` segments as styled <code> chips. */
   detail: string
+  /** Groups notes under an in-card subsection tab. Notes sharing the same
+   *  string render together; omitting it on every note in a topic keeps
+   *  today's single ungrouped grid. */
+  section?: string
 }
 
 /** One themed card in the "My Stuff" field-notes carousel */

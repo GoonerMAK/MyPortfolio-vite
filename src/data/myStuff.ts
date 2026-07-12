@@ -232,113 +232,135 @@ export const myStuff: MyStuffTopic[] = [
     notes: [
       {
         term: 'No magic strings',
+        section: 'Core Habits',
         detail:
           "Don't scatter raw string literals across the codebase — centralise them in objects, enums or user-defined types so the compiler catches a typo instead of production.",
       },
       {
         term: 'Sensible default return types',
+        section: 'Core Habits',
         detail:
           'Stay consistent: object → `null`, number → `0`, boolean → an explicit `true`/`false`, array → `[]`. Predictable shapes mean far fewer defensive checks downstream.',
       },
       {
         term: 'null vs undefined vs falsy',
+        section: 'Core Habits',
         detail:
           "Know the difference between them, and when `hasOwnProperty` is the correct check rather than a plain truthiness test that `0` or `''` would slip through.",
       },
       {
         term: 'var vs let vs const',
+        section: 'Core Habits',
         detail:
           "`var` — function-scoped: it leaks out of `if`/`for` blocks into the whole enclosing function (no block scope).\n`let` — block-scoped and mutable: only exists inside the nearest `{ }`, but its value can be reassigned.\n`const` — block-scoped like `let`, but the binding is immutable — can't reassign `x`, though a `const` object/array's contents can still be mutated.",
       },
       {
-        term: 'Conditional fields via spread',
-        detail:
-          "`{ ...(condition && { field: value }) }` adds a key only when it's needed — cleaner than building the object and mutating it afterwards.",
-      },
-      {
-        term: 'for..of vs for..in',
-        detail:
-          "`for..in` gives you keys, `for..of` gives you values. `for (i in [3,4,5])` → `0,1,2`; `for (v of [3,4,5])` → `3,4,5`.\nOnly `for..of` works with `await` inside the loop, letting you build entries one by one before a single bulk insert — `.forEach` and `for..in` can't pause per item: \n`for (const id of ids) { const row = await fetchUser(id); rows.push(row); } await db.insertMany(rows);`",
-      },
-      {
-        term: 'ES6 Promises',
-        detail:
-          "Three states: `pending` (initial, no result yet) → `fulfilled` (resolved with a value) or `rejected` (failed with a reason) — and once settled either way, a promise is immutable, it can't flip states again. `new Promise((resolve, reject) => task ? resolve(value) : reject(error))`\nChain steps without nesting. `fetchUser(id).then(u => fetchOrders(u.id)).then(orders => render(orders))`\nHandle failure in one place instead of an error-first callback per step. `promise.catch(err => log(err))`\nRun cleanup regardless of outcome. `promise.finally(() => setLoading(false))`\nRun independent async calls in parallel and wait for all. `Promise.all([fetchA(), fetchB()])`\nTake whichever settles first (timeouts, races). `Promise.race([fetchData(), timeout(5000)])`\nWait for all to settle, success or failure, without short-circuiting. `Promise.allSettled([...])`\nasync/await is sugar over promises — same mechanism, sequential-looking syntax. `const user = await fetchUser(id)`\nSolves callback hell — deeply nested `fn(a, (err, b) => fn2(b, (err, c) => ...))` becomes a flat `.then()` chain or linear `await` sequence.",
-      },
-      {
-        term: 'ES6 Symbol()',
-        detail:
-          "`Symbol()` mints a unique, immutable value every call — `Symbol('id') !== Symbol('id')`. Solves naming collisions and lets you attach \"invisible,\" collision-proof metadata to objects: symbol keys are skipped by `for..in`, `Object.keys` and `JSON.stringify`, so `obj[mySym] = 'meta'` won't clash with other libs or leak into serialisation.",
-      },
-      {
         term: 'ES6 destructuring',
+        section: 'Destructuring & Spread',
         detail:
           "Pull object properties into named variables. `const { name, age } = user`\nRename while destructuring. `const { name: userName } = user`\nDefault values for missing keys. `const { role = 'guest' } = user`\nPositional array unpacking. `const [first, second] = [1, 2]`\nSkip array entries you don't need. `const [, second] = [1, 2]`\nNested destructuring. `const { address: { city } } = user`\nUnpack function arguments directly in the signature. `function greet({ name }) { return name }`",
       },
       {
         term: 'Spread operator (...)',
+        section: 'Destructuring & Spread',
         detail:
           "Copy an array (shallow). `const b = [...a]`\nMerge arrays. `[...arr1, ...arr2]` → combined array, later duplicates win\nCopy an object (shallow). `const clone = { ...obj }`\nMerge objects, later keys override earlier ones. `{ ...defaults, ...overrides }`\nPass array elements as individual function args. `Math.max(...[3,1,4])` → `4`\nBuild a new array/string from an iterable. `[...'abc']` → `['a','b','c']`\nCollect the rest of an array/object into one var. `const [first, ...rest] = [1,2,3]` → `rest = [2,3]`",
       },
       {
-        term: 'ES6 array methods',
+        term: 'Conditional fields via spread',
+        section: 'Destructuring & Spread',
         detail:
-          "`Array.from()` — iterables/array-likes → array. `Array.from('abc')` → `['a','b','c']`\n`Array.of()` — new array from args, no type/count quirks. `Array.of(7)` → `[7]` (vs `Array(7)` → empty length-7 array)\n`.copyWithin()` — copy a slice within same array. `[1,2,3,4,5].copyWithin(0,3)` → `[4,5,3,4,5]`\n`.find()` — first element matching predicate. `[1,5,10].find(n => n > 4)` → `5`\n`.findIndex()` — index of first match. `[1,5,10].findIndex(n => n > 4)` → `1`\n`.entries()` — iterator of `[index, value]` pairs. `[...['a','b'].entries()]` → `[[0,'a'],[1,'b']]`\n`.keys()` — iterator of indices. `[...['a','b'].keys()]` → `[0,1]`\n`.values()` — iterator of values. `[...['a','b'].values()]` → `['a','b']`\n`.fill()` — overwrite elements with a static value. `[1,2,3].fill(0,1)` → `[1,0,0]`",
+          "`{ ...(condition && { field: value }) }` adds a key only when it's needed — cleaner than building the object and mutating it afterwards.",
       },
       {
-        term: 'ES6 string methods',
+        term: 'ES6 rest parameters',
+        section: 'Destructuring & Spread',
         detail:
-          "`.startsWith()` — true if string begins with given chars. `'hello'.startsWith('he')` → `true`\n`.endsWith()` — true if string ends with given chars. `'hello'.endsWith('lo')` → `true`\n`.includes()` — true if given substring appears anywhere. `'hello'.includes('ell')` → `true`\n`.repeat()` — new string with the original repeated n times. `'ab'.repeat(3)` → `'ababab'`",
-      },
-      {
-        term: 'Babel transpiling',
-        detail:
-          "Babel compiles modern JS/TS down to a version older engines understand, so you write today's syntax without dropping support for older browsers. Arrow functions, optional chaining and the rest get rewritten:\n`const f = (a) => a?.x` → `var f = function (a) { return a == null ? undefined : a.x; };`",
+          "Collect the remaining arguments into a real array. `function sum(...nums) { return nums.reduce((a, b) => a + b, 0) }`\nMix named params with a trailing rest. `function log(level, ...args) {}`\nReplaces the old `arguments` object with an actual `Array` — has `.map`/`.reduce`, and works in arrow functions where `arguments` doesn't exist. `const sum = (...nums) => nums.reduce((a, b) => a + b, 0)`",
       },
       {
         term: 'ES6 arrow functions — common uses',
+        section: 'Functions',
         detail:
           "Short one-line callbacks — implicit return, no `{ }`/`return`. `arr.map(n => n * 2)`\nArray/object transforms in `.filter`/`.reduce` chains. `users.filter(u => u.active).reduce((sum, u) => sum + u.age, 0)`\nPromise chains and async handlers. `fetch(url).then(res => res.json())`\nPreserving `this` inside a class method or setTimeout — arrow functions don't rebind it, unlike `function`. `class Timer { start() { setTimeout(() => this.tick(), 1000) } }`\nDefault export of a small component/handler. `export const Button = () => <button />`\nCurrying / returning a function from a function. `const add = a => b => a + b`\nSorting comparators. `arr.sort((a, b) => a - b)`",
       },
       {
         term: 'When NOT to use arrow functions',
+        section: 'Functions',
         detail:
           "Named/hoisted functions — arrow functions are anonymous and not hoisted, so skip them when you need the function callable before its declaration or named in stack traces.\nObject methods — `this` isn't bound to the object, it's inherited from the enclosing scope. `{ b: 7, func: () => { this.b-- } }` — `this.b` isn't the object's `b`, so it silently does nothing.\nDOM event handlers needing the element as `this`. `btn.addEventListener('click', () => this.classList.toggle('on'))` → `TypeError`, since `this` is the parent scope, not `btn`.\nAny function relying on its own `this` or `arguments` — arrow functions have neither; both resolve to the enclosing function's.",
       },
       {
         term: 'ES6 default parameters',
+        section: 'Functions',
         detail:
           "Fallback value used only when the arg is `undefined`. `function greet(name = 'Guest') { return name }` → `greet()` → `'Guest'`\nUnlike the old `arg = arg || fallback` trick, a falsy-but-valid value like `0` or `''` is kept, not overridden. `function f(x = 5) {}; f(0)` → `0`\nLater defaults can reference earlier params. `function make(a, b = a * 2) {}`",
       },
       {
-        term: 'ES6 template literals',
+        term: 'for..of vs for..in',
+        section: 'Iteration & Built-ins',
         detail:
-          "Basic interpolation — swap `+` concatenation for a placeholder. `` `${s1} ${s2}` `` → `'Good Day'`\nEmbed any expression, not just variables — math, ternaries, function calls. `` `Total: ${price * qty}` ``\nTrue multi-line strings without `\\n` concatenation — a literal newline in the source becomes one in the string.\nBuild dynamic class names / URLs / query strings inline. `` `/users/${id}?active=${isActive}` ``\nTagged templates let a function intercept and process the pieces — used for escaping, i18n, styled-components. `` html`<div>${value}</div>` ``\nNesting works fine for conditional strings. `` `${a ? 'yes' : 'no'}` ``",
+          "`for..in` gives you keys, `for..of` gives you values. `for (i in [3,4,5])` → `0,1,2`; `for (v of [3,4,5])` → `3,4,5`.\nOnly `for..of` works with `await` inside the loop, letting you build entries one by one before a single bulk insert — `.forEach` and `for..in` can't pause per item: \n`for (const id of ids) { const row = await fetchUser(id); rows.push(row); } await db.insertMany(rows);`",
       },
       {
-        term: 'ES6 rest parameters',
+        term: 'ES6 array methods',
+        section: 'Iteration & Built-ins',
         detail:
-          "Collect the remaining arguments into a real array. `function sum(...nums) { return nums.reduce((a, b) => a + b, 0) }`\nMix named params with a trailing rest. `function log(level, ...args) {}`\nReplaces the old `arguments` object with an actual `Array` — has `.map`/`.reduce`, and works in arrow functions where `arguments` doesn't exist. `const sum = (...nums) => nums.reduce((a, b) => a + b, 0)`",
+          "`Array.from()` — iterables/array-likes → array. `Array.from('abc')` → `['a','b','c']`\n`Array.of()` — new array from args, no type/count quirks. `Array.of(7)` → `[7]` (vs `Array(7)` → empty length-7 array)\n`.copyWithin()` — copy a slice within same array. `[1,2,3,4,5].copyWithin(0,3)` → `[4,5,3,4,5]`\n`.find()` — first element matching predicate. `[1,5,10].find(n => n > 4)` → `5`\n`.findIndex()` — index of first match. `[1,5,10].findIndex(n => n > 4)` → `1`\n`.entries()` — iterator of `[index, value]` pairs. `[...['a','b'].entries()]` → `[[0,'a'],[1,'b']]`\n`.keys()` — iterator of indices. `[...['a','b'].keys()]` → `[0,1]`\n`.values()` — iterator of values. `[...['a','b'].values()]` → `['a','b']`\n`.fill()` — overwrite elements with a static value. `[1,2,3].fill(0,1)` → `[1,0,0]`",
+      },
+      {
+        term: 'ES6 string methods',
+        section: 'Iteration & Built-ins',
+        detail:
+          "`.startsWith()` — true if string begins with given chars. `'hello'.startsWith('he')` → `true`\n`.endsWith()` — true if string ends with given chars. `'hello'.endsWith('lo')` → `true`\n`.includes()` — true if given substring appears anywhere. `'hello'.includes('ell')` → `true`\n`.repeat()` — new string with the original repeated n times. `'ab'.repeat(3)` → `'ababab'`",
+      },
+      {
+        term: 'ES6 collections — Map/Set/WeakMap/WeakSet',
+        section: 'Iteration & Built-ins',
+        detail:
+          "`Map` — key/value pairs like an object, but any type can be a key and insertion order is preserved. `new Map([['a', 1]])`\n`Set` — unique values only; the one-liner way to dedupe an array. `[...new Set([1, 1, 2])]` → `[1, 2]`\n`WeakMap`/`WeakSet` — same idea, but keys must be objects and are held weakly, so an entry doesn't stop its key from being garbage-collected. Good for attaching private metadata to an object without leaking memory.",
       },
       {
         term: 'ES6 classes',
+        section: 'Classes, Modules & Async',
         detail:
           "Syntactic sugar over prototype-based inheritance. `class User { constructor(name) { this.name = name } }`\nInheritance via `extends`/`super`. `class Admin extends User { constructor(name) { super(name) } }`\nInstance methods live on the shared prototype, not copied per-instance — cheaper than attaching functions in the constructor.\nGetters/setters read like properties but run code. `class Circle { get area() { return Math.PI * this.r ** 2 } }`\nStatic members belong to the class itself, not instances. `class Util { static parse(x) { return Number(x) } }`",
       },
       {
         term: 'ES6 modules',
+        section: 'Classes, Modules & Async',
         detail:
           "Named exports — export as many as you like per file; the import name must match. `export function perimeter(x, y) { return 2 * (x + y) }` → `import { perimeter } from './rectangle'`\nDefault export — one per file, and the import side can name it anything. `export default function Component() {}` → `import AnyName from './file'`\nBatch-export a list at the bottom instead of tagging each declaration. `export { perimeter, area }`\nMix named and default in one file — one export renamed to default alongside the rest. `export { show as default, a, b }` → `import show, { a, b } from './index'`\nImport both styles from the same module at once. `import Component, { helper } from './file'`\nStatic import/export structure (resolved at parse time, not runtime) is what lets bundlers tree-shake unused exports out of the final build.",
       },
       {
-        term: 'ES6 collections — Map/Set/WeakMap/WeakSet',
+        term: 'ES6 Promises',
+        section: 'Classes, Modules & Async',
         detail:
-          "`Map` — key/value pairs like an object, but any type can be a key and insertion order is preserved. `new Map([['a', 1]])`\n`Set` — unique values only; the one-liner way to dedupe an array. `[...new Set([1, 1, 2])]` → `[1, 2]`\n`WeakMap`/`WeakSet` — same idea, but keys must be objects and are held weakly, so an entry doesn't stop its key from being garbage-collected. Good for attaching private metadata to an object without leaking memory.",
+          "Three states: `pending` (initial, no result yet) → `fulfilled` (resolved with a value) or `rejected` (failed with a reason) — and once settled either way, a promise is immutable, it can't flip states again. `new Promise((resolve, reject) => task ? resolve(value) : reject(error))`\nChain steps without nesting. `fetchUser(id).then(u => fetchOrders(u.id)).then(orders => render(orders))`\nHandle failure in one place instead of an error-first callback per step. `promise.catch(err => log(err))`\nRun cleanup regardless of outcome. `promise.finally(() => setLoading(false))`\nRun independent async calls in parallel and wait for all. `Promise.all([fetchA(), fetchB()])`\nTake whichever settles first (timeouts, races). `Promise.race([fetchData(), timeout(5000)])`\nWait for all to settle, success or failure, without short-circuiting. `Promise.allSettled([...])`\nasync/await is sugar over promises — same mechanism, sequential-looking syntax. `const user = await fetchUser(id)`\nSolves callback hell — deeply nested `fn(a, (err, b) => fn2(b, (err, c) => ...))` becomes a flat `.then()` chain or linear `await` sequence.",
+      },
+      {
+        term: 'ES6 template literals',
+        section: 'Templates & Tooling',
+        detail:
+          "Basic interpolation — swap `+` concatenation for a placeholder. `${s1} ${s2}` → `'Good Day'`\nEmbed any expression, not just variables — math, ternaries, function calls. `Total: ${price * qty}`\nTrue multi-line strings without `\\n` concatenation — a literal newline in the source becomes one in the string.\nBuild dynamic class names / URLs / query strings inline. `/users/${id}?active=${isActive}`\nTagged templates let a function intercept and process the pieces before they're joined — used for escaping, i18n, styled-components.\nNesting works fine for conditional strings. `${a ? 'yes' : 'no'}`",
+      },
+      {
+        term: 'ES6 Symbol()',
+        section: 'Templates & Tooling',
+        detail:
+          "`Symbol()` mints a unique, immutable value every call — `Symbol('id') !== Symbol('id')`. Solves naming collisions and lets you attach \"invisible,\" collision-proof metadata to objects: symbol keys are skipped by `for..in`, `Object.keys` and `JSON.stringify`, so `obj[mySym] = 'meta'` won't clash with other libs or leak into serialisation.",
       },
       {
         term: 'Meta-programming & Intl',
+        section: 'Templates & Tooling',
         detail:
           "`Proxy` — intercept fundamental operations (get/set/has) on an object. `new Proxy(target, { get: (t, prop) => (prop in t ? t[prop] : 'missing') })`\n`Reflect` — companion API for those same operations, used inside proxy traps to forward the default behaviour correctly. `Reflect.get(target, prop)`\n`Intl` — locale-aware number/date/currency formatting without a library. `new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(1234.5)` → `'£1,234.50'`",
+      },
+      {
+        term: 'Babel transpiling',
+        section: 'Templates & Tooling',
+        detail:
+          "Babel compiles modern JS/TS down to a version older engines understand, so you write today's syntax without dropping support for older browsers. Arrow functions, optional chaining and the rest get rewritten:\n`const f = (a) => a?.x` → `var f = function (a) { return a == null ? undefined : a.x; };`",
       },
     ],
   },

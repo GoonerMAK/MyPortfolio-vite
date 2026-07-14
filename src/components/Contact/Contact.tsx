@@ -1,9 +1,18 @@
-﻿import { m } from 'motion/react'
-import { Mail } from 'lucide-react'
+﻿import { useState } from 'react'
+import { m } from 'motion/react'
+import { Mail, Copy, Check } from 'lucide-react'
 import { contact } from '@/data/portfolio'
 
 export function Contact() {
+  const [copied, setCopied] = useState(false)
+
   if (!contact.email) return null
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(contact.email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <section className="section px-4" id="contact" aria-labelledby="contact-title">
@@ -28,9 +37,20 @@ export function Contact() {
           <p className="font-['JetBrains_Mono'] text-sm text-[var(--clr-fg)] mb-1 uppercase tracking-wider">
             Get in Touch
           </p>
-          <p className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)] mb-6">
-            {contact.email}
-          </p>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <p className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)]">
+              {contact.email}
+            </p>
+            <button
+              type="button"
+              onClick={handleCopy}
+              aria-label={copied ? 'Email copied!' : 'Copy email'}
+              className="p-1 rounded hover:bg-[var(--clr-border)] transition-colors text-[var(--clr-fg-alt)] hover:text-[var(--clr-primary)]"
+              title={copied ? 'Copied!' : 'Copy to clipboard'}
+            >
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            </button>
+          </div>
           <m.a
             href={`mailto:${contact.email}`}
             aria-label={`Send email to ${contact.email}`}

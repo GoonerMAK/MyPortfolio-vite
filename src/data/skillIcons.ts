@@ -37,6 +37,13 @@ import {
   SiOllama,
   SiGithubcopilot,
   SiClaude,
+  SiPython,
+  SiPandas,
+  SiTensorflow,
+  SiNumpy,
+  SiScikitlearn,
+  SiUnity,
+  SiDotnet,
 } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
 
@@ -79,6 +86,14 @@ export const skillIconMap: Record<string, IconType> = {
   'GitHub Copilot': SiGithubcopilot,
   'Google Gemini': SiGooglegemini,
   'Ollama': SiOllama,
+  'Python': SiPython,
+  'Pandas': SiPandas,
+  'Tensorflow': SiTensorflow,
+  'Numpy': SiNumpy,
+  'Scikit-learn': SiScikitlearn,
+  'Unity': SiUnity,
+  'C#': SiDotnet,
+  'HTML & CSS': SiHtml5,
 }
 
 export const skillColorMap: Record<string, string> = {
@@ -125,4 +140,13 @@ export const skillColorMap: Record<string, string> = {
   'GitHub Copilot': '#8957E5',
   'Google Gemini': '#4285F4',
   'Ollama': '#FFFFFF',
+
+  'Python': '#3776AB',
+  'Pandas': '#FFFFFF',
+  'Tensorflow': '#FF6F00',
+  'Numpy': '#4DABCF',
+  'Scikit-learn': '#F7931E',
+  'Unity': '#FFFFFF',
+  'C#': '#512BD4',
+  'HTML & CSS': '#E34F26',
 }

@@ -1,5 +1,6 @@
 ﻿import { m } from 'motion/react'
 import { ExternalLink, Github } from 'lucide-react'
+import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import type { Project } from '@/types'
 
 const PRIORITY_COLORS = [
@@ -69,14 +70,28 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
           {project.description}
         </p>
 
-        {/* Tech stack tags */}
+        {/* Tech stack tags (icon + label) */}
         {project.stack && (
           <ul className="flex flex-wrap gap-2 mb-5">
-            {project.stack.map((item) => (
-              <li key={item}>
-                <span className="btn btn--plain">{item}</span>
-              </li>
-            ))}
+            {project.stack.map((item) => {
+              const Icon = skillIconMap[item]
+              const brandColor = skillColorMap[item]
+              return (
+                <li key={item}>
+                  <span
+                    className="btn btn--plain cursor-default inline-flex items-center gap-2 group !py-1.5 !px-2.5"
+                    style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                  >
+                    {Icon && (
+                      <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
+                    )}
+                    <span className="text-[12px] font-['JetBrains_Mono'] text-[var(--clr-fg-alt)] leading-none">
+                      {item}
+                    </span>
+                  </span>
+                </li>
+              )
+            })}
           </ul>
         )}
 

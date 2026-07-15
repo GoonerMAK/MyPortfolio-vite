@@ -31,22 +31,22 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: '.map + Promise.all, carefully',
         detail:
-          'A couple of parallel DB calls are fine, but fanning out N independent queries through `Promise.all` opens N connections at once and can exhaust the pool — at scale it takes the system down. For writes, reach for `bulkCreate` / `bulkUpdate` instead of parallel singles.',
+          "`Promise.all` runs async calls in parallel — great for two or three independent queries. But `ids.map(id => db.query(...))` over 500 ids grabs 500 pool connections at once. It's like sending 500 shoppers into a store with 10 tills: everything queues, then the pool exhausts and the app falls over. For bulk writes, make it one round trip instead: `bulkCreate(rows)` beats 500 parallel `create()` calls.",
       },
       {
         term: 'INNER vs LEFT JOIN',
         detail:
-          'Use an INNER JOIN (`required: true` on a Sequelize `include`) when you only want rows that actually have the association; a LEFT JOIN (`required: false`) keeps the parent row even when the associated record is null.',
+          "Joining `users` to `orders`: an INNER JOIN returns only users who actually have orders — no match, no row. A LEFT JOIN keeps every user and fills the missing order side with `null`. Party analogy: INNER is the list of guests who showed up, LEFT is the full invite list with blanks next to the no-shows. In Sequelize an `include` with `required: true` is the INNER JOIN; `required: false` is the LEFT.",
       },
       {
         term: 'Push work to the database',
         detail:
-          'A complex query at the database level beats pulling rows into the server and looping in memory — that eats RAM and falls over at scale. Collapse the work into one query with JSON aggregation.',
+          "Pulling 100k rows into Node just to sum or group them burns RAM and time — the database was built for exactly that job. `SELECT user_id, SUM(total) FROM orders GROUP BY user_id` hands back 50 finished rows instead of 100k raw ones to loop over. Rule of thumb: ship the question to the data, not the data to the question. JSON aggregation (`json_agg`) goes further — one query can return a parent with its children already nested.",
       },
       {
         term: 'Sequelize dataValues',
         detail:
-          "Model instances aren't plain objects, so serialisers like GraphQL can't reach nested `dataValues`. `toJSON()` flattens them to plain objects — safe as long as nothing downstream calls `.update()`, `.reload()` or `.destroy()` on the result.",
+          "A Sequelize query returns model instances — objects wrapped in methods and hidden state, not plain data. Serialisers like GraphQL can't see into the nested `dataValues`, so fields silently come back empty. `const plain = instance.toJSON()` flattens it to a plain object — safe as long as nothing downstream calls `.update()`, `.reload()` or `.destroy()` on the result, because those only exist on the live instance.",
       },
     ],
   },
@@ -62,27 +62,27 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'DNS record types',
         detail:
-          "`A` points to an IPv4 address, `AAAA` to IPv6, and `CNAME` to another domain. CloudFront — AWS's CDN — is hundreds of edge servers with no fixed IP, so you point a domain at it with a `CNAME`, never a hard-coded `A` record.",
+          "DNS is the internet's phone book — it turns a name into an address. An `A` record maps to an IPv4 address (`example.com → 93.184.216.34`), `AAAA` to IPv6, and `CNAME` aliases one name to another name. CloudFront — AWS's CDN — is hundreds of edge servers with no fixed IP, so you point a domain at it with a `CNAME` like `d123.cloudfront.net`, never a hard-coded `A` record that breaks the moment the IPs rotate.",
       },
       {
         term: 'Custom domain flow (Amplify)',
         detail:
-          '`CreateDomainAssociationCommand` registers the domain; `GetDomainAssociationCommand` returns two CNAMEs (certificate verification + subdomain). You add them at the registrar (GoDaddy/Cloudflare), DNS propagates, ACM detects the verification record, issues the SSL cert, and CloudFront gets linked.',
+          'Everything between "customer types their domain" and "site loads with a padlock": `CreateDomainAssociationCommand` registers the domain, then `GetDomainAssociationCommand` returns two CNAME records — one proves domain ownership, one routes the subdomain. The customer adds both at their registrar (GoDaddy/Cloudflare), DNS propagates, ACM spots the verification record and issues the SSL certificate, and CloudFront starts serving the app on that domain.',
       },
       {
         term: 'ACM vs CloudFront',
         detail:
-          'ACM issues the SSL/HTTPS certificate — the padlock and the security. CloudFront serves the actual app to visitors worldwide and resolves the right edge IP every time.',
+          "Two AWS services that are easy to blur together. ACM (Certificate Manager) issues and renews the SSL certificate — the padlock, the proof the site is who it claims to be. CloudFront is the delivery network — it serves the actual app from the edge server closest to each visitor. Analogy: ACM is the ID card, CloudFront is the courier fleet.",
       },
       {
         term: 'Background jobs',
         detail:
-          "Long-running work belongs off the request path — independently-deployed Lambda workers fed by SQS, running scheduled and queue-triggered jobs — so the core API stays responsive and failed jobs retry safely instead of blocking a user's request.",
+          'A user clicking "export report" shouldn\'t stare at a spinner while the server crunches for two minutes. Long work moves off the request path: the API drops a message onto an SQS queue and responds instantly; an independently-deployed Lambda worker picks it up and does the heavy lifting. Restaurant model — the waiter takes the order and moves on, the kitchen cooks. Bonus: a failed job retries from the queue instead of making the user resubmit.',
       },
       {
         term: 'Multi-tenant SaaS',
         detail:
-          'One application serving many customers, each fully isolated from the others — the tenancy model behind the SaaS products I worked on.',
+          "One codebase, one deployment, many customers — each seeing only their own data. Apartment building: shared walls and plumbing (servers, code), private locked units (data isolation, typically a `tenant_id` scoping every query). The alternative — one deployment per customer — is easier to isolate but brutal to maintain once you have hundreds of them.",
       },
     ],
   },
@@ -98,17 +98,17 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'Subscriptions, webhooks & pub/sub',
         detail:
-          'Webhooks, GraphQL subscriptions and pub/sub all push updates outward instead of waiting to be polled — and scope matters: an organisation-wide subscription has a very different blast radius from a localised one.',
+          'Three ways of saying "don\'t keep asking — I\'ll tell you when something happens." Webhook: an external server calls your URL when an event fires (Stripe hitting `/payment-succeeded`). GraphQL subscription: the client holds a socket open and the server pushes updates through it (live chat, dashboards). Pub/sub: an internal post office — services publish events to a channel, every subscriber gets a copy. Scope is the gotcha: an organisation-wide channel fans out to every member; a per-user channel touches one socket.',
       },
       {
         term: 'Publish plain objects only',
         detail:
-          "`pubSub.publish()` needs plain JS objects all the way down — even nested fields. Raw model instances won't serialise, so convert before you publish.",
+          "`pubSub.publish()` serialises the payload to push it over the wire, and Sequelize model instances don't survive the trip — subscribers receive empty or broken fields. Convert everything first, nested associations included: `pubSub.publish(TASK_UPDATED, { task: task.toJSON() })`.",
       },
       {
         term: 'Null associations on live events',
         detail:
-          'If an association comes back null in a real-time event, either the query never `include`d it, or the instance needs a `reload()` before publishing so the fresh association is attached.',
+          "A live event arrives with `task.assignee` as `null` even though the task clearly has one. Two usual causes: the query that produced the instance never `include`d the association, so it was never loaded — or the association changed after loading and the instance is stale. `await task.reload({ include: [User] })` before publishing attaches the fresh data.",
       },
     ],
   },
@@ -124,22 +124,22 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'React virtualization',
         detail:
-          'When the backend returns a large, unpaginated list, render only the rows currently in view. It slashes DOM nodes and render time on data-heavy screens — worth ~150ms on the heaviest ones.',
+          "Render a 10,000-row table naively and the browser chokes on 10,000 DOM nodes. Virtualization renders only what's on screen — maybe 20 rows — and swaps content in as you scroll, a window sliding over the list. The scrollbar still behaves like all 10,000 rows exist; the DOM never holds more than a screenful. Worth ~150ms on the heaviest data screens I worked on.",
       },
       {
         term: 'Throttling vs rate limiting',
         detail:
-          'Throttling smooths and slows the flow of requests; rate limiting hard-caps the count within a time window and rejects the overflow. Different tools for different abuse patterns.',
+          'Both tame request floods, differently. Throttling smooths the flow — requests slow down or queue, like a metered motorway on-ramp: everyone gets on, gradually. Rate limiting hard-caps a window and rejects the overflow — 100 requests/min, then `HTTP 429`, a bouncer with a headcount. Throttle to protect a downstream you still want fully served; rate-limit to shut down abuse outright.',
       },
       {
         term: 'Fire-and-forget analytics',
         detail:
-          'Sending a PostHog event fire-and-forget adds zero latency — ideal for analytics. Awaiting it guarantees delivery but lets a tracking error block core flow (avoid); a queue guarantees delivery at the cost of extra infrastructure.',
+          "Three delivery guarantees, three price tags. Fire-and-forget — `posthog.capture(event)` with no `await` — adds zero latency, but a lost event stays lost: perfect for analytics. Awaited — delivery guaranteed, but now a tracking outage can block your core flow: avoid. Queued — guaranteed and non-blocking, but you're running extra infrastructure. Match the guarantee to how much the data actually matters.",
       },
       {
         term: 'Bloom filters',
         detail:
-          "A tiny, fast probabilistic 'have I seen this?' check — widely used in caching layers to skip pointless lookups for keys that definitely aren't there.",
+          'A probabilistic "have I seen this before?" set that squeezes huge datasets into tiny memory. Its answers are "definitely not" or "probably yes" — false positives possible, false negatives impossible. Caching layers use one to skip pointless lookups: if the filter says a key was never stored, don\'t even hit the cache or database. A guest list that is 100% certain only about who is NOT invited.',
       },
     ],
   },
@@ -155,17 +155,17 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'Checkpointer (LangGraph)',
         detail:
-          'A persistent database that stores conversation state. If the server crashes mid-conversation it reloads the last checkpoint and resumes — without re-running tool calls or losing context.',
+          "A save-game system for agent conversations. Every step of state — messages, tool results, position in the graph — is written to a database checkpoint. If the server crashes mid-conversation, it reloads the last checkpoint and resumes: no re-running expensive tool calls, no lost context. Same mechanism enables time-travel debugging — replay any conversation from any step.",
       },
       {
         term: 'Temperature',
         detail:
-          'The model’s creativity dial — low is deterministic, high is wild, and ~0.5 sits balanced in the middle.',
+          "The randomness dial on how the model picks its next token. Low (~0): always take the most likely token — deterministic and repeatable, right for extraction, classification and code. High (~1): long-shot tokens get real odds — creative but loose, right for brainstorming and copy. ~0.5 sits balanced. Rule of thumb: if a \"wrong but interesting\" answer is useless to you, keep it low.",
       },
       {
         term: 'Context scoping',
         detail:
-          'Feeding the model compressed prompts plus a codebase knowledge graph scopes its context to the relevant nodes instead of whole file trees — markedly better token efficiency.',
+          'Both cost and answer quality degrade when you dump whole file trees into a prompt. Better: compress the prompt and pair it with a knowledge graph of the codebase, so the model reasons over just the relevant nodes — `auth.service` plus its three dependents, not 400 files. Markedly better token efficiency and less "lost in the middle."',
       },
     ],
   },
@@ -181,17 +181,17 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'MIME',
         detail:
-          'Multipurpose Internet Mail Extensions — the standard that defines what an email can actually carry beyond plain text.',
+          'Multipurpose Internet Mail Extensions — the standard that lets an email carry more than plain ASCII text. A MIME message is a set of labelled parts: `multipart/alternative` holds a plain-text and an HTML version of the same body (the client picks one), `image/png` marks an inline image or attachment. Without MIME there are no attachments, no formatting, no non-Latin characters — email as it was in the 1970s.',
       },
       {
         term: 'Links vs file attachments',
         detail:
-          "File attachments bloat the email, trip spam filters, and can't be recalled once sent. Download links keep mail light, dodge spam triggers, can expire or require auth, and let you track downloads.",
+          "Attach a 10MB report and it bloats every recipient's copy, trips spam filters, and can never be recalled once sent. A download link — e.g. a pre-signed S3 URL — keeps the mail light, can expire or require auth, lets you revoke or replace the file after sending, and makes every download trackable.",
       },
       {
         term: 'Reputation & bounces',
         detail:
-          "Sender reputation decides inbox vs spam. A soft bounce is temporary (mailbox full); a hard bounce is permanent (address doesn't exist) and should be suppressed right away to protect that reputation.",
+          "Mailbox providers score every sender like a credit rating, and that score decides inbox vs spam for all your future mail. Bounces damage it most. Soft bounce — temporary (mailbox full, server down): safe to retry. Hard bounce — permanent (address doesn't exist): suppress immediately. Repeatedly mailing dead addresses is exactly what spammers do, and providers grade you accordingly.",
       },
     ],
   },
@@ -207,17 +207,17 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'Validate on the server',
         detail:
-          'Client-side checks are convenience, not security — they can be impersonated or bypassed. Authorisation has to be enforced on the server, every time.',
+          "Client-side validation is UX, not security — anyone can open devtools, edit the request, and send `price: 0` or someone else's `userId`. Every rule the frontend checks must be re-checked server-side, e.g. a Zod schema at the API boundary: `schema.parse(req.body)` rejects anything malformed before business logic ever runs. Trust the server, never the client.",
       },
       {
         term: 'Least privilege',
         detail:
-          "When an event is denied, the fix isn't to open everything up — deny by default and allow only the one specific event that's actually needed.",
+          "When something gets denied, the lazy fix is granting broad access; the right fix is the narrowest one. Deny by default, then allow exactly the one event or action that's needed. Hotel keycards, not master keys: housekeeping opens floors 2–4, not the vault. A leaked narrow credential is an incident; a leaked master key is a breach.",
       },
       {
         term: 'WAF token',
         detail:
-          'The frontend and services attach a WAF token to reach the backend APIs; the Web Application Firewall itself sits at the backend API layer, inspecting traffic before it ever hits the app.',
+          'A Web Application Firewall inspects traffic before it reaches the app — filtering injection attempts, bots and floods. In our setup the frontend and services attach a WAF token to each request; the firewall sitting at the backend API layer verifies it, so untokened junk traffic is dropped before it ever touches business logic. A wristband checked at the door, not at the bar.',
       },
     ],
   },
@@ -234,43 +234,43 @@ export const myStuff: MyStuffTopic[] = [
         term: 'No magic strings',
         section: 'Core Habits',
         detail:
-          "Don't scatter raw string literals across the codebase — centralise them in objects, enums or user-defined types so the compiler catches a typo instead of production.",
+          "A raw `'active'` typed in 14 places is 14 chances for a typo the compiler can't catch — `'actve'` fails silently in production. Centralise once: `const STATUS = { ACTIVE: 'active', BANNED: 'banned' } as const`. Now `STATUS.ACTVE` is a compile error, a rename is a one-line change, and autocomplete lists every valid value.",
       },
       {
         term: 'Sensible default return types',
         section: 'Core Habits',
         detail:
-          'Stay consistent: object → `null`, number → `0`, boolean → an explicit `true`/`false`, array → `[]`. Predictable shapes mean far fewer defensive checks downstream.',
+          "Callers should never have to guess a function's empty shape. Stay consistent: object → `null`, number → `0`, boolean → an explicit `true`/`false`, array → `[]`. Returning `[]` instead of `null` for the empty case means `getUsers().map(...)` never explodes — predictable shapes delete whole classes of defensive `if` checks downstream.",
       },
       {
         term: 'null vs undefined vs falsy',
         section: 'Core Habits',
         detail:
-          "Know the difference between them, and when `hasOwnProperty` is the correct check rather than a plain truthiness test that `0` or `''` would slip through.",
+          "`undefined` — the value was never set. `null` — someone deliberately set \"nothing\". Falsy — the whole crowd that fails an `if`: `0`, `''`, `false`, `null`, `undefined`, `NaN`. The trap: `if (obj.count)` treats a real `0` as missing. When the actual question is \"does the key exist\", ask exactly that — `obj.hasOwnProperty('count')` is `true` even when the value is `0` or `''`.",
       },
       {
         term: 'var vs let vs const',
         section: 'Core Habits',
         detail:
-          "`var` — function-scoped: it leaks out of `if`/`for` blocks into the whole enclosing function (no block scope).\n`let` — block-scoped and mutable: only exists inside the nearest `{ }`, but its value can be reassigned.\n`const` — block-scoped like `let`, but the binding is immutable — can't reassign `x`, though a `const` object/array's contents can still be mutated.",
+          "`var` — function-scoped: it leaks out of `if`/`for` blocks into the whole enclosing function. `if (true) { var x = 1 } console.log(x)` → `1`\n`let` — block-scoped and mutable: exists only inside the nearest `{ }`, value can be reassigned. `if (true) { let y = 1 } console.log(y)` → `ReferenceError`\n`const` — block-scoped like `let`, but the binding can't be reassigned — though a `const` object/array's contents can still mutate: `const arr = [1]; arr.push(2)` is legal, `arr = []` is not.",
       },
       {
         term: 'ES6 destructuring',
         section: 'Destructuring & Spread',
         detail:
-          "Pull object properties into named variables. `const { name, age } = user`\nRename while destructuring. `const { name: userName } = user`\nDefault values for missing keys. `const { role = 'guest' } = user`\nPositional array unpacking. `const [first, second] = [1, 2]`\nSkip array entries you don't need. `const [, second] = [1, 2]`\nNested destructuring. `const { address: { city } } = user`\nUnpack function arguments directly in the signature. `function greet({ name }) { return name }`",
+          "Unpack values out of objects and arrays into variables in one line, instead of repeating `user.name`, `user.age` everywhere.\nPull object properties into named variables. `const { name, age } = user`\nRename while destructuring. `const { name: userName } = user`\nDefault values for missing keys. `const { role = 'guest' } = user`\nPositional array unpacking. `const [first, second] = [1, 2]`\nSkip array entries you don't need. `const [, second] = [1, 2]`\nNested destructuring. `const { address: { city } } = user`\nUnpack function arguments directly in the signature. `function greet({ name }) { return name }`",
       },
       {
         term: 'Spread operator (...)',
         section: 'Destructuring & Spread',
         detail:
-          "Copy an array (shallow). `const b = [...a]`\nMerge arrays. `[...arr1, ...arr2]` → combined array, later duplicates win\nCopy an object (shallow). `const clone = { ...obj }`\nMerge objects, later keys override earlier ones. `{ ...defaults, ...overrides }`\nPass array elements as individual function args. `Math.max(...[3,1,4])` → `4`\nBuild a new array/string from an iterable. `[...'abc']` → `['a','b','c']`\nCollect the rest of an array/object into one var. `const [first, ...rest] = [1,2,3]` → `rest = [2,3]`",
+          "Expands an iterable or object in place — the Swiss-army knife for copying and merging without mutating the original.\nCopy an array (shallow). `const b = [...a]`\nMerge arrays. `[...arr1, ...arr2]` → combined array, later duplicates win\nCopy an object (shallow). `const clone = { ...obj }`\nMerge objects, later keys override earlier ones. `{ ...defaults, ...overrides }`\nPass array elements as individual function args. `Math.max(...[3,1,4])` → `4`\nBuild a new array/string from an iterable. `[...'abc']` → `['a','b','c']`\nCollect the rest of an array/object into one var. `const [first, ...rest] = [1,2,3]` → `rest = [2,3]`",
       },
       {
         term: 'Conditional fields via spread',
         section: 'Destructuring & Spread',
         detail:
-          "`{ ...(condition && { field: value }) }` adds a key only when it's needed — cleaner than building the object and mutating it afterwards.",
+          "`{ ...(condition && { field: value }) }` adds a key only when it's needed — cleaner than building the object and mutating it afterwards. `{ ...(isAdmin && { role: 'admin' }) }` → `{ role: 'admin' }` when `isAdmin` is true, `{}` when false: the `&&` short-circuits to `false`, and spreading `false` contributes nothing.",
       },
       {
         term: 'ES6 rest parameters',
@@ -336,7 +336,7 @@ export const myStuff: MyStuffTopic[] = [
         term: 'ES6 Promises',
         section: 'Classes, Modules & Async',
         detail:
-          "Three states: `pending` (initial, no result yet) → `fulfilled` (resolved with a value) or `rejected` (failed with a reason) — and once settled either way, a promise is immutable, it can't flip states again. `new Promise((resolve, reject) => task ? resolve(value) : reject(error))`\nChain steps without nesting. `fetchUser(id).then(u => fetchOrders(u.id)).then(orders => render(orders))`\nHandle failure in one place instead of an error-first callback per step. `promise.catch(err => log(err))`\nRun cleanup regardless of outcome. `promise.finally(() => setLoading(false))`\nRun independent async calls in parallel and wait for all. `Promise.all([fetchA(), fetchB()])`\nTake whichever settles first (timeouts, races). `Promise.race([fetchData(), timeout(5000)])`\nWait for all to settle, success or failure, without short-circuiting. `Promise.allSettled([...])`\nasync/await is sugar over promises — same mechanism, sequential-looking syntax. `const user = await fetchUser(id)`\nSolves callback hell — deeply nested `fn(a, (err, b) => fn2(b, (err, c) => ...))` becomes a flat `.then()` chain or linear `await` sequence.",
+          "A promise is an IOU for a value that isn't ready yet.\nThree states: `pending` (initial, no result yet) → `fulfilled` (resolved with a value) or `rejected` (failed with a reason) — and once settled either way, a promise is immutable, it can't flip states again. `new Promise((resolve, reject) => task ? resolve(value) : reject(error))`\nChain steps without nesting. `fetchUser(id).then(u => fetchOrders(u.id)).then(orders => render(orders))`\nHandle failure in one place instead of an error-first callback per step. `promise.catch(err => log(err))`\nRun cleanup regardless of outcome. `promise.finally(() => setLoading(false))`\nRun independent async calls in parallel and wait for all. `Promise.all([fetchA(), fetchB()])`\nTake whichever settles first (timeouts, races). `Promise.race([fetchData(), timeout(5000)])`\nWait for all to settle, success or failure, without short-circuiting. `Promise.allSettled([...])`\nasync/await is sugar over promises — same mechanism, sequential-looking syntax. `const user = await fetchUser(id)`\nSolves callback hell — deeply nested `fn(a, (err, b) => fn2(b, (err, c) => ...))` becomes a flat `.then()` chain or linear `await` sequence.",
       },
       {
         term: 'ES6 template literals',
@@ -376,12 +376,12 @@ export const myStuff: MyStuffTopic[] = [
       {
         term: 'Husky git hooks',
         detail:
-          '`pre-commit`, `post-checkout` and friends run scripts at git lifecycle points — lint, type-check, codegen. For service repos, a push goes through cleanly with the AWS SAM CLI and Docker running locally.',
+          'Automated checklists wired into git itself. Husky runs scripts at lifecycle points — `pre-commit` lints and type-checks the staged code, `post-checkout` reinstalls deps or regenerates code — so a broken commit is stopped on the laptop before CI ever sees it. Gotcha from service repos: the pre-push checks needed the AWS SAM CLI and Docker running locally, or the push failed.',
       },
       {
         term: 'CI/CD build states',
         detail:
-          'A GitHub Actions run moves through pending → running → success or failed; reading those states at a glance tells you whether to dig into the logs or move on.',
+          "Every GitHub Actions run walks pending → running → success or failed — read it like a traffic light. Green: merge and move on. Red: open the failed step's log first; the last summary line usually names the exact test or command that broke. One job spinning while siblings pass usually means a job dependency, not a failure. The skill is knowing when to dig into logs and when to move on.",
       },
     ],
   },

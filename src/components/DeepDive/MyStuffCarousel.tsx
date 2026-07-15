@@ -89,12 +89,19 @@ export function MyStuffCarousel() {
   const hasSections = sections.length > 1
 
   const [activeSection, setActiveSection] = useState(sections[0] ?? DEFAULT_SECTION)
+  const notesRef = useRef<HTMLDivElement>(null)
 
   // Reset to the first subsection whenever the topic changes.
   useEffect(() => {
     setActiveSection(sections[0] ?? DEFAULT_SECTION)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topic.id])
+
+  // The card only remounts on topic change, so a section switch would
+  // otherwise inherit the previous section's scroll position mid-list.
+  useEffect(() => {
+    notesRef.current?.scrollTo({ top: 0 })
+  }, [activeSection])
 
   const notesToRender = hasSections
     ? topic.notes.filter((note) => (note.section ?? DEFAULT_SECTION) === activeSection)
@@ -103,7 +110,8 @@ export function MyStuffCarousel() {
   const goTo = useCallback(
     (next: number, fromKeyboard = false) => {
       const target = (next + TOTAL) % TOTAL
-      setDirection(target >= index ? 1 : -1)
+      // Pre-wrap value keeps slide direction correct at list edges.
+      setDirection(next >= index ? 1 : -1)
       setIndex(target)
       refocus.current = fromKeyboard
     },
@@ -366,6 +374,7 @@ export function MyStuffCarousel() {
               {/* Notes — 2 columns on wide screens; fixed-height card scrolls
                   this region instead of growing, so every topic is the same size */}
               <div
+                ref={notesRef}
                 role={hasSections ? 'tabpanel' : undefined}
                 id={hasSections ? `mystuff-sec-panel-${topic.id}` : undefined}
                 aria-labelledby={

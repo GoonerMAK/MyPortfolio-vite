@@ -13,7 +13,7 @@ export function Footer() {
         </div>
         <Link
           to="/deepdive"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] border border-[var(--clr-primary)] bg-[var(--clr-primary)] text-(--clr-bg)! font-semibold uppercase tracking-wider hover:bg-transparent hover:text-(--clr-primary)! transition-colors duration-150"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] border border-[var(--clr-primary)] bg-[var(--clr-primary)] text-(--clr-bg) font-semibold uppercase tracking-wider hover:bg-transparent hover:text-(--clr-primary) transition-colors duration-150"
         >
           Deep Dive
           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

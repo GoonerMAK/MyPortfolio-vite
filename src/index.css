@@ -95,9 +95,13 @@ ul {
   list-style-type: none;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* Layered so Tailwind text-color utilities (also layered) can override it —
+   unlayered rules would beat every `text-*`/`hover:text-*` on links. */
+@layer base {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 button {

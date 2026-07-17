@@ -135,21 +135,25 @@ export function Projects() {
 
       <div className="max-w-[1250px] mx-auto relative">
         {/* Navigation arrows */}
-        <button
-          onClick={() => scrollTo('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
-          aria-label="Previous project"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
+        {visibleDotCount > 1 && (
+          <>
+            <button
+              onClick={() => scrollTo('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
+              aria-label="Previous project"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
 
-        <button
-          onClick={() => scrollTo('right')}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
-          aria-label="Next project"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+            <button
+              onClick={() => scrollTo('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
+              aria-label="Next project"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </>
+        )}
 
         {/* Carousel container */}
         <div
@@ -171,7 +175,7 @@ export function Projects() {
         >
           {projects.map((project, index) => (
             <m.div
-              key={project.name || Math.random()}
+              key={project.name || index}
               variants={itemVariants}
               initial="hidden"
               animate="visible"
@@ -184,6 +188,7 @@ export function Projects() {
         </div>
 
         {/* Dots indicator */}
+        {visibleDotCount > 1 && (
         <div className="flex justify-center gap-2 mt-4">
           {Array.from({ length: visibleDotCount }).map((_, index) => (
             <button
@@ -210,6 +215,7 @@ export function Projects() {
             />
           ))}
         </div>
+        )}
       </div>
     </section>
   )

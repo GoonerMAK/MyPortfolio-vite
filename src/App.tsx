@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from '@/contexts/theme'
 import { GameSkeleton, DeepDiveSkeleton } from '@/components/Skeletons/RouteSkeletons'
 import { HomePage } from './pages/HomePage'
+import { KeyboardShortcutsModal } from '@/components/KeyboardShortcutsModal/KeyboardShortcutsModal'
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 const GamePage = lazy(() => import('./pages/GamePage'))
 const DeepDivePage = lazy(() => import('./pages/DeepDivePage'))
@@ -21,37 +23,48 @@ function LoadingSpinner() {
   )
 }
 
+function AppContent() {
+  const { showHelp, setShowHelp } = useKeyboardShortcuts()
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/game"
+          element={
+            <Suspense fallback={<GameSkeleton />}>
+              <GamePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/deepdive"
+          element={
+            <Suspense fallback={<DeepDiveSkeleton />}>
+              <DeepDivePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <NotFoundPage />
+            </Suspense>
+          }
+        />
+      </Routes>
+      <KeyboardShortcutsModal isOpen={showHelp} onClose={() => setShowHelp(false)} />
+    </>
+  )
+}
+
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter basename="/">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/game"
-            element={
-              <Suspense fallback={<GameSkeleton />}>
-                <GamePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/deepdive"
-            element={
-              <Suspense fallback={<DeepDiveSkeleton />}>
-                <DeepDivePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<LoadingSpinner />}>
-                <NotFoundPage />
-              </Suspense>
-            }
-          />
-        </Routes>
+        <AppContent />
       </BrowserRouter>
     </ThemeProvider>
   )

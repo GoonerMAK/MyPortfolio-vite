@@ -100,7 +100,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
           {project.sourceCode && (
             <m.a
               href={project.sourceCode}
-              aria-label="source code"
+              aria-label={`${project.name} source code`}
               className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-primary)] transition-colors duration-150"
               target="_blank"
               rel="noopener noreferrer"
@@ -115,7 +115,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
           {project.livePreview && (
             <m.a
               href={project.livePreview}
-              aria-label="live preview"
+              aria-label={`${project.name} live preview`}
               className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-accent-green)] transition-colors duration-150"
               target="_blank"
               rel="noopener noreferrer"

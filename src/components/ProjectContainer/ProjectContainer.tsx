@@ -101,7 +101,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
             <m.a
               href={project.sourceCode}
               aria-label={`${project.name} source code`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-primary)] transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-primary)] focus-visible:text-[var(--clr-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors duration-150"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 2 }}
@@ -116,7 +116,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
             <m.a
               href={project.livePreview}
               aria-label={`${project.name} live preview`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-accent-green)] transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-accent-green)] focus-visible:text-[var(--clr-accent-green)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-accent-green)] transition-colors duration-150"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 2 }}

@@ -472,7 +472,7 @@ const TopicListItem = forwardRef<
         />
       )}
       <topic.icon className="w-4 h-4 shrink-0" aria-hidden="true" />
-      <span className="flex-1 text-left truncate">{topic.label}</span>
+      <span className="flex-1 text-left truncate" title={topic.label}>{topic.label}</span>
     </button>
   )
 })

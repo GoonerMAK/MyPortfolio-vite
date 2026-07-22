@@ -160,6 +160,8 @@ export function Projects() {
           ref={scrollRef}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
           onMouseDown={() => setAutoplayKey((prev) => prev + 1)}
           onTouchStart={() => setAutoplayKey((prev) => prev + 1)}
           className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
@@ -212,6 +214,7 @@ export function Projects() {
                   : 'bg-[var(--clr-border)] hover:bg-[var(--clr-fg-alt)]'
               }`}
               aria-label={`Go to project ${index + 1}`}
+              aria-current={index === currentIndex ? 'true' : undefined}
             />
           ))}
         </div>

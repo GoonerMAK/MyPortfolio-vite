@@ -213,7 +213,7 @@ export function Projects() {
                   ? 'bg-[var(--clr-primary)] w-6'
                   : 'bg-[var(--clr-border)] hover:bg-[var(--clr-fg-alt)]'
               }`}
-              aria-label={`Go to project ${index + 1}`}
+              aria-label={`Go to ${projects[index]?.name ?? `project ${index + 1}`}`}
               aria-current={index === currentIndex ? 'true' : undefined}
             />
           ))}

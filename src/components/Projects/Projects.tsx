@@ -31,6 +31,9 @@ export function Projects() {
   const [isPaused, setIsPaused] = useState(false)
   const [autoplayKey, setAutoplayKey] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useRef(
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  ).current
 
   // Resize effect: update the number of items per view based on container width
   useEffect(() => {
@@ -53,7 +56,7 @@ export function Projects() {
 
   // Autoplay effect: automatically advance the carousel every 8 seconds
   useEffect(() => {
-    if (isPaused || !projects.length) return
+    if (isPaused || !projects.length || prefersReducedMotion) return
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {

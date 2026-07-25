@@ -141,6 +141,7 @@ export function Projects() {
         {visibleDotCount > 1 && (
           <>
             <button
+              type="button"
               onClick={() => scrollTo('left')}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
               aria-label="Previous project"
@@ -149,6 +150,7 @@ export function Projects() {
             </button>
 
             <button
+              type="button"
               onClick={() => scrollTo('right')}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
               aria-label="Next project"
@@ -197,6 +199,7 @@ export function Projects() {
         <div className="flex justify-center gap-2 mt-4">
           {Array.from({ length: visibleDotCount }).map((_, index) => (
             <button
+              type="button"
               key={index}
               onClick={() => {
                 setAutoplayKey((prev) => prev + 1)

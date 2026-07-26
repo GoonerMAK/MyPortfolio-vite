@@ -163,6 +163,9 @@ export function Projects() {
         {/* Carousel container */}
         <div
           ref={scrollRef}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Projects"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onFocus={() => setIsPaused(true)}

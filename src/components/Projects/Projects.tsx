@@ -190,6 +190,9 @@ export function Projects() {
               initial="hidden"
               animate="visible"
               exit="exit"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${projects.length}: ${project.name}`}
               className="flex-shrink-0 w-[400px] sm:w-[500px] snap-center"
             >
               <ProjectContainer project={project} index={index} />

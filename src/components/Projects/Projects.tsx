@@ -40,10 +40,11 @@ export function Projects() {
     const handleResize = () => {
       if (scrollRef.current) {
         const width = scrollRef.current.clientWidth
-         // Card: 500px width + 24px gap = 524px per item
-         if (width < 768) setItemsPerView(1)
-         else if (width < 1280) setItemsPerView(2)
-        else setItemsPerView(2) // Max 2 cards for 500px width
+        // Card: 500px width + 24px gap = 524px per item
+        const nextItemsPerView = width < 768 ? 1 : 2 // Max 2 cards for 500px width
+        setItemsPerView(nextItemsPerView)
+        const nextVisibleDotCount = projects.length - nextItemsPerView + 1
+        setCurrentIndex((prev) => Math.min(prev, nextVisibleDotCount - 1))
       }
     }
     handleResize()

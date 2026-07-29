@@ -4,6 +4,13 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { projects } from '@/data/portfolio'
 import { ProjectContainer } from '../ProjectContainer/ProjectContainer'
 
+const CARD_GAP = 24
+
+function getScrollStep(container: HTMLDivElement): number {
+  const cardWidth = container.querySelector('.panel')?.clientWidth || 320
+  return cardWidth + CARD_GAP
+}
+
 const itemVariants: Variants = {
   hidden: { opacity: 0, x: 50 },
   visible: {
@@ -65,15 +72,12 @@ export function Projects() {
 
         const container = scrollRef.current
         if (container) {
-          const cardWidth = container.querySelector('.panel')?.clientWidth || 320
-          const gap = 24
-          
           if (next === 0) {
             // Wrap to start - scroll to beginning
             container.scrollTo({ left: 0, behavior: 'smooth' })
           } else {
             container.scrollTo({
-              left: next * (cardWidth + gap),
+              left: next * getScrollStep(container),
               behavior: 'smooth',
             })
           }
@@ -95,9 +99,7 @@ export function Projects() {
     const container = scrollRef.current
     if (!container) return
 
-    const cardWidth = container.querySelector('.panel')?.clientWidth || 320
-    const gap = 24
-    const scrollAmount = cardWidth + gap
+    const scrollAmount = getScrollStep(container)
     const maxScroll = container.scrollWidth - container.clientWidth
 
     if (direction === 'right') {
@@ -176,10 +178,7 @@ export function Projects() {
           className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
           onScroll={(e) => {
             const container = e.currentTarget
-            const cardWidth = container.querySelector('.panel')?.clientWidth || 320
-            const gap = 24
-            const scrollAmount = cardWidth + gap
-            const index = Math.round(container.scrollLeft / scrollAmount)
+            const index = Math.round(container.scrollLeft / getScrollStep(container))
             setCurrentIndex(Math.min(Math.max(0, index), visibleDotCount - 1))
           }}
           style={{ scrollBehavior: 'smooth' }}
@@ -212,10 +211,8 @@ export function Projects() {
                 setAutoplayKey((prev) => prev + 1)
                 const container = scrollRef.current
                 if (container) {
-                  const cardWidth = container.querySelector('.panel')?.clientWidth || 320
-                  const gap = 24
                   container.scrollTo({
-                    left: index * (cardWidth + gap),
+                    left: index * getScrollStep(container),
                     behavior: 'smooth',
                   })
                   setCurrentIndex(index)

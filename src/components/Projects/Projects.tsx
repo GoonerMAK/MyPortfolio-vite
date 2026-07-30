@@ -139,7 +139,11 @@ export function Projects() {
         Projects
       </m.h2>
 
-      <div className="max-w-[1250px] mx-auto relative">
+      <div
+        className="max-w-[1250px] mx-auto relative"
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
+      >
         {/* Navigation arrows */}
         {visibleDotCount > 1 && (
           <>
@@ -171,8 +175,6 @@ export function Projects() {
           aria-label="Projects"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          onFocus={() => setIsPaused(true)}
-          onBlur={() => setIsPaused(false)}
           onMouseDown={() => setAutoplayKey((prev) => prev + 1)}
           onTouchStart={() => setAutoplayKey((prev) => prev + 1)}
           className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"

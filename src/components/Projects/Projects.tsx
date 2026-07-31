@@ -34,7 +34,9 @@ const itemVariants: Variants = {
 // Carousel: Displays a list of projects in a responsive carousel with navigation arrows and dot indicators.
 export function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [itemsPerView, setItemsPerView] = useState(3)
+  const [itemsPerView, setItemsPerView] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 2,
+  )
   const [isPaused, setIsPaused] = useState(false)
   const [autoplayKey, setAutoplayKey] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)

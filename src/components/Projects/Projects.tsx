@@ -40,9 +40,16 @@ export function Projects() {
   const [isPaused, setIsPaused] = useState(false)
   const [autoplayKey, setAutoplayKey] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const prefersReducedMotion = useRef(
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  ).current
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const onChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   // Resize effect: update the number of items per view based on container width
   useEffect(() => {

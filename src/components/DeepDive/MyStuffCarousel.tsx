@@ -223,7 +223,7 @@ export function MyStuffCarousel() {
             className="lg:hidden w-full panel panel-hud flex items-center gap-3 px-4 py-3 mb-2 rounded-[6px] cursor-pointer"
           >
             <topic.icon className="w-4 h-4 shrink-0" style={{ color: topic.accent }} aria-hidden="true" />
-            <span className="flex-1 text-left font-['JetBrains_Mono'] text-xs uppercase tracking-wider text-[var(--clr-fg-alt)]">
+            <span className="flex-1 min-w-0 truncate text-left font-['JetBrains_Mono'] text-xs uppercase tracking-wider text-[var(--clr-fg-alt)]">
               {topic.label}
             </span>
             <ChevronDown

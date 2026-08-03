@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { m, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { projects, contact } from '@/data/portfolio'
@@ -6,6 +6,15 @@ import { cn } from '@/lib/utils'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
   const navLinks = [
     { href: '#about', label: 'About', show: true },

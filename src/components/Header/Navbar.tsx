@@ -26,7 +26,7 @@ export function Navbar() {
 
   return (
     <nav className="flex items-center">
-      {/* Desktop nav */}
+      {/* Desktop nav  */}
       <ul className={cn('nav__list hidden md:flex mr-4 space-x-5 items-center')}>
         {navLinks.map((link, index) => (
           <m.li

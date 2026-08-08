@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { m, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { projects, contact } from '@/data/portfolio'
@@ -6,14 +6,22 @@ import { cn } from '@/lib/utils'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (!open) return
     const onKeyDown = (e: globalThis.KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
     }
+    const onPointerDown = (e: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpen(false)
+    }
     window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('pointerdown', onPointerDown)
+    }
   }, [open])
 
   const navLinks = [
@@ -25,7 +33,7 @@ export function Navbar() {
   ].filter((link) => link.show)
 
   return (
-    <nav className="flex items-center">
+    <nav ref={navRef} className="flex items-center">
       {/* Desktop nav */}
       <ul className={cn('nav__list hidden md:flex mr-4 space-x-5 items-center')}>
         {navLinks.map((link, index) => (

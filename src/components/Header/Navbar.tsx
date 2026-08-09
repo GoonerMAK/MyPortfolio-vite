@@ -9,6 +9,13 @@ export function Navbar() {
   const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  useEffect(() => {
     if (!open) return
     const onKeyDown = (e: globalThis.KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)

@@ -38,7 +38,11 @@ export class ErrorBoundary extends Component<
     if (!this.state.hasError) return this.props.children
 
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-4 text-center">
+      <div
+        role="alert"
+        aria-live="assertive"
+        className="min-h-screen flex flex-col items-center justify-center gap-6 px-4 text-center"
+      >
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-red)] shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
           <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">

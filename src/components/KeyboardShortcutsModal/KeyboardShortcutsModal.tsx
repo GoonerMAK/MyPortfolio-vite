@@ -35,6 +35,9 @@ export function KeyboardShortcutsModal({
             onClick={onClose}
           />
           <m.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="keyboard-shortcuts-title"
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
@@ -42,10 +45,11 @@ export function KeyboardShortcutsModal({
             className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--clr-bg)] border-2 border-[var(--clr-border)] rounded-lg shadow-lg z-50 w-full max-w-sm mx-4 p-6"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-[var(--clr-fg)]">
+              <h2 id="keyboard-shortcuts-title" className="text-lg font-bold text-[var(--clr-fg)]">
                 Keyboard Shortcuts
               </h2>
               <button
+                type="button"
                 onClick={onClose}
                 aria-label="Close"
                 className="p-1 hover:bg-[var(--clr-border)] rounded transition-colors"

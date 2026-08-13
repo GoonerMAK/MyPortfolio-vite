@@ -1,17 +1,23 @@
-﻿import { useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { m } from 'motion/react'
 import { Mail, Copy, Check } from 'lucide-react'
 import { contact } from '@/data/portfolio'
 
 export function Contact() {
   const [copied, setCopied] = useState(false)
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  useEffect(() => {
+    return () => clearTimeout(copyTimeoutRef.current)
+  }, [])
 
   if (!contact.email) return null
 
   const handleCopy = () => {
     navigator.clipboard.writeText(contact.email)
     setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    clearTimeout(copyTimeoutRef.current)
+    copyTimeoutRef.current = setTimeout(() => setCopied(false), 2000)
   }
 
   return (

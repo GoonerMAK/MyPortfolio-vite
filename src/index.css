@@ -297,6 +297,7 @@ button {
 
 .section {
   margin-top: 5em;
+  scroll-margin-top: 6rem;
 }
 
 /* ---- Skeleton loaders (lazy-route Suspense fallbacks) ---- */

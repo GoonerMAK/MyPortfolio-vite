@@ -71,29 +71,19 @@ export function MemoryGame() {
       const firstCard = cards.find((c) => c.id === first)
       const secondCard = cards.find((c) => c.id === second)
 
-      if (firstCard?.value === secondCard?.value) {
-        setTimeout(() => {
-          setCards((previousCards) =>
-            previousCards.map((c) =>
-              c.id === first || c.id === second
-                ? { ...c, isMatched: true }
-                : c
-            )
+      const isMatch = firstCard?.value === secondCard?.value
+      const timeout = setTimeout(() => {
+        setCards((previousCards) =>
+          previousCards.map((c) =>
+            c.id === first || c.id === second
+              ? { ...c, isMatched: isMatch, isFlipped: isMatch ? c.isFlipped : false }
+              : c
           )
-          setFlippedCards([])
-        }, 500)
-      } else {
-        setTimeout(() => {
-          setCards((previousCards) =>
-            previousCards.map((c) =>
-              c.id === first || c.id === second
-                ? { ...c, isFlipped: false }
-                : c
-            )
-          )
-          setFlippedCards([])
-        }, 1000)
-      }
+        )
+        setFlippedCards([])
+      }, isMatch ? 500 : 1000)
+
+      return () => clearTimeout(timeout)
     }
   }, [flippedCards, cards])
 

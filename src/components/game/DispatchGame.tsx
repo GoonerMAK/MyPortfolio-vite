@@ -202,6 +202,7 @@ export function DispatchGame() {
               Score = 100 base + time bonus + streak bonus
             </p>
             <m.button
+              type="button"
               className="btn btn--outline"
               onClick={startGame}
               whileHover={{ scale: 1.03 }}
@@ -255,6 +256,7 @@ export function DispatchGame() {
             </div>
 
             <m.button
+              type="button"
               className="btn btn--outline inline-flex items-center gap-2"
               onClick={startGame}
               whileHover={{ scale: 1.03 }}
@@ -375,6 +377,7 @@ export function DispatchGame() {
         {UNITS.map((unit) => (
           <m.button
             key={unit.type}
+            type="button"
             onClick={() => handleDispatch(unit.type)}
             disabled={!!gameState.feedback}
             className="panel p-4 flex flex-col items-center gap-2 cursor-pointer transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"

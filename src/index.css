@@ -471,6 +471,11 @@ li:hover .highlight-sweep::after {
   cursor: pointer;
 }
 
+.deepdive-zone:focus-visible {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: -2px;
+}
+
 /* Uniform dot field (dim, so the label reads on top of it), revealed only
    inside a radial mask under the cursor */
 .deepdive-dots {
@@ -485,7 +490,8 @@ li:hover .highlight-sweep::after {
   pointer-events: none;
 }
 
-.deepdive-zone:hover .deepdive-dots {
+.deepdive-zone:hover .deepdive-dots,
+.deepdive-zone:focus-visible .deepdive-dots {
   opacity: 1;
 }
 
@@ -517,7 +523,8 @@ li:hover .highlight-sweep::after {
   pointer-events: none;
 }
 
-.deepdive-zone:hover .deepdive-label {
+.deepdive-zone:hover .deepdive-label,
+.deepdive-zone:focus-visible .deepdive-label {
   opacity: 1;
 }
 

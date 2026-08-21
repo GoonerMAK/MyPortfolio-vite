@@ -94,8 +94,8 @@ export function About() {
                 {social.github && (
                   <m.a
                     href={social.github}
-                    aria-label="github"
-                    className="text-[var(--clr-fg)] hover:text-[var(--clr-primary)] transition-colors duration-150"
+                    aria-label="GitHub profile"
+                    className="text-[var(--clr-fg)] hover:text-[var(--clr-primary)] focus-visible:text-[var(--clr-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors duration-150"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
@@ -108,8 +108,8 @@ export function About() {
                 {social.linkedin && (
                   <m.a
                     href={social.linkedin}
-                    aria-label="linkedin"
-                    className="text-[var(--clr-fg)] hover:text-[var(--clr-primary)] transition-colors duration-150"
+                    aria-label="LinkedIn profile"
+                    className="text-[var(--clr-fg)] hover:text-[var(--clr-primary)] focus-visible:text-[var(--clr-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors duration-150"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}

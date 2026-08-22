@@ -69,11 +69,11 @@ export function Experience() {
               <div className="flex flex-col">
                 <h3 className="text-sm font-semibold text-[var(--clr-fg-alt)] !font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
                   {company.name === 'Gain Solutions' ? (
-                    <a href="https://gainhq.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
+                    <a href="https://gainhq.com/" target="_blank" rel="noopener noreferrer" className="text-[var(--clr-primary)] hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors">
                       Gain Solutions
                     </a>
                   ) : company.name === 'BinduLogic LLC' ? (
-                    <a href="https://www.bindulogic.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
+                    <a href="https://www.bindulogic.com/" target="_blank" rel="noopener noreferrer" className="text-[var(--clr-primary)] hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors">
                       BinduLogic LLC
                     </a>
                   ) : company.name}

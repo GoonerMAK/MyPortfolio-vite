@@ -32,7 +32,7 @@ function TitleSkeleton() {
 
 export function GameSkeleton() {
   return (
-    <div className="min-h-screen" aria-busy="true" aria-label="Loading game">
+    <div className="min-h-screen" role="status" aria-busy="true" aria-label="Loading game">
       <HeaderSkeleton />
       <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-12">
         <TitleSkeleton />
@@ -57,7 +57,7 @@ export function GameSkeleton() {
 
 export function DeepDiveSkeleton() {
   return (
-    <div className="min-h-screen" aria-busy="true" aria-label="Loading deep dive">
+    <div className="min-h-screen" role="status" aria-busy="true" aria-label="Loading deep dive">
       <HeaderSkeleton />
       <main className="max-w-[1400px] w-[95%] mx-auto px-4 pb-12">
         <TitleSkeleton />

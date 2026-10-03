@@ -2,6 +2,7 @@ import { m } from 'motion/react'
 import { experience } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import { DeepDiveZone } from './DeepDiveZone'
+import { formatDateRange, formatDuration, monthsBetween } from '@/lib/date'
 
 // Helper: Parse achievement text and wrap highlighted phrases
 function HighlightedText({ text, highlights }: { text: string; highlights?: string[] }) {
@@ -78,8 +79,9 @@ export function Experience() {
                     </a>
                   ) : company.name}
                 </h3>
-                {/* <span className="text-xs text-[var(--clr-fg)] font-['JetBrains_Mono']">
-                  {company.totalTenure}
+                {/* Company tenure (earliest start → latest end), if re-enabled:
+                <span className="text-xs text-[var(--clr-fg)] font-['JetBrains_Mono']">
+                  {formatDuration(monthsBetween(company.roles.at(-1)!.start, company.roles[0].end))}
                 </span> */}
               </div>
             </div>
@@ -111,7 +113,7 @@ export function Experience() {
                     {role.title}
                   </h4>
                   <p className="text-xs text-[var(--clr-fg)] mt-0.5 font-['JetBrains_Mono']">
-                    {role.dateRange} · {role.duration}
+                    {formatDateRange(role.start, role.end)} · {formatDuration(monthsBetween(role.start, role.end))}
                   </p>
 
                   {/* Achievements */}

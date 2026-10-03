@@ -1,4 +1,5 @@
 ﻿import type { LucideIcon } from 'lucide-react'
+import type { YearMonth } from '@/lib/date'
 
 export interface Header {
   homepage: string
@@ -32,8 +33,8 @@ export interface Contact {
 export interface ExperienceRole {
   title: string
   type: string
-  dateRange: string
-  duration: string
+  start: YearMonth
+  end?: YearMonth
   mode: string
   achievements: string[]
   highlights?: string[][]
@@ -45,7 +46,6 @@ export interface ExperienceRole {
 export interface ExperienceCompany {
   name: string
   logo: string
-  totalTenure: string
   roles: ExperienceRole[]
 }
 

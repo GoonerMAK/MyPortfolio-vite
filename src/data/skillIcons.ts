@@ -44,8 +44,14 @@ import {
   SiScikitlearn,
   SiUnity,
   SiDotnet,
+  SiJest,
+  SiGooglechrome,
+  SiDatadog,
+  SiJsonwebtokens,
+  SiMongoose,
 } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
+import { TbMasksTheater } from 'react-icons/tb'
 
 export const skillIconMap: Record<string, IconType> = {
   'Node.js': SiNodedotjs,
@@ -94,6 +100,12 @@ export const skillIconMap: Record<string, IconType> = {
   'Unity': SiUnity,
   'C#': SiDotnet,
   'HTML & CSS': SiHtml5,
+  'Jest': SiJest,
+  'Playwright': TbMasksTheater,
+  'Chrome DevTools': SiGooglechrome,
+  'Datadog': SiDatadog,
+  'JWT': SiJsonwebtokens,
+  'Mongoose': SiMongoose,
 }
 
 export const skillColorMap: Record<string, string> = {
@@ -149,4 +161,11 @@ export const skillColorMap: Record<string, string> = {
   'Unity': '#FFFFFF',
   'C#': '#512BD4',
   'HTML & CSS': '#E34F26',
+
+  'Jest': '#C21325',
+  'Playwright': '#2EAD33',
+  'Chrome DevTools': '#4285F4',
+  'Datadog': '#632CA6',
+  'JWT': '#D63AFF',
+  'Mongoose': '#C0392B',
 }

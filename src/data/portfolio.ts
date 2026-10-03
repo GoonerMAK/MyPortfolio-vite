@@ -95,7 +95,7 @@ export const projects: Project[] = [
 export const skillsList = [
   {
     title: 'Backend Development',
-    skills: ['Node.js', 'Express.js', 'GraphQL', 'Apollo-GraphQL', 'Zod', 'Stripe', 'Postman', 'JavaScript', 'TypeScript']
+    skills: ['Node.js', 'Express.js', 'GraphQL', 'Apollo-GraphQL', 'Zod', 'Stripe', 'JWT', 'Postman', 'JavaScript', 'TypeScript']
   },
   {
     title: 'Frontend Development',
@@ -103,11 +103,15 @@ export const skillsList = [
   },
   {
     title: 'Databases & ORMs',
-    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Supabase', 'Prisma', 'Sequelize']
+    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Supabase', 'Prisma', 'Sequelize', 'Mongoose']
   },
   {
     title: 'UI Frameworks & Styling',
     skills: ['Tailwind CSS', 'shadcn/ui', 'Chakra UI', 'Material UI']
+  },
+  {
+    title: 'Testing & Debugging',
+    skills: ['Jest', 'Playwright', 'Chrome DevTools']
   },
   {
     title: 'DevOps, Cloud & Deployment',
@@ -125,34 +129,35 @@ export const experience: ExperienceCompany[] = [
   {
     name: 'Gain Solutions',
     logo: gainSolutionsLogo,
-    totalTenure: '7 months',
     roles: [
       {
         title: 'Backend Developer',
         type: 'Full-time',
-        dateRange: 'Jan 2026 – Present',
-        duration: '7 months',
+        start: '2026-01',
         mode: 'On-site',
         achievements: [
-          'Drove end-to-end performance improvements — optimized database queries and introduced parallelization techniques, achieving ∼30% faster average API response times; implemented UI virtualization, reducing average render time by ∼150ms across data-heavy interfaces',
-          'Built features on a microservice-based architecture, collectively utilizing 6+ AWS Lambda workers and event-driven AWS SQS pipelines to run asynchronous background operations without slowing down the core API server',
-          'Optimized the AI coding workflow across full-stack modules by integrating compressed agentic prompts and a codebase knowledge graph — scoping model context to relevant nodes rather than full file trees, achieving top-21% amongst developers for AI token efficiency',
-          'Led the development of a helpdesk platform while concurrently contributing to backend systems for an HR management system and a CRM — all three being SaaS products',
-          'Integrated AI-assisted coding tools into the development cycle, backed by structured logging, error handling and observability via AWS CloudWatch for faster debugging, improving pre-QA smoke test coverage and reducing bug escalation rate to QA, achieving a 67% acceleration in overall feature delivery',
+          'Built features on a microservice architecture utilizing 6+ AWS Lambda workers and event-driven AWS SQS pipelines that ran background operations (billing, email events, automated workflows) without slowing down the core API server',
+          'Led the development of the customer support platform for a unified helpdesk and Customer Relationship Management (CRM) SaaS, with contributions across the CRM side of the product',
+          'Improved the performance of data-heavy interfaces by combining Next.js list virtualization, lazy loading and debounced GraphQL queries with parallelized, memory-light PostgreSQL reads in Node.js, which reduced server RAM load and lowered render time by 150ms on average',
+          'Extended role based access control (RBAC) in a multi-tenant SaaS with 2+ new roles & GraphQL authorization checks',
+          'Integrated a two stage (local + deployed) pre-QA verification process into an AI-assisted development workflow using Jest unit tests, API tests, DB query checks and Playwright E2E tests, plus structured logging and AWS CloudWatch monitoring, which sped up debugging and reduced QA-reported bugs',
+          'Re-engineered Stripe subscription billing for two SaaS products from tiered plans to flat-rate per-seat pricing, with prorated mid-cycle upgrades and scheduled downgrades',
         ],
         highlights: [
-          ['Drove end-to-end performance improvements', 'achieving ∼30% faster average API response times', 'reducing average render time by ∼150ms'],
-          ['microservice-based architecture', '6+ AWS Lambda workers', 'event-driven AWS SQS pipelines', 'asynchronous background operations'],
-          ['codebase knowledge graph', 'achieving top-21%'],
-          ['SaaS products', 'Led the development'],
-          ['structured logging, error handling and observability via AWS CloudWatch', 'improving pre-QA smoke test coverage', 'achieving a 67% acceleration'],
+          ['microservice architecture', '6+ AWS Lambda workers', 'event-driven AWS SQS pipelines'],
+          ['Led the development', 'unified helpdesk and Customer Relationship Management (CRM) SaaS'],
+          ['parallelized, memory-light PostgreSQL reads', 'reduced server RAM load', 'lowered render time by 150ms on average'],
+          ['role based access control (RBAC)', 'multi-tenant SaaS', '2+ new roles'],
+          ['two stage (local + deployed) pre-QA verification process', 'reduced QA-reported bugs'],
+          ['Re-engineered Stripe subscription billing', 'flat-rate per-seat pricing', 'prorated mid-cycle upgrades'],
         ],
         skills: [
-          ['Node.js', 'PostgreSQL', 'Next.js', 'JavaScript', 'GraphQL', 'Sequelize'],
-          ['AWS', 'Node.js', 'Express.js', 'GitHub Actions'],
-          ['Claude', 'JavaScript'],
-          ['Node.js', 'PostgreSQL', 'Express.js', 'GraphQL', 'Sequelize', 'AWS'],
-          ['AWS', 'Node.js', 'Claude', 'Apollo-GraphQL'],
+          ['AWS', 'Node.js', 'Express.js'],
+          ['Node.js', 'PostgreSQL', 'GraphQL', 'Next.js', 'Sequelize'],
+          ['Next.js', 'React', 'GraphQL', 'PostgreSQL', 'Node.js'],
+          ['GraphQL', 'Apollo-GraphQL', 'Node.js', 'PostgreSQL'],
+          ['Jest', 'Playwright', 'AWS', 'Claude'],
+          ['Stripe', 'Node.js', 'PostgreSQL'],
         ],
       },
     ],
@@ -160,50 +165,46 @@ export const experience: ExperienceCompany[] = [
   {
     name: 'BinduLogic LLC',
     logo: binduLogicLogo,
-    totalTenure: '1 yr 4 months',
     roles: [
       {
         title: 'Junior Software Engineer',
         type: 'Full-time',
-        dateRange: 'Dec 2024 – Sept 2025',
-        duration: '10 months',
+        start: '2024-12',
+        end: '2025-09',
         mode: 'Hybrid',
         achievements: [
-          'Developed full-stack modules for a web application consisting of 25+ RESTful API endpoints and 10+ managed database schemas in PostgreSQL, using Express.js (Node.js) for backend services and Redux for state management',
-          'Migrated specific legacy modules from React/Material UI to the React/Tailwind/shadcn UI stack, contributing ∼55% of the migration efforts toward the team’s ∼90% overall migration progress',
-          'Built 7+ responsive React interfaces, combining lazy API fetching, server-side pagination and batched Prisma includes to improve Lighthouse Performance scores by an average of ∼15% across five modules',
+          'Developed full-stack modules for a Hospital Management Information System (HMIS) covering supply, consumption, stock, distribution — using React, TypeScript, Redux Toolkit, Express (Node.js) & PostgreSQL, spanning 60+ RESTful endpoints and 25+ Prisma models indexed for faster queries',
+          'Designed reusable base React components for the HMIS, adopted across 10+ responsive user interfaces, which reduced code duplication and development effort for future modules',
+          'Built 7+ stock movement flows (e.g. transfers, adjustments, distributions) ensuring atomicity and integrated them with the system’s audit trail and Datadog monitoring',
         ],
         highlights: [
-          ['25+ RESTful API endpoints', '10+ managed database schemas'],
-          ['contributing ∼55%', 'the team’s ∼90% overall migration progress'],
-          ['7+ responsive React interfaces', 'server-side pagination and batched Prisma includes', 'Lighthouse Performance scores by an average of ∼15%'],
+          ['Hospital Management Information System (HMIS)', '60+ RESTful endpoints', '25+ Prisma models'],
+          ['reusable base React components', '10+ responsive user interfaces'],
+          ['7+ stock movement flows', 'ensuring atomicity', 'Datadog monitoring'],
         ],
         skills: [
-          ['TypeScript', 'Express.js', 'Node.js', 'PostgreSQL', 'Redux', 'React'],
-          ['React', 'Tailwind CSS', 'shadcn/ui', 'Material UI', 'HTML', 'CSS3'],
-          ['React', 'Node.js', 'Prisma', 'TypeScript', 'Redux', 'PostgreSQL'],
+          ['React', 'TypeScript', 'Redux', 'Express.js', 'PostgreSQL', 'Prisma'],
+          ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui'],
+          ['Node.js', 'Prisma', 'PostgreSQL', 'Datadog'],
         ],
       },
       {
         title: 'Software Engineer Intern',
         type: 'Internship',
-        dateRange: 'Jun 2024 – Nov 2024',
-        duration: '6 months',
+        start: '2024-06',
+        end: '2024-11',
         mode: 'On-site',
         achievements: [
-          'Created a project expenditure app using React, TypeScript, Express, Prisma; ensured 80%+ test coverage through unit & integration testing using Jest, while enforcing runtime type safety with Zod',
-          'Contributed to the development of a project module — implemented RTK Query, ensured proper state management, and maintained UI consistency, delivering ∼70% of the team\'s frontend output',
-          'Collaborated within a four-person intern team on full-stack development, rotationally taking ownership of assigned features — breaking them into tickets and coordinating delivery within the team.',
+          'Implemented an inventory dashboard and product catalog for a Hospital Management Information System (HMIS) with React, TypeScript, shadcn/ui and RTK Query, and Zod-validated RESTful APIs serving 30K+ medicine brands across 200+ manufacturers with live stock quantities',
+          'Collaborated as part of a four-person intern team on product features, broke down assigned work into actionable tickets and coordinated delivery through regular syncs and reviews on a rotational basis',
         ],
         highlights: [
-          ['ensured 80%+ test coverage', 'runtime type safety with Zod'],
-          ['Contributed to the development', 'delivering ∼70% of the team\'s frontend output'],
-          ['four-person intern team', 'rotationally taking ownership of assigned features'],
+          ['inventory dashboard and product catalog', '30K+ medicine brands', '200+ manufacturers'],
+          ['four-person intern team', 'on a rotational basis'],
         ],
         skills: [
-          ['React', 'TypeScript', 'Express.js', 'Prisma', 'Zod'],
-          ['TypeScript', 'React', 'React Query', 'Redux'],
-          ['Git', 'Node.js'],
+          ['React', 'TypeScript', 'shadcn/ui', 'Redux', 'Zod', 'Express.js'],
+          ['Git'],
         ],
       },
     ],
@@ -216,27 +217,27 @@ export const deepDive: DeepDiveRole[] = [
     title: 'Backend Developer',
     dateRange: 'Jan 2026 – Present',
     overview:
-      'Backend-focused role across three concurrent SaaS products — a helpdesk platform, an HR management system, and a CRM. Work spans API performance, event-driven background processing, and embedding AI tooling deep into the delivery cycle.',
+      'Backend-focused role on a unified helpdesk and CRM SaaS — leading the customer support platform while contributing across the CRM side. Work spans event-driven background processing, performance, access control, billing, and a tighter pre-QA loop around AI-assisted development.',
     items: [
       {
         detail:
-          'Drove end-to-end performance work on data-heavy interfaces: profiled and rewrote slow database queries, parallelized independent I/O paths, and added UI virtualization for large lists. Net effect was ∼30% faster average API response times and ∼150ms lower average render time on the heaviest screens.',
-        skills: ['Node.js', 'PostgreSQL', 'React', 'TypeScript'],
-      },
-      {
-        detail:
-          'Built an asynchronous processing layer using 6+ independently-deployed AWS Lambda workers fed by SQS pipelines — including scheduled and queue-triggered jobs — moving long-running operations off the request path. The core API server stayed responsive under load while heavy jobs ran in the background and retried safely on failure.',
+          'Built features on a microservice architecture with 6+ AWS Lambda workers fed by event-driven SQS pipelines, moving billing, email events and automated workflows off the request path so the core API server stayed responsive.',
         skills: ['AWS', 'Node.js'],
       },
       {
         detail:
-          'Optimized the AI coding workflow across full-stack modules by feeding compressed agentic prompts and a codebase knowledge graph to the model — scoping its context to the relevant nodes instead of whole file trees. Ranked top-21% among developers for AI token efficiency.',
-        skills: ['Claude', 'GitHub Copilot', 'TypeScript'],
+          'Tuned data-heavy interfaces end to end: Next.js list virtualization, lazy loading and debounced GraphQL queries on the client, paired with parallelized, memory-light PostgreSQL reads in Node.js. Cut server RAM load and lowered average render time by 150ms.',
+        skills: ['Next.js', 'GraphQL', 'PostgreSQL', 'Node.js'],
       },
       {
         detail:
-          'Integrated AI-assisted tooling into the everyday cycle — backed by structured logging and error handling surfaced in cloud logs for faster debugging — to raise pre-QA smoke-test coverage and cut the bug escalation rate to QA, contributing to a 67% acceleration in overall feature delivery across the three products.',
-        skills: ['Claude', 'GitHub Actions', 'Node.js'],
+          'Extended RBAC in the multi-tenant product with 2+ new roles and GraphQL authorization checks, and re-engineered Stripe subscription billing for two SaaS products from tiered plans to flat-rate per-seat pricing with prorated mid-cycle upgrades and scheduled downgrades.',
+        skills: ['GraphQL', 'Stripe', 'Node.js'],
+      },
+      {
+        detail:
+          'Added a two-stage (local + deployed) pre-QA verification process to the AI-assisted workflow — Jest unit tests, API tests, DB query checks and Playwright E2E tests, backed by structured logging and AWS CloudWatch — which sped up debugging and reduced QA-reported bugs.',
+        skills: ['Jest', 'Playwright', 'AWS', 'Claude'],
       },
     ],
   },
@@ -245,22 +246,22 @@ export const deepDive: DeepDiveRole[] = [
     title: 'Junior Software Engineer',
     dateRange: 'Dec 2024 – Sept 2025',
     overview:
-      'Full-stack delivery on a production web application, plus a large legacy modernization effort moving the UI to a modern React/Tailwind/shadcn stack.',
+      'Full-stack delivery on a Hospital Management Information System (HMIS) — supply, consumption, stock and distribution modules, owned from schema to UI.',
     items: [
       {
         detail:
-          'Developed full-stack modules covering 25+ RESTful endpoints and 10+ managed PostgreSQL schemas — Express.js services on the backend with Redux managing client state. Owned the modules end to end from schema design through API to UI wiring.',
-        skills: ['Express.js', 'Node.js', 'PostgreSQL', 'Redux', 'React'],
+          'Developed full-stack HMIS modules with React, TypeScript, Redux Toolkit, Express and PostgreSQL — 60+ RESTful endpoints and 25+ Prisma models, indexed for faster queries.',
+        skills: ['React', 'TypeScript', 'Express.js', 'PostgreSQL', 'Prisma'],
       },
       {
         detail:
-          'Led a chunk of a legacy migration off older React and Material UI onto the React/Tailwind/shadcn stack — contributing 54% of the migration effort toward 88% overall project completion while keeping the app shippable throughout.',
-        skills: ['React', 'Tailwind CSS', 'shadcn/ui', 'Material UI'],
+          'Designed reusable base React components adopted across 10+ responsive interfaces, cutting duplication and speeding up development of later modules.',
+        skills: ['React', 'Tailwind CSS', 'shadcn/ui'],
       },
       {
         detail:
-          'Built 7+ responsive interfaces and paired them with optimized backend code, introducing lazy API fetching that lifted Lighthouse Performance scores by an average of 12% across five modules.',
-        skills: ['React', 'Node.js', 'Vite'],
+          'Built 7+ atomic stock movement flows (transfers, adjustments, distributions) wired into the system’s audit trail and Datadog monitoring.',
+        skills: ['Node.js', 'Prisma', 'Datadog'],
       },
     ],
   },
@@ -269,22 +270,17 @@ export const deepDive: DeepDiveRole[] = [
     title: 'Software Engineer Intern',
     dateRange: 'Jun 2024 – Nov 2024',
     overview:
-      'Internship on a five-person team building a project-expenditure app and a shared project module, rotating into team-lead duties.',
+      'Internship on a four-person team building HMIS inventory features, with rotating ownership of planning and delivery.',
     items: [
       {
         detail:
-          'Created a project-expenditure app with React, TypeScript, Express, and Prisma. Held 80%+ test coverage through unit and integration tests in Jest, and enforced runtime type safety with Zod at the boundaries.',
-        skills: ['React', 'TypeScript', 'Express.js', 'Prisma', 'Zod'],
+          'Implemented an inventory dashboard and product catalog with React, TypeScript, shadcn/ui and RTK Query, backed by Zod-validated RESTful APIs serving 30K+ medicine brands across 200+ manufacturers with live stock quantities.',
+        skills: ['React', 'TypeScript', 'Redux', 'Zod'],
       },
       {
         detail:
-          'Contributed to a shared project module — wired up RTK Query, kept state management consistent, and maintained UI consistency across the team, delivering 71% of the team’s frontend output.',
-        skills: ['React', 'React Query', 'Redux'],
-      },
-      {
-        detail:
-          'Collaborated closely on full-stack work with a five-person team and took the team-lead role on a rotational basis, coordinating tasks and reviews during those stints.',
-        skills: ['Git', 'JavaScript'],
+          'Broke assigned work into actionable tickets and coordinated delivery through regular syncs and reviews, taking ownership on a rotational basis.',
+        skills: ['Git'],
       },
     ],
   },

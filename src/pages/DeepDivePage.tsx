@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop'
 import { MyStuffCarousel } from '@/components/DeepDive/MyStuffCarousel'
+import { Highlights } from '@/components/DeepDive/Highlights'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 export function DeepDivePage() {
@@ -52,6 +53,8 @@ export function DeepDivePage() {
             picked up along the way, and the work that produced them.
           </p>
         </m.div>
+
+        <Highlights />
 
         {/* Field-notes showcase carousel */}
         <MyStuffCarousel />

@@ -65,6 +65,15 @@ export interface DeepDiveRole {
   items: DeepDiveItem[]
 }
 
+export type DecisionCategory = 'Architectural' | 'Product' | 'Technical' | 'Workflow'
+
+export interface HighlightItem {
+  title: string
+  detail: string
+  category?: DecisionCategory
+  skills?: string[]
+}
+
 /** A single concept inside a "My Stuff" topic card */
 export interface MyStuffNote {
   /** Short concept name, rendered emphasised */

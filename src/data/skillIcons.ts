@@ -49,9 +49,18 @@ import {
   SiDatadog,
   SiJsonwebtokens,
   SiMongoose,
+  SiLangchain,
+  SiModelcontextprotocol,
 } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
-import { TbMasksTheater } from 'react-icons/tb'
+import {
+  TbMasksTheater,
+  TbBrandAws,
+  TbVector,
+  TbDatabaseSearch,
+  TbApi,
+  TbTopologyStar3,
+} from 'react-icons/tb'
 
 export const skillIconMap: Record<string, IconType> = {
   'Node.js': SiNodedotjs,
@@ -88,10 +97,17 @@ export const skillIconMap: Record<string, IconType> = {
   'Vercel': SiVercel,
   'Netlify': SiNetlify,
   'Render': SiRender,
-  'Claude': SiClaude,
+  'Claude Code': SiClaude,
   'GitHub Copilot': SiGithubcopilot,
   'Google Gemini': SiGooglegemini,
   'Ollama': SiOllama,
+  'LangChain': SiLangchain,
+  'MCP': SiModelcontextprotocol,
+  'AWS Bedrock': TbBrandAws,
+  'RAG & Embeddings': TbDatabaseSearch,
+  'pgvector': TbVector,
+  'REST APIs': TbApi,
+  'Microservices': TbTopologyStar3,
   'Python': SiPython,
   'Pandas': SiPandas,
   'Tensorflow': SiTensorflow,
@@ -148,10 +164,17 @@ export const skillColorMap: Record<string, string> = {
   'Netlify': '#00C7B7',
   'Render': '#46E3B7',
 
-  'Claude': '#D97757',
+  'Claude Code': '#D97757',
   'GitHub Copilot': '#8957E5',
   'Google Gemini': '#4285F4',
   'Ollama': '#FFFFFF',
+  'LangChain': '#3CB4A0',
+  'MCP': '#FFFFFF',
+  'AWS Bedrock': '#01A88D',
+  'RAG & Embeddings': '#A855F7',
+  'pgvector': '#4169E1',
+  'REST APIs': '#00E5FF',
+  'Microservices': '#00E096',
 
   'Python': '#3776AB',
   'Pandas': '#FFFFFF',

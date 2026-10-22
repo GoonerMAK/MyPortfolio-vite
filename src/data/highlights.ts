@@ -14,10 +14,10 @@ export const proudOf: HighlightItem[] = [
     skills: ['PostgreSQL', 'GraphQL', 'Node.js', 'Sequelize'],
   },
   {
-    title: 'AI knowledge capture and review',
+    title: 'RAG knowledge capture',
     detail:
-      'Captured reusable knowledge from support conversations as AI knowledge entries, spanning the conversation service, the core API and a review screen where the team checks what the AI learned before it is used in answers.',
-    skills: ['Node.js', 'GraphQL', 'AWS', 'Next.js'],
+      'Turned resolved customer conversations across 3+ helpdesk modules into chatbot answers. Gemini structured output through LangChain and Zod extracts PII-free knowledge, pgvector embeddings make it retrievable, and an LLM contradiction check holds conflicting answers for human review before they reach customers.',
+    skills: ['LangChain', 'Google Gemini', 'Zod', 'pgvector', 'RAG & Embeddings'],
   },
   {
     title: 'Website sources for AI answers',
@@ -28,8 +28,8 @@ export const proudOf: HighlightItem[] = [
   {
     title: 'AI-assisted engineering harness',
     detail:
-      'Set up the first AI-agent instructions on the core API repo, covering coding conventions, planning protocols, a smoke-testing agent and skill, test-artifact prompts and a Postgres MCP connection. Alongside it I keep a personal toolkit of skills, hooks, MCP servers, CLIs and a custom token-metering mod, and every recurring pain point becomes an automation.',
-    skills: ['Claude', 'GitHub Copilot'],
+      'Set up the first AI-agent instructions on the core API repo, covering coding conventions, planning protocols, a smoke-testing agent and skill, test-artifact prompts and a Postgres MCP connection. Work now runs through a multi-agent workflow of planning, developer, QA and adversarial reviewer agents, merging 4+ PRs a day, and every recurring pain point becomes an automation in my toolkit of skills, hooks, MCP servers, CLIs and a custom token-metering mod.',
+    skills: ['Claude Code', 'MCP', 'GitHub Copilot'],
   },
   {
     title: 'Custom domain rework',

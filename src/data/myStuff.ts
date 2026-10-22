@@ -150,7 +150,7 @@ export const myStuff: MyStuffTopic[] = [
     blurb: 'Wiring LLMs into a real backend without losing state.',
     icon: Sparkles,
     accent: 'var(--clr-accent-purple)',
-    skills: ['Claude', 'Google Gemini', 'GitHub Copilot'],
+    skills: ['Claude Code', 'Google Gemini', 'GitHub Copilot'],
     notes: [
       {
         term: 'Checkpointer (LangGraph)',

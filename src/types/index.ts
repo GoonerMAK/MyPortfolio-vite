@@ -49,22 +49,6 @@ export interface ExperienceCompany {
   roles: ExperienceRole[]
 }
 
-export interface DeepDiveItem {
-  /** Expanded write-up of a single piece of work done */
-  detail: string
-  /** Related skills — names must match entries in `skillsList` for badge consistency */
-  skills: string[]
-}
-
-export interface DeepDiveRole {
-  company: string
-  title: string
-  dateRange: string
-  /** High-level summary of the role's scope */
-  overview: string
-  items: DeepDiveItem[]
-}
-
 export type DecisionCategory = 'Architectural' | 'Product' | 'Technical' | 'Workflow'
 
 export interface HighlightItem {

@@ -292,9 +292,16 @@ button {
   border: 1px solid var(--clr-border);
   color: var(--clr-fg-alt);
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.78rem;
   font-weight: 500;
   padding: 0.4em 0.8em;
+}
+
+/* Desktop only: em-based padding/letter-spacing would wrap skill labels on narrow tiles */
+@media (min-width: 1024px) {
+  .btn--plain {
+    font-size: 1.2rem;
+  }
 }
 
 .btn--plain:hover {

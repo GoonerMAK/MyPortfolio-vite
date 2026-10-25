@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My personal site: who I am, what I've built, and how I think about building it.
 
-Currently, two official plugins are available:
+**Live:** https://goonermak.github.io/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What's on it
 
-## React Compiler
+- **Home**: about me, skills, work experience, projects and contact.
+- **Deep Dive** (`/deepdive`): features I've shipped and decisions I stand by, each with a small flow diagram. Also field notes on concepts I've learned on the job.
+- **Game** (`/game`): a quick dispatch game. Read each request and send the right team (frontend, backend, DevOps or security) before time runs out.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Press `?` anywhere to see keyboard shortcuts.
 
-## Expanding the ESLint configuration
+## Built with
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+React, TypeScript, Vite, Tailwind CSS and Motion.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Run it locally
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+You need Node.js 18 or newer.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open http://localhost:5173.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Change the content
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+All text lives in `src/data/`, so you rarely need to touch components:
+
+| File | What it holds |
+|---|---|
+| `portfolio.ts` | About, skills, experience, projects, contact |
+| `highlights.ts` | Deep Dive features and decisions |
+| `highlightDiagrams.ts` | The flow diagram for each highlight |
+| `myStuff.ts` | Deep Dive field notes |
+
+Colours are defined once in `src/index.css`. Use them as Tailwind classes (`text-primary`, `bg-bg-alt`) or through `src/lib/colors.ts` in inline styles.
+
+## Deploy
+
+```bash
+npm run deploy
 ```
+
+This builds the site and publishes it to GitHub Pages. Pushing to `main` does not update the live site.

@@ -159,7 +159,7 @@ export function Projects() {
             <button
               type="button"
               onClick={() => scrollTo('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-bg-alt border border-border text-fg hover:border-primary hover:text-primary transition-colors cursor-pointer"
               aria-label="Previous project"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -168,7 +168,7 @@ export function Projects() {
             <button
               type="button"
               onClick={() => scrollTo('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-bg-alt border border-border text-fg hover:border-primary hover:text-primary transition-colors cursor-pointer"
               aria-label="Next project"
             >
               <ChevronRight className="w-5 h-5" />
@@ -231,8 +231,8 @@ export function Projects() {
               }}
               className={`w-2 h-2 rounded-full transition-all duration-200 cursor-pointer ${
                 index === currentIndex
-                  ? 'bg-[var(--clr-primary)] w-6'
-                  : 'bg-[var(--clr-border)] hover:bg-[var(--clr-fg-alt)]'
+                  ? 'bg-primary w-6'
+                  : 'bg-border hover:bg-fg-alt'
               }`}
               aria-label={`Go to ${projects[index]?.name ?? `project ${index + 1}`}`}
               aria-current={index === currentIndex ? 'true' : undefined}

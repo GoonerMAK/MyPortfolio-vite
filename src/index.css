@@ -1,5 +1,21 @@
 ﻿@import "tailwindcss";
 
+/* Expose the palette as Tailwind colours: text-primary, bg-bg-alt, border-border, bg-accent-green/10 … */
+@theme inline {
+  --color-bg: var(--clr-bg);
+  --color-bg-alt: var(--clr-bg-alt);
+  --color-bg-panel: var(--clr-bg-panel);
+  --color-fg: var(--clr-fg);
+  --color-fg-alt: var(--clr-fg-alt);
+  --color-primary: var(--clr-primary);
+  --color-accent-red: var(--clr-accent-red);
+  --color-accent-green: var(--clr-accent-green);
+  --color-accent-gold: var(--clr-accent-gold);
+  --color-accent-purple: var(--clr-accent-purple);
+  --color-border: var(--clr-border);
+  --color-border-accent: var(--clr-border-accent);
+}
+
 @layer base {
   :root {
     /* Dispatch Dark Palette */

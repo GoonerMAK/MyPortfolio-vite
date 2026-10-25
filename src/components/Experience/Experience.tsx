@@ -3,6 +3,7 @@ import { experience } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import { DeepDiveZone } from './DeepDiveZone'
 import { formatDateRange, formatDuration, monthsBetween } from '@/lib/date'
+import { iconColor } from '@/lib/colors'
 
 // Helper: Parse achievement text and wrap highlighted phrases
 function HighlightedText({ text, highlights }: { text: string; highlights?: string[] }) {
@@ -64,30 +65,30 @@ export function Experience() {
           >
             {/* Company Header */}
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-11 h-11 rounded-md bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] flex items-center justify-center shrink-0 overflow-hidden">
+              <div className="w-11 h-11 rounded-md bg-bg-alt border border-border flex items-center justify-center shrink-0 overflow-hidden">
                 <img src={company.logo} alt={`${company.name} logo`} className="w-full h-full object-contain p-1" />
               </div>
               <div className="flex flex-col">
-                <h3 className="text-sm font-semibold text-[var(--clr-fg-alt)] !font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
+                <h3 className="text-sm font-semibold text-fg-alt !font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
                   {company.name === 'Gain Solutions' ? (
-                    <a href="https://gainhq.com/" target="_blank" rel="noopener noreferrer" className="text-[var(--clr-primary)] hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors">
+                    <a href="https://gainhq.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors">
                       Gain Solutions
                     </a>
                   ) : company.name === 'BinduLogic LLC' ? (
-                    <a href="https://www.bindulogic.com/" target="_blank" rel="noopener noreferrer" className="text-[var(--clr-primary)] hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors">
+                    <a href="https://www.bindulogic.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors">
                       BinduLogic LLC
                     </a>
                   ) : company.name}
                 </h3>
                 {/* Company tenure (earliest start → latest end), if re-enabled:
-                <span className="text-xs text-[var(--clr-fg)] font-['M_PLUS_Rounded_1c']">
+                <span className="text-xs text-fg font-['M_PLUS_Rounded_1c']">
                   {formatDuration(monthsBetween(company.roles.at(-1)!.start, company.roles[0].end))}
                 </span> */}
               </div>
             </div>
 
             {/* Roles Timeline */}
-            <div className="relative ml-3 pl-4 sm:ml-5 sm:pl-5 border-l-2 border-[var(--clr-border)] group/timeline">
+            <div className="relative ml-3 pl-4 sm:ml-5 sm:pl-5 border-l-2 border-border group/timeline">
               {/* Timeline Sweep Animation */}
               <svg className="timeline-trace-svg">
                 <line
@@ -106,13 +107,13 @@ export function Experience() {
                   className={roleIndex < company.roles.length - 1 ? 'pb-12' : ''}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute -left-[7px] mt-1.5 w-3 h-3 rounded-full border-2 border-[var(--clr-primary)] bg-[var(--clr-bg-panel)]" />
+                  <div className="absolute -left-[7px] mt-1.5 w-3 h-3 rounded-full border-2 border-primary bg-bg-panel" />
 
                   {/* Role Info */}
-                  <h4 className="text-sm font-semibold !text-[var(--clr-primary)] font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
+                  <h4 className="text-sm font-semibold !text-primary font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
                     {role.title}
                   </h4>
-                  <p className="text-xs text-[var(--clr-fg)] mt-0.5 font-['M_PLUS_Rounded_1c']">
+                  <p className="text-xs text-fg mt-0.5 font-['M_PLUS_Rounded_1c']">
                     {formatDateRange(role.start, role.end)} · {formatDuration(monthsBetween(role.start, role.end))}
                   </p>
 
@@ -121,7 +122,7 @@ export function Experience() {
                     {role.achievements.map((achievement, i) => (
                       <li
                         key={i}
-                        className="text-sm sm:text-base text-[var(--clr-fg)] leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-[var(--clr-primary)] before:text-sm transition-all duration-500 border border-transparent hover:border-[var(--clr-primary)] hover:bg-[var(--clr-bg-alt)] sm:hover:scale-[1.03] hover:shadow-sm rounded-sm px-2 py-2 -ml-2 sm:px-4 sm:-ml-4"
+                        className="text-sm sm:text-base text-fg leading-relaxed pl-3 relative before:content-['▹'] before:absolute before:left-0 before:text-primary before:text-sm transition-all duration-500 border border-transparent hover:border-primary hover:bg-bg-alt sm:hover:scale-[1.03] hover:shadow-sm rounded-sm px-2 py-2 -ml-2 sm:px-4 sm:-ml-4"
                       >
                         <HighlightedText
                           text={achievement}
@@ -138,12 +139,12 @@ export function Experience() {
                                 <span
                                   key={skill}
                                   className="btn btn--plain cursor-default inline-flex items-center gap-2 group !py-1.5 !px-2.5"
-                                  style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                                  style={iconColor(brandColor)}
                                 >
                                   {Icon && (
                                     <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
                                   )}
-                                  <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-[var(--clr-fg-alt)] leading-none">
+                                  <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-fg-alt leading-none">
                                     {skill}
                                   </span>
                                 </span>

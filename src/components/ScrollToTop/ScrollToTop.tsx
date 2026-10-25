@@ -17,7 +17,7 @@ export function ScrollToTop() {
       <a
         href="#top"
         aria-label="Scroll to top"
-        className="flex items-center justify-center w-10 h-10 border-2 border-[var(--clr-primary)] text-[var(--clr-primary)] hover:bg-[var(--clr-primary)] hover:text-[var(--clr-bg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-all duration-150"
+        className="flex items-center justify-center w-10 h-10 border-2 border-primary text-primary hover:bg-primary hover:text-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-150"
         style={{ borderRadius: 'var(--radius)' }}
       >
         <ArrowUp className="w-5 h-5" />

@@ -1,33 +1,54 @@
 import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
-import { Scale, Trophy } from 'lucide-react'
-import { categoryAccent, decisions, proudOf } from '@/data/highlights'
+import { Scale, Trophy, Workflow } from 'lucide-react'
+import { FlowDiagram } from '@/components/DeepDive/FlowDiagram'
+import { decisionCategories, decisions, proudOf } from '@/data/highlights'
+import { highlightDiagrams } from '@/data/highlightDiagrams'
 import { skillColorMap, skillIconMap } from '@/data/skillIcons'
-import type { HighlightItem } from '@/types'
+import { FILTER_ACCENT, TAB_ACCENT, glow, iconColor } from '@/lib/colors'
+import type { DecisionCategory, HighlightItem } from '@/types'
 
 const TABS = [
-  { id: 'proud', label: 'Proud Of', icon: Trophy, accent: 'var(--clr-primary)', items: proudOf },
-  { id: 'defend', label: "Decisions I'd Defend", icon: Scale, accent: 'var(--clr-accent-gold)', items: decisions },
+  { id: 'built', label: 'Features Built', icon: Trophy, items: proudOf },
+  { id: 'decisions', label: 'Decisions Taken', icon: Scale, items: decisions },
 ]
 
-function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false)
+type Filter = 'All' | DecisionCategory
+
+const FILTERS: { id: Filter; count: number }[] = [
+  { id: 'All', count: decisions.length },
+  ...decisionCategories
+    .map((c) => ({ id: c, count: decisions.filter((d) => d.category === c).length }))
+    .filter((f) => f.count > 0),
+]
+
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false)
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches)
+    const mq = window.matchMedia(query)
+    setMatches(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches)
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
-  }, [])
-  return reduced
+  }, [query])
+  return matches
 }
 
 export function Highlights() {
-  const reduced = usePrefersReducedMotion()
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)')
+  // Matches Tailwind's lg breakpoint, where the sticky diagram panel replaces inline toggles
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [index, setIndex] = useState(0)
+  const [filter, setFilter] = useState<Filter>('All')
+  const [activeTitle, setActiveTitle] = useState<string | null>(null)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const tab = TABS[index]
+  const isDecisions = tab.id === 'decisions'
+  const items = isDecisions && filter !== 'All' ? tab.items.filter((item) => item.category === filter) : tab.items
+  // Falls back to the first visible item after a tab or filter change hides the active one
+  const active = items.find((item) => item.title === activeTitle) ?? items[0]
+  const activeDiagram = active ? highlightDiagrams[active.title] : undefined
 
   function select(next: number) {
     const target = (next + TABS.length) % TABS.length
@@ -61,24 +82,25 @@ export function Highlights() {
   return (
     <section aria-labelledby="highlights-heading" className="mt-14 mb-4">
       <div className="text-center mb-8">
-        <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
+        <span className="font-['M_PLUS_Rounded_1c'] text-xs text-primary uppercase tracking-[0.3em]">
           // Highlights
         </span>
         <h2 id="highlights-heading" className="text-2xl md:text-3xl mt-2">
-          Built &amp; Defended
+          Features Built &amp; Decisions Taken
         </h2>
-        <p className="text-[var(--clr-fg)] max-w-xl mx-auto text-sm md:text-base mt-2">
-          The work I&apos;m proudest of, and the calls I&apos;d make again, ranked.
+        <p className="text-fg max-w-xl mx-auto text-sm md:text-base mt-2">
+          More features I&apos;ve shipped, and the product &amp; architectural calls I stand by.
         </p>
       </div>
 
-      <div className="max-w-[1536px] mx-auto panel panel-hud p-5 md:p-8">
+      {/* overflow-clip, not .panel's hidden, so the sticky diagram panel can stick */}
+      <div className="max-w-[1536px] mx-auto panel panel-hud !overflow-clip p-5 md:p-8">
         <div
           role="tablist"
           aria-label="Highlights"
           aria-orientation="horizontal"
           onKeyDown={handleKeyDown}
-          className="flex flex-wrap gap-2 pb-5 border-b border-[var(--clr-border)]"
+          className="flex flex-wrap gap-2 pb-5 border-b border-border"
         >
           {TABS.map((t, i) => {
             const active = i === index
@@ -95,17 +117,17 @@ export function Highlights() {
                 aria-controls={`highlights-panel-${t.id}`}
                 tabIndex={active ? 0 : -1}
                 onClick={() => setIndex(i)}
-                className={`relative isolate inline-flex items-center gap-2 px-3.5 py-2 rounded-[4px] text-[12px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
+                className={`relative isolate inline-flex items-center gap-2 px-3.5 py-2 rounded-[4px] text-[12px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
                   active
-                    ? 'text-[var(--clr-bg)] font-semibold border border-transparent'
-                    : 'text-[var(--clr-fg)] hover:text-[var(--clr-fg-alt)] hover:bg-[var(--clr-bg-alt)] border border-[var(--clr-border)]'
+                    ? 'text-bg font-semibold border border-transparent'
+                    : 'text-fg hover:text-fg-alt hover:bg-bg-alt border border-border'
                 }`}
               >
                 {active && (
                   <m.span
                     layoutId="highlights-pill"
                     className="absolute inset-0 -z-10 rounded-[4px]"
-                    style={{ backgroundColor: t.accent, boxShadow: `0 0 16px -4px ${t.accent}` }}
+                    style={{ backgroundColor: TAB_ACCENT, boxShadow: glow(TAB_ACCENT) }}
                     transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 34 }}
                   />
                 )}
@@ -117,60 +139,139 @@ export function Highlights() {
           })}
         </div>
 
-        <AnimatePresence mode="wait" initial={false}>
-          <m.ol
-            key={tab.id}
-            role="tabpanel"
-            id={`highlights-panel-${tab.id}`}
-            aria-labelledby={`highlights-tab-${tab.id}`}
-            tabIndex={0}
-            initial={{ opacity: 0, y: reduced ? 0 : 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: reduced ? 0 : -12 }}
-            transition={{ duration: reduced ? 0.15 : 0.28, ease: 'easeOut' }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-6 pt-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] rounded-[4px]"
-          >
-            {tab.items.map((item, i) => (
-              <HighlightRow key={item.title} item={item} rank={i + 1} accent={tab.accent} />
-            ))}
-          </m.ol>
-        </AnimatePresence>
+        {isDecisions && (
+          <div role="group" aria-label="Filter decisions by category" className="flex flex-wrap gap-2 pt-5">
+            {FILTERS.map((f) => {
+              const active = f.id === filter
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setFilter(f.id)}
+                  className={`relative isolate inline-flex items-center gap-2 px-3 py-1.5 rounded-[4px] text-[11px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
+                    active
+                      ? 'text-bg font-semibold border border-transparent'
+                      : 'text-fg hover:text-fg-alt hover:bg-bg-alt border border-border'
+                  }`}
+                >
+                  {active && (
+                    <m.span
+                      layoutId="highlights-filter-pill"
+                      className="absolute inset-0 -z-10 rounded-[4px]"
+                      style={{ backgroundColor: FILTER_ACCENT, boxShadow: glow(FILTER_ACCENT, 14) }}
+                      transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  {f.id}
+                  <span className="tabular-nums opacity-70">{String(f.count).padStart(2, '0')}</span>
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(360px,440px)] lg:gap-10">
+          <AnimatePresence mode="wait" initial={false}>
+            <m.ol
+              key={isDecisions ? `${tab.id}-${filter}` : tab.id}
+              role="tabpanel"
+              id={`highlights-panel-${tab.id}`}
+              aria-labelledby={`highlights-tab-${tab.id}`}
+              tabIndex={0}
+              initial={{ opacity: 0, y: reduced ? 0 : 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: reduced ? 0 : -12 }}
+              transition={{ duration: reduced ? 0.15 : 0.28, ease: 'easeOut' }}
+              className="grid grid-cols-1 gap-y-2 pt-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-[4px]"
+            >
+              {items.map((item, i) => (
+                <HighlightRow
+                  key={item.title}
+                  item={item}
+                  rank={i + 1}
+                  active={item === active}
+                  isDesktop={isDesktop}
+                  reduced={reduced}
+                  onActivate={() => setActiveTitle(item.title)}
+                />
+              ))}
+            </m.ol>
+          </AnimatePresence>
+
+          <aside className="hidden lg:block pt-6" aria-label="Diagram for the highlighted item">
+            <div className="sticky top-24 rounded-[4px] border border-border bg-bg p-5">
+              <span className="font-['M_PLUS_Rounded_1c'] text-[11px] text-primary uppercase tracking-[0.2em]">
+                // Flow
+              </span>
+              <p className="text-sm text-fg-alt font-semibold mt-1 mb-4 leading-snug">{active?.title}</p>
+              <AnimatePresence mode="wait" initial={false}>
+                <m.div
+                  key={active?.title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: reduced ? 0 : 0.15 }}
+                >
+                  {active && activeDiagram ? (
+                    <FlowDiagram spec={activeDiagram} title={active.title} reduced={reduced} />
+                  ) : (
+                    <p className="text-[13px] text-fg">No diagram for this item yet.</p>
+                  )}
+                </m.div>
+              </AnimatePresence>
+              <p className="text-[11px] text-fg mt-4 opacity-70">Hover or focus an item to see its flow.</p>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
   )
 }
 
-function HighlightRow({ item, rank, accent }: { item: HighlightItem; rank: number; accent: string }) {
-  const rowAccent = item.category ? categoryAccent[item.category] : accent
+function HighlightRow({
+  item,
+  rank,
+  active,
+  isDesktop,
+  reduced,
+  onActivate,
+}: {
+  item: HighlightItem
+  rank: number
+  active: boolean
+  isDesktop: boolean
+  reduced: boolean
+  onActivate: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const diagram = highlightDiagrams[item.title]
+  const diagramId = `highlight-flow-${rank}-${item.title.replace(/\W+/g, '-').toLowerCase()}`
+
   return (
-    <li className="flex gap-4">
+    <li
+      // Desktop rows are focusable so keyboard users can drive the side panel; on mobile the toggle button is the stop
+      tabIndex={isDesktop ? 0 : undefined}
+      aria-current={isDesktop && active ? 'true' : undefined}
+      onMouseEnter={isDesktop ? onActivate : undefined}
+      onFocus={isDesktop ? onActivate : undefined}
+      className={`flex flex-wrap gap-4 p-3 rounded-[4px] border-l-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
+        isDesktop && active ? 'border-primary bg-bg-alt' : 'border-transparent'
+      }`}
+    >
       <span
         className="shrink-0 font-['M_PLUS_Rounded_1c'] text-sm font-semibold tabular-nums leading-6"
-        style={{ color: rowAccent }}
+        style={{ color: TAB_ACCENT }}
         aria-hidden="true"
       >
         {String(rank).padStart(2, '0')}
       </span>
       <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <h3 className="!text-[var(--clr-fg-alt)] !text-sm md:!text-base !tracking-normal !normal-case !font-['IBM_Plex_Sans'] !font-semibold !leading-6">
-            <span className="sr-only">{rank}. </span>
-            {item.title}
-          </h3>
-          {item.category && (
-            <span
-              className="px-2 py-0.5 rounded-[3px] border text-[10px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider"
-              style={{
-                color: rowAccent,
-                borderColor: rowAccent,
-                backgroundColor: 'color-mix(in srgb, ' + rowAccent + ' 12%, transparent)',
-              }}
-            >
-              {item.category}
-            </span>
-          )}
-        </div>
-        <p className="text-[13px] md:text-sm text-[var(--clr-fg)] leading-relaxed mt-1.5">{item.detail}</p>
+        <h3 className="!text-fg-alt !text-sm md:!text-base !tracking-normal !normal-case !font-['IBM_Plex_Sans'] !font-semibold !leading-6">
+          <span className="sr-only">{rank}. </span>
+          {item.title}
+        </h3>
+        <p className="text-[13px] md:text-sm text-fg leading-relaxed mt-1.5">{item.detail}</p>
         {item.skills && item.skills.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-3">
             {item.skills.map((skill) => {
@@ -179,10 +280,10 @@ function HighlightRow({ item, rank, accent }: { item: HighlightItem; rank: numbe
                 <span
                   key={skill}
                   className="btn btn--plain cursor-default inline-flex items-center gap-1.5 group !py-1 !px-2"
-                  style={{ '--icon-color': skillColorMap[skill] || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                  style={iconColor(skillColorMap[skill])}
                 >
                   {Icon && <Icon className="w-3.5 h-3.5 transition-all duration-300 skill-icon" />}
-                  <span className="text-[11px] font-['M_PLUS_Rounded_1c'] text-[var(--clr-fg-alt)] leading-none">
+                  <span className="text-[11px] font-['M_PLUS_Rounded_1c'] text-fg-alt leading-none">
                     {skill}
                   </span>
                 </span>
@@ -190,7 +291,38 @@ function HighlightRow({ item, rank, accent }: { item: HighlightItem; rank: numbe
             })}
           </div>
         )}
+        {diagram && !isDesktop && (
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls={diagramId}
+            onClick={() => setOpen((o) => !o)}
+            className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] border border-border text-[11px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider text-primary cursor-pointer hover:bg-bg-alt transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+          >
+            <Workflow className="w-3.5 h-3.5" aria-hidden="true" />
+            {open ? 'Hide flow' : 'Show flow'}
+          </button>
+        )}
       </div>
+      {/* Spans the full row, not the indented text column, so the diagram stays legible on phones */}
+      <AnimatePresence initial={false}>
+        {diagram && !isDesktop && open && (
+          <m.div
+            id={diagramId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: reduced ? 0 : 0.25, ease: 'easeOut' }}
+            className="basis-full overflow-hidden"
+          >
+            <div className="rounded-[4px] border border-border bg-bg p-2 overflow-x-auto">
+              <div className="min-w-[340px]">
+                <FlowDiagram spec={diagram} title={item.title} reduced={reduced} />
+              </div>
+            </div>
+          </m.div>
+        )}
+      </AnimatePresence>
     </li>
   )
 }

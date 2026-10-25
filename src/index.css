@@ -482,9 +482,10 @@ li:hover .highlight-sweep::after {
 
 /* ---- Deep Dive Spotlight Zone ---- */
 
-/* Absorb any spill from the off-card zone reaching toward the viewport edge */
+/* Absorb any spill from the off-card zone reaching toward the viewport edge.
+   clip, not hidden: hidden makes .app a scroll container and breaks position: sticky inside it. */
 .app {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .deepdive-zone {

@@ -168,9 +168,4 @@ export const decisions: HighlightItem[] = [
   },
 ]
 
-export const categoryAccent: Record<DecisionCategory, string> = {
-  Architectural: 'var(--clr-primary)',
-  Product: 'var(--clr-accent-gold)',
-  Technical: 'var(--clr-accent-green)',
-  Workflow: 'var(--clr-accent-purple)',
-}
+export const decisionCategories: DecisionCategory[] = ['Architectural', 'Product', 'Technical', 'Workflow']

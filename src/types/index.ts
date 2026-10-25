@@ -1,6 +1,5 @@
 ﻿import type { LucideIcon } from 'lucide-react'
 import type { YearMonth } from '@/lib/date'
-import type { FlowSpec } from '@/components/DeepDive/FlowDiagram'
 
 export interface Header {
   homepage: string
@@ -48,16 +47,50 @@ export interface ExperienceCompany {
   roles: ExperienceRole[]
 }
 
-export type DecisionCategory = 'Architectural' | 'Product' | 'Technical' | 'Workflow'
+export const DECISION_CATEGORIES = ['Architectural', 'Product', 'Technical', 'Workflow'] as const
+export type DecisionCategory = (typeof DECISION_CATEGORIES)[number]
 
 export interface HighlightItem {
   title: string
   detail: string
   category?: DecisionCategory
   skills?: string[]
+  diagram?: FlowSpec
 }
 
-/** A single concept inside a "My Stuff" topic card */
+export type Tone = 'primary' | 'green' | 'red' | 'gold' | 'purple' | 'muted'
+
+export interface FlowNode {
+  id: string
+  label: string
+  col: number
+  row: number
+  tone?: Tone
+}
+
+export interface FlowEdge {
+  from: string
+  to: string
+  label?: string
+  tone?: Tone
+  dashed?: boolean
+  back?: boolean
+}
+
+export interface FlowGroup {
+  label: string
+  cols: [number, number]
+  rows: [number, number]
+  tone?: Tone
+}
+
+export interface FlowSpec {
+  nodes: FlowNode[]
+  edges: FlowEdge[]
+  groups?: FlowGroup[]
+  caption?: string
+}
+
 export interface MyStuffNote {
   term: string
   tldr: string
@@ -70,7 +103,6 @@ export interface MyStuffNote {
   rule?: string
 }
 
-/** One themed card in the "My Stuff" field-notes carousel */
 export interface MyStuffTopic {
   id: string
   label: string

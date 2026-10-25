@@ -1,42 +1,6 @@
 import { m } from 'motion/react'
 import { clr, tint } from '@/lib/colors'
-
-export type Tone = 'primary' | 'green' | 'red' | 'gold' | 'purple' | 'muted'
-
-export interface FlowNode {
-  id: string
-  /** Use `\n` for a second line; keep each line under ~18 characters */
-  label: string
-  /** Grid column 0–2; halves (0.5, 1.5) centre a node between columns */
-  col: number
-  row: number
-  tone?: Tone
-}
-
-export interface FlowEdge {
-  from: string
-  to: string
-  label?: string
-  tone?: Tone
-  dashed?: boolean
-  /** Same-row return path, drawn as an arc below the row instead of a straight line */
-  back?: boolean
-}
-
-/** Dashed frame around a block of cells, e.g. a transaction or one side of a comparison */
-export interface FlowGroup {
-  label: string
-  cols: [number, number]
-  rows: [number, number]
-  tone?: Tone
-}
-
-export interface FlowSpec {
-  nodes: FlowNode[]
-  edges: FlowEdge[]
-  groups?: FlowGroup[]
-  caption?: string
-}
+import type { FlowNode, FlowSpec, Tone } from '@/types'
 
 const TONE: Record<Tone, string> = {
   primary: clr.primary,

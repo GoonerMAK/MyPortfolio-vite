@@ -3,11 +3,11 @@ import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
 import { Scale, Trophy, Workflow } from 'lucide-react'
 import { FlowDiagram } from '@/components/DeepDive/FlowDiagram'
-import { decisionCategories, decisions, proudOf } from '@/data/highlights'
-import { highlightDiagrams } from '@/data/highlightDiagrams'
+import { decisions, proudOf } from '@/data/highlights'
 import { skillColorMap, skillIconMap } from '@/data/skillIcons'
 import { useMediaQuery, usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import { FILTER_ACCENT, TAB_ACCENT, glow, iconColor } from '@/lib/colors'
+import { DECISION_CATEGORIES } from '@/types'
 import type { DecisionCategory, HighlightItem } from '@/types'
 
 const TABS = [
@@ -19,7 +19,7 @@ type Filter = 'All' | DecisionCategory
 
 const FILTERS: { id: Filter; count: number }[] = [
   { id: 'All', count: decisions.length },
-  ...decisionCategories
+  ...DECISION_CATEGORIES
     .map((c) => ({ id: c, count: decisions.filter((d) => d.category === c).length }))
     .filter((f) => f.count > 0),
 ]
@@ -37,7 +37,6 @@ export function Highlights() {
   const items = isDecisions && filter !== 'All' ? tab.items.filter((item) => item.category === filter) : tab.items
   // Falls back to the first visible item after a tab or filter change hides the active one
   const active = items.find((item) => item.title === activeTitle) ?? items[0]
-  const activeDiagram = active ? highlightDiagrams[active.title] : undefined
 
   function select(next: number) {
     const target = (next + TABS.length) % TABS.length
@@ -202,8 +201,8 @@ export function Highlights() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: reduced ? 0 : 0.15 }}
                 >
-                  {active && activeDiagram ? (
-                    <FlowDiagram spec={activeDiagram} title={active.title} reduced={reduced} />
+                  {active?.diagram ? (
+                    <FlowDiagram spec={active.diagram} title={active.title} reduced={reduced} />
                   ) : (
                     <p className="text-[13px] text-fg">No diagram for this item yet.</p>
                   )}
@@ -234,7 +233,7 @@ function HighlightRow({
   onActivate: () => void
 }) {
   const [open, setOpen] = useState(false)
-  const diagram = highlightDiagrams[item.title]
+  const diagram = item.diagram
   const diagramId = `highlight-flow-${rank}-${item.title.replace(/\W+/g, '-').toLowerCase()}`
 
   return (

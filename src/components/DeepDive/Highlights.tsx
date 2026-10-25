@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
 import { Scale, Trophy, Workflow } from 'lucide-react'
@@ -6,6 +6,7 @@ import { FlowDiagram } from '@/components/DeepDive/FlowDiagram'
 import { decisionCategories, decisions, proudOf } from '@/data/highlights'
 import { highlightDiagrams } from '@/data/highlightDiagrams'
 import { skillColorMap, skillIconMap } from '@/data/skillIcons'
+import { useMediaQuery, usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import { FILTER_ACCENT, TAB_ACCENT, glow, iconColor } from '@/lib/colors'
 import type { DecisionCategory, HighlightItem } from '@/types'
 
@@ -23,20 +24,8 @@ const FILTERS: { id: Filter; count: number }[] = [
     .filter((f) => f.count > 0),
 ]
 
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia(query)
-    setMatches(mq.matches)
-    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [query])
-  return matches
-}
-
 export function Highlights() {
-  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)')
+  const reduced = usePrefersReducedMotion()
   // Matches Tailwind's lg breakpoint, where the sticky diagram panel replaces inline toggles
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [index, setIndex] = useState(0)

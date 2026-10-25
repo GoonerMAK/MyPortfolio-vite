@@ -3,23 +3,11 @@ import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
 import { FieldNote } from '@/components/DeepDive/FieldNote'
+import { usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import { glow, iconColor, tint } from '@/lib/colors'
 import { myStuff } from '@/data/myStuff'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import type { MyStuffTopic } from '@/types'
-
-/** Tracks OS reduced-motion preference; returns true when active. */
-function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
-  return reduced
-}
 
 /** Turns a section label into an id-safe slug, e.g. "Core Habits" -> "core-habits". */
 function slugify(label: string): string {

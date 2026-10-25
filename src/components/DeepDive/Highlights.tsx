@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
 import { Scale, Trophy, Workflow } from 'lucide-react'
@@ -24,6 +24,9 @@ const FILTERS: { id: Filter; count: number }[] = [
     .filter((f) => f.count > 0),
 ]
 
+// Hover has to rest this long before the side panel swaps, so sweeping across rows doesn't replay every diagram
+const HOVER_DELAY_MS = 150
+
 export function Highlights() {
   const reduced = usePrefersReducedMotion()
   // Matches Tailwind's lg breakpoint, where the sticky diagram panel replaces inline toggles
@@ -32,11 +35,20 @@ export function Highlights() {
   const [filter, setFilter] = useState<Filter>('All')
   const [activeTitle, setActiveTitle] = useState<string | null>(null)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const tab = TABS[index]
   const isDecisions = tab.id === 'decisions'
   const items = isDecisions && filter !== 'All' ? tab.items.filter((item) => item.category === filter) : tab.items
   // Falls back to the first visible item after a tab or filter change hides the active one
   const active = items.find((item) => item.title === activeTitle) ?? items[0]
+
+  useEffect(() => () => clearTimeout(hoverTimer.current), [])
+
+  function activate(title: string, delay: number) {
+    clearTimeout(hoverTimer.current)
+    if (delay === 0) setActiveTitle(title)
+    else hoverTimer.current = setTimeout(() => setActiveTitle(title), delay)
+  }
 
   function select(next: number) {
     const target = (next + TABS.length) % TABS.length
@@ -181,36 +193,40 @@ export function Highlights() {
                   active={item === active}
                   isDesktop={isDesktop}
                   reduced={reduced}
-                  onActivate={() => setActiveTitle(item.title)}
+                  onHover={() => activate(item.title, HOVER_DELAY_MS)}
+                  onFocus={() => activate(item.title, 0)}
                 />
               ))}
             </m.ol>
           </AnimatePresence>
 
-          <aside className="hidden lg:block pt-6" aria-label="Diagram for the highlighted item">
-            <div className="sticky top-24 rounded-[4px] border border-border bg-bg p-5">
-              <span className="font-['M_PLUS_Rounded_1c'] text-[11px] text-primary uppercase tracking-[0.2em]">
-                // Flow
-              </span>
-              <p className="text-sm text-fg-alt font-semibold mt-1 mb-4 leading-snug">{active?.title}</p>
-              <AnimatePresence mode="wait" initial={false}>
-                <m.div
-                  key={active?.title}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: reduced ? 0 : 0.15 }}
-                >
-                  {active?.diagram ? (
-                    <FlowDiagram spec={active.diagram} title={active.title} reduced={reduced} />
-                  ) : (
-                    <p className="text-[13px] text-fg">No diagram for this item yet.</p>
-                  )}
-                </m.div>
-              </AnimatePresence>
-              <p className="text-[11px] text-fg mt-4 opacity-70">Hover or focus an item to see its flow.</p>
-            </div>
-          </aside>
+          {/* Desktop only: a CSS-hidden copy would still mount and animate on mobile */}
+          {isDesktop && (
+            <aside className="pt-6" aria-label="Diagram for the highlighted item">
+              <div className="sticky top-24 rounded-[4px] border border-border bg-bg p-5">
+                <span className="font-['M_PLUS_Rounded_1c'] text-[11px] text-primary uppercase tracking-[0.2em]">
+                  // Flow
+                </span>
+                <p className="text-sm text-fg-alt font-semibold mt-1 mb-4 leading-snug">{active?.title}</p>
+                <AnimatePresence mode="wait" initial={false}>
+                  <m.div
+                    key={active?.title}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduced ? 0 : 0.15 }}
+                  >
+                    {active?.diagram ? (
+                      <FlowDiagram spec={active.diagram} title={active.title} reduced={reduced} />
+                    ) : (
+                      <p className="text-[13px] text-fg">No diagram for this item yet.</p>
+                    )}
+                  </m.div>
+                </AnimatePresence>
+                <p className="text-[11px] text-fg mt-4 opacity-70">Hover or focus an item to see its flow.</p>
+              </div>
+            </aside>
+          )}
         </div>
       </div>
     </section>
@@ -223,14 +239,16 @@ function HighlightRow({
   active,
   isDesktop,
   reduced,
-  onActivate,
+  onHover,
+  onFocus,
 }: {
   item: HighlightItem
   rank: number
   active: boolean
   isDesktop: boolean
   reduced: boolean
-  onActivate: () => void
+  onHover: () => void
+  onFocus: () => void
 }) {
   const [open, setOpen] = useState(false)
   const diagram = item.diagram
@@ -241,8 +259,8 @@ function HighlightRow({
       // Desktop rows are focusable so keyboard users can drive the side panel; on mobile the toggle button is the stop
       tabIndex={isDesktop ? 0 : undefined}
       aria-current={isDesktop && active ? 'true' : undefined}
-      onMouseEnter={isDesktop ? onActivate : undefined}
-      onFocus={isDesktop ? onActivate : undefined}
+      onMouseEnter={isDesktop ? onHover : undefined}
+      onFocus={isDesktop ? onFocus : undefined}
       className={`flex flex-wrap gap-4 p-3 rounded-[4px] border-l-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
         isDesktop && active ? 'border-primary bg-bg-alt' : 'border-transparent'
       }`}

@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { m } from 'motion/react'
 import { clr, tint } from '@/lib/colors'
 import type { FlowNode, FlowSpec, Tone } from '@/types'
@@ -83,6 +84,8 @@ export function FlowDiagram({ spec, title, reduced }: { spec: FlowSpec; title: s
   const hasBackBelowLast = spec.edges.some((e) => e.back && byId(spec, e.from).row === maxRow)
   const height = top + maxRow * ROW_H + NODE_H + (hasBackBelowLast ? 36 : 10)
   const draw = reduced ? { duration: 0 } : { duration: 0.5, ease: 'easeOut' as const }
+  const uid = useId().replace(/[^\w-]/g, '')
+  const arrowId = (t: Tone) => `flow-arrow-${uid}-${t}`
 
   return (
     <figure className="m-0">
@@ -96,7 +99,7 @@ export function FlowDiagram({ spec, title, reduced }: { spec: FlowSpec; title: s
           {(Object.keys(TONE) as Tone[]).map((t) => (
             <marker
               key={t}
-              id={`flow-arrow-${t}`}
+              id={arrowId(t)}
               viewBox="0 0 8 8"
               refX="7"
               refY="4"
@@ -138,7 +141,7 @@ export function FlowDiagram({ spec, title, reduced }: { spec: FlowSpec; title: s
                 strokeOpacity={tone === 'muted' ? 0.55 : 0.9}
                 strokeWidth={1.4}
                 strokeDasharray={e.dashed ? '4 3' : undefined}
-                markerEnd={`url(#flow-arrow-${tone})`}
+                markerEnd={`url(#${arrowId(tone)})`}
                 initial={{ pathLength: reduced ? 1 : 0 }}
                 animate={{ pathLength: 1 }}
                 transition={{ ...draw, delay: reduced ? 0 : 0.15 + i * 0.07 }}
@@ -150,7 +153,7 @@ export function FlowDiagram({ spec, title, reduced }: { spec: FlowSpec; title: s
                   textAnchor={r.labelAnchor}
                   fontSize={9}
                   fill={color}
-                  stroke={clr.bgPanel}
+                  stroke={clr.bg}
                   strokeWidth={3}
                   paintOrder="stroke"
                   className="font-['M_PLUS_Rounded_1c']"

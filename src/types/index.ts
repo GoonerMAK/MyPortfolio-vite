@@ -38,8 +38,6 @@ export interface ExperienceRole {
   mode: string
   achievements: string[]
   highlights?: string[][]
-  /** Related skills per achievement (parallel to `achievements`).
-   *  Names must match keys in `skillIconMap`. */
   skills?: string[][]
 }
 
@@ -60,34 +58,20 @@ export interface HighlightItem {
 
 /** A single concept inside a "My Stuff" topic card */
 export interface MyStuffNote {
-  /** Short concept name, rendered emphasised */
   term: string
-  /** Plain-English explainer. Wrap inline code in backticks — the carousel
-   *  renders `…` segments as styled <code> chips. */
   detail: string
-  /** Groups notes under an in-card subsection tab. Notes sharing the same
-   *  string render together; omitting it on every note in a topic keeps
-   *  today's single ungrouped grid. */
   section?: string
 }
 
 /** One themed card in the "My Stuff" field-notes carousel */
 export interface MyStuffTopic {
-  /** Stable id — also used to wire up tab/tabpanel aria attributes */
   id: string
-  /** Short label shown on the pill / tab */
   label: string
-  /** Card headline */
   title: string
-  /** One-line intro under the headline */
   blurb: string
-  /** Lucide glyph representing the topic */
   icon: LucideIcon
-  /** Accent colour (any valid CSS colour value, incl. CSS vars) */
   accent: string
-  /** The concepts grouped under this topic */
   notes: MyStuffNote[]
-  /** Related skills — names must match keys in `skillIconMap` */
   skills: string[]
 }
 

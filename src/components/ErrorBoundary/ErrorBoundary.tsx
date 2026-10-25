@@ -45,7 +45,7 @@ export class ErrorBoundary extends Component<
       >
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-red)] shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
-          <span className="font-['DM_Mono'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
+          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
             System Fault
           </span>
         </div>

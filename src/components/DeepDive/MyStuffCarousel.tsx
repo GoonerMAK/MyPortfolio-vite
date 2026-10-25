@@ -25,7 +25,7 @@ function renderWithCode(text: string): ReactNode[] {
     i % 2 === 1 ? (
       <code
         key={i}
-        className="font-['DM_Mono'] text-[0.82em] px-1.5 py-0.5 mx-0.5 rounded-[3px] bg-[var(--clr-bg)] border border-[var(--clr-border)] text-[var(--clr-primary)] align-baseline"
+        className="font-['M_PLUS_Rounded_1c'] text-[0.82em] px-1.5 py-0.5 mx-0.5 rounded-[3px] bg-[var(--clr-bg)] border border-[var(--clr-border)] text-[var(--clr-primary)] align-baseline"
       >
         {segment}
       </code>
@@ -197,7 +197,7 @@ export function MyStuffCarousel() {
     <section aria-labelledby="mystuff-heading" className="mt-14 mb-4">
       {/* Heading block */}
       <div className="text-center mb-8">
-        <span className="font-['DM_Mono'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
+        <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
           // Field Notes
         </span>
         <h2 id="mystuff-heading" className="text-2xl md:text-3xl mt-2">
@@ -223,7 +223,7 @@ export function MyStuffCarousel() {
             className="lg:hidden w-full panel panel-hud flex items-center gap-3 px-4 py-3 mb-2 rounded-[6px] cursor-pointer"
           >
             <topic.icon className="w-4 h-4 shrink-0" style={{ color: topic.accent }} aria-hidden="true" />
-            <span className="flex-1 min-w-0 truncate text-left font-['DM_Mono'] text-xs uppercase tracking-wider text-[var(--clr-fg-alt)]">
+            <span className="flex-1 min-w-0 truncate text-left font-['M_PLUS_Rounded_1c'] text-xs uppercase tracking-wider text-[var(--clr-fg-alt)]">
               {topic.label}
             </span>
             <ChevronDown
@@ -305,7 +305,7 @@ export function MyStuffCarousel() {
                         label={`Previous topic: ${prevTopic.label}`}
                         onClick={() => goTo(index - 1)}
                       />
-                      <span className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] tabular-nums">
+                      <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] tabular-nums">
                         {String(index + 1).padStart(2, '0')}
                         <span className="text-[var(--clr-border)]"> / </span>
                         {String(TOTAL).padStart(2, '0')}
@@ -345,7 +345,7 @@ export function MyStuffCarousel() {
                           aria-controls={`mystuff-sec-panel-${topic.id}`}
                           tabIndex={activeSec ? 0 : -1}
                           onClick={() => setActiveSection(s)}
-                          className={`relative isolate px-3 py-1.5 rounded-[4px] text-[11px] font-['DM_Mono'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
+                          className={`relative isolate px-3 py-1.5 rounded-[4px] text-[11px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
                             activeSec
                               ? 'text-[var(--clr-bg)] font-semibold'
                               : 'text-[var(--clr-fg)] hover:text-[var(--clr-fg-alt)]'
@@ -387,7 +387,7 @@ export function MyStuffCarousel() {
                 {notesToRender.map((note) => (
                   <div key={note.term}>
                     <h4
-                      className="!text-[var(--clr-fg-alt)] !text-sm !tracking-normal !normal-case font-['DM_Mono'] flex items-center gap-2"
+                      className="!text-[var(--clr-fg-alt)] !text-sm !tracking-normal !normal-case font-['M_PLUS_Rounded_1c'] flex items-center gap-2"
                     >
                       <span
                         className="inline-block w-1.5 h-1.5 rounded-full"
@@ -418,7 +418,7 @@ export function MyStuffCarousel() {
                         {Icon && (
                           <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
                         )}
-                        <span className="text-[12px] font-['DM_Mono'] text-[var(--clr-fg-alt)] leading-none">
+                        <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-[var(--clr-fg-alt)] leading-none">
                           {skill}
                         </span>
                       </span>
@@ -454,7 +454,7 @@ const TopicListItem = forwardRef<
       aria-controls={`mystuff-panel-${topic.id}`}
       tabIndex={active ? 0 : -1}
       onClick={onClick}
-      className={`relative isolate w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-[4px] text-[12px] font-['DM_Mono'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
+      className={`relative isolate w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-[4px] text-[12px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
         active
           ? 'text-[var(--clr-bg)] font-semibold border border-transparent'
           : 'text-[var(--clr-fg)] hover:text-[var(--clr-fg-alt)] hover:bg-[var(--clr-bg-alt)] border border-[var(--clr-border)]'

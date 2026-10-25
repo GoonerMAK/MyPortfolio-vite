@@ -29,7 +29,6 @@ const HOVER_DELAY_MS = 150
 
 export function Highlights() {
   const reduced = usePrefersReducedMotion()
-  // Matches Tailwind's lg breakpoint, where the sticky diagram panel replaces inline toggles
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [index, setIndex] = useState(0)
   const [filter, setFilter] = useState<Filter>('All')
@@ -39,7 +38,6 @@ export function Highlights() {
   const tab = TABS[index]
   const isDecisions = tab.id === 'decisions'
   const items = isDecisions && filter !== 'All' ? tab.items.filter((item) => item.category === filter) : tab.items
-  // Falls back to the first visible item after a tab or filter change hides the active one
   const active = items.find((item) => item.title === activeTitle) ?? items[0]
 
   useEffect(() => () => clearTimeout(hoverTimer.current), [])

@@ -1,7 +1,9 @@
-import { Fragment, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { KeyboardEvent, ReactNode } from 'react'
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
-import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
+import { FieldNote } from '@/components/DeepDive/FieldNote'
+import { glow, iconColor, tint } from '@/lib/colors'
 import { myStuff } from '@/data/myStuff'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
 import type { MyStuffTopic } from '@/types'
@@ -17,29 +19,6 @@ function usePrefersReducedMotion(): boolean {
     return () => mq.removeEventListener('change', onChange)
   }, [])
   return reduced
-}
-
-/** Splits on backticks; odd segments become styled `<code>` chips. */
-function renderWithCode(text: string): ReactNode[] {
-  return text.split('`').map((segment, i) =>
-    i % 2 === 1 ? (
-      <code
-        key={i}
-        className="font-['M_PLUS_Rounded_1c'] text-[0.82em] px-1.5 py-0.5 mx-0.5 rounded-[3px] bg-[var(--clr-bg)] border border-[var(--clr-border)] text-[var(--clr-primary)] align-baseline"
-      >
-        {segment}
-      </code>
-    ) : (
-      <span key={i}>
-        {segment.split('\n').map((line, j, arr) => (
-          <Fragment key={j}>
-            {line}
-            {j < arr.length - 1 && <br />}
-          </Fragment>
-        ))}
-      </span>
-    ),
-  )
 }
 
 /** Turns a section label into an id-safe slug, e.g. "Core Habits" -> "core-habits". */
@@ -89,7 +68,6 @@ export function MyStuffCarousel() {
   const hasSections = sections.length > 1
 
   const [activeSection, setActiveSection] = useState(sections[0] ?? DEFAULT_SECTION)
-  const notesRef = useRef<HTMLDivElement>(null)
 
   // Reset to the first subsection whenever the topic changes.
   useEffect(() => {
@@ -97,15 +75,24 @@ export function MyStuffCarousel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topic.id])
 
-  // The card only remounts on topic change, so a section switch would
-  // otherwise inherit the previous section's scroll position mid-list.
-  useEffect(() => {
-    notesRef.current?.scrollTo({ top: 0 })
-  }, [activeSection])
-
   const notesToRender = hasSections
     ? topic.notes.filter((note) => (note.section ?? DEFAULT_SECTION) === activeSection)
     : topic.notes
+
+  const [openTerms, setOpenTerms] = useState<Set<string>>(() => new Set())
+  useEffect(() => {
+    setOpenTerms(new Set())
+  }, [topic.id, activeSection])
+  const allOpen = notesToRender.every((note) => openTerms.has(note.term))
+
+  function toggleNote(term: string) {
+    setOpenTerms((prev) => {
+      const next = new Set(prev)
+      if (next.has(term)) next.delete(term)
+      else next.add(term)
+      return next
+    })
+  }
 
   const goTo = useCallback(
     (next: number, fromKeyboard = false) => {
@@ -197,13 +184,13 @@ export function MyStuffCarousel() {
     <section aria-labelledby="mystuff-heading" className="mt-14 mb-4">
       {/* Heading block */}
       <div className="text-center mb-8">
-        <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
+        <span className="font-['M_PLUS_Rounded_1c'] text-xs text-primary uppercase tracking-[0.3em]">
           // Field Notes
         </span>
         <h2 id="mystuff-heading" className="text-2xl md:text-3xl mt-2">
           My Stuff
         </h2>
-        <p className="text-[var(--clr-fg)] max-w-xl mx-auto text-sm md:text-base mt-2">
+        <p className="text-fg max-w-xl mx-auto text-sm md:text-base mt-2">
           A working logbook of concepts I dug into on the job — the kind of
           notes that don&apos;t fit on a résumé. Pick a topic.
         </p>
@@ -223,7 +210,7 @@ export function MyStuffCarousel() {
             className="lg:hidden w-full panel panel-hud flex items-center gap-3 px-4 py-3 mb-2 rounded-[6px] cursor-pointer"
           >
             <topic.icon className="w-4 h-4 shrink-0" style={{ color: topic.accent }} aria-hidden="true" />
-            <span className="flex-1 min-w-0 truncate text-left font-['M_PLUS_Rounded_1c'] text-xs uppercase tracking-wider text-[var(--clr-fg-alt)]">
+            <span className="flex-1 min-w-0 truncate text-left font-['M_PLUS_Rounded_1c'] text-xs uppercase tracking-wider text-fg-alt">
               {topic.label}
             </span>
             <ChevronDown
@@ -279,7 +266,7 @@ export function MyStuffCarousel() {
               id={`mystuff-panel-${topic.id}`}
               aria-label={topic.title}
               tabIndex={0}
-              className="panel panel-hud p-5 md:p-8 flex flex-col lg:h-[720px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)]"
+              className="panel panel-hud p-5 md:p-8 flex flex-col lg:min-h-[720px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               {/* Card header: icon · title · counter */}
               <div className="flex items-start gap-4 mb-5 shrink-0">
@@ -288,14 +275,14 @@ export function MyStuffCarousel() {
                   style={{
                     color: topic.accent,
                     borderColor: topic.accent,
-                    backgroundColor: 'color-mix(in srgb, ' + topic.accent + ' 12%, transparent)',
+                    backgroundColor: tint(topic.accent, 12),
                   }}
                 >
                   <topic.icon className="w-5 h-5" aria-hidden="true" />
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-lg md:text-xl !text-[var(--clr-fg-alt)] leading-tight">
+                    <h3 className="text-lg md:text-xl !text-fg-alt leading-tight">
                       {topic.title}
                     </h3>
                     {/* Prev / counter / next cluster — out of the way of the notes */}
@@ -305,9 +292,9 @@ export function MyStuffCarousel() {
                         label={`Previous topic: ${prevTopic.label}`}
                         onClick={() => goTo(index - 1)}
                       />
-                      <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] tabular-nums">
+                      <span className="font-['M_PLUS_Rounded_1c'] text-xs text-fg tabular-nums">
                         {String(index + 1).padStart(2, '0')}
-                        <span className="text-[var(--clr-border)]"> / </span>
+                        <span className="text-border"> / </span>
                         {String(TOTAL).padStart(2, '0')}
                       </span>
                       <NavArrow
@@ -317,7 +304,7 @@ export function MyStuffCarousel() {
                       />
                     </div>
                   </div>
-                  <p className="text-sm text-[var(--clr-fg)] mt-1 font-['IBM_Plex_Sans']">
+                  <p className="text-sm text-fg mt-1 font-['IBM_Plex_Sans']">
                     {topic.blurb}
                   </p>
                 </div>
@@ -325,13 +312,13 @@ export function MyStuffCarousel() {
 
               {/* Subsection tabs — only when this topic's notes define more than one section */}
               {hasSections && (
-                <div className="border-t border-[var(--clr-border)] pt-4 shrink-0">
+                <div className="border-t border-border pt-4 shrink-0">
                   <div
                     role="tablist"
                     aria-label={`${topic.label} sections`}
                     aria-orientation="horizontal"
                     onKeyDown={handleSectionKeyDown}
-                    className="flex flex-wrap gap-1.5 pb-4 border-b border-[var(--clr-border)]"
+                    className="flex flex-wrap gap-1.5 pb-4 border-b border-border"
                   >
                     {sections.map((s) => {
                       const activeSec = s === activeSection
@@ -345,10 +332,10 @@ export function MyStuffCarousel() {
                           aria-controls={`mystuff-sec-panel-${topic.id}`}
                           tabIndex={activeSec ? 0 : -1}
                           onClick={() => setActiveSection(s)}
-                          className={`relative isolate px-3 py-1.5 rounded-[4px] text-[11px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
+                          className={`relative isolate px-3 py-1.5 rounded-[4px] text-[11px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
                             activeSec
-                              ? 'text-[var(--clr-bg)] font-semibold'
-                              : 'text-[var(--clr-fg)] hover:text-[var(--clr-fg-alt)]'
+                              ? 'text-bg font-semibold'
+                              : 'text-fg hover:text-fg-alt'
                           }`}
                         >
                           {activeSec && (
@@ -371,41 +358,55 @@ export function MyStuffCarousel() {
                 </div>
               )}
 
-              {/* Notes — 2 columns on wide screens; fixed-height card scrolls
-                  this region instead of growing, so every topic is the same size */}
               <div
-                ref={notesRef}
                 role={hasSections ? 'tabpanel' : undefined}
                 id={hasSections ? `mystuff-sec-panel-${topic.id}` : undefined}
                 aria-labelledby={
                   hasSections ? `mystuff-sec-tab-${topic.id}-${slugify(activeSection)}` : undefined
                 }
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 content-start flex-1 min-h-0 lg:overflow-y-auto pr-1 ${
-                  hasSections ? 'pt-4' : 'border-t border-[var(--clr-border)] pt-5'
-                }`}
+                className={`flex-1 max-w-[860px] ${hasSections ? '' : 'border-t border-border'}`}
               >
-                {notesToRender.map((note) => (
-                  <div key={note.term}>
-                    <h4
-                      className="!text-[var(--clr-fg-alt)] !text-sm !tracking-normal !normal-case font-['M_PLUS_Rounded_1c'] flex items-center gap-2"
+                <div className="flex items-center justify-between gap-3 py-3">
+                  <span className="font-['M_PLUS_Rounded_1c'] text-[11px] uppercase tracking-[0.2em] text-fg">
+                    <span className="tabular-nums">{String(notesToRender.length).padStart(2, '0')}</span>{' '}
+                    {notesToRender.length === 1 ? 'note' : 'notes'}
+                  </span>
+                  {notesToRender.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenTerms(allOpen ? new Set() : new Set(notesToRender.map((note) => note.term)))
+                      }
+                      className="inline-flex items-center gap-1.5 font-['M_PLUS_Rounded_1c'] text-[11px] uppercase tracking-wider text-fg hover:text-fg-alt hover:bg-bg-alt cursor-pointer transition-colors px-2.5 py-1 rounded-[4px] border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
-                      <span
-                        className="inline-block w-1.5 h-1.5 rounded-full"
-                        style={{ backgroundColor: topic.accent }}
-                        aria-hidden="true"
-                      />
-                      {note.term}
-                    </h4>
-                    <p className="text-[13px] md:text-sm text-[var(--clr-fg)] leading-relaxed mt-1.5 pl-[14px]">
-                      {renderWithCode(note.detail)}
-                    </p>
-                  </div>
-                ))}
+                      {allOpen ? (
+                        <ChevronsDownUp className="w-3.5 h-3.5" aria-hidden="true" />
+                      ) : (
+                        <ChevronsUpDown className="w-3.5 h-3.5" aria-hidden="true" />
+                      )}
+                      {allOpen ? 'Collapse all' : 'Expand all'}
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1.5">
+                  {notesToRender.map((note, i) => (
+                    <FieldNote
+                      key={note.term}
+                      id={`mystuff-note-${topic.id}-${slugify(note.term)}`}
+                      rank={i + 1}
+                      note={note}
+                      accent={topic.accent}
+                      open={openTerms.has(note.term)}
+                      reduced={reduced}
+                      onToggle={() => toggleNote(note.term)}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Related skill chips — pinned to the bottom of the fixed-height card */}
               {topic.skills.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-5 pt-5 border-t border-[var(--clr-border)] shrink-0">
+                <div className="flex flex-wrap gap-2 mt-5 pt-5 border-t border-border shrink-0">
                   {topic.skills.map((skill) => {
                     const Icon = skillIconMap[skill]
                     const brandColor = skillColorMap[skill]
@@ -413,12 +414,12 @@ export function MyStuffCarousel() {
                       <span
                         key={skill}
                         className="btn btn--plain cursor-default inline-flex items-center gap-2 group !py-1.5 !px-2.5"
-                        style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                        style={iconColor(brandColor)}
                       >
                         {Icon && (
                           <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
                         )}
-                        <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-[var(--clr-fg-alt)] leading-none">
+                        <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-fg-alt leading-none">
                           {skill}
                         </span>
                       </span>
@@ -454,10 +455,10 @@ const TopicListItem = forwardRef<
       aria-controls={`mystuff-panel-${topic.id}`}
       tabIndex={active ? 0 : -1}
       onClick={onClick}
-      className={`relative isolate w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-[4px] text-[12px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
+      className={`relative isolate w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-[4px] text-[12px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${
         active
-          ? 'text-[var(--clr-bg)] font-semibold border border-transparent'
-          : 'text-[var(--clr-fg)] hover:text-[var(--clr-fg-alt)] hover:bg-[var(--clr-bg-alt)] border border-[var(--clr-border)]'
+          ? 'text-bg font-semibold border border-transparent'
+          : 'text-fg hover:text-fg-alt hover:bg-bg-alt border border-border'
       }`}
     >
       {active && (
@@ -466,7 +467,7 @@ const TopicListItem = forwardRef<
           className="absolute inset-0 -z-10 rounded-[4px]"
           style={{
             backgroundColor: topic.accent,
-            boxShadow: `0 0 16px -4px ${topic.accent}`,
+            boxShadow: glow(topic.accent),
           }}
           transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 34 }}
         />
@@ -493,7 +494,7 @@ function NavArrow({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid place-items-center w-9 h-9 rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg-alt)] cursor-pointer transition-colors duration-200 hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)]"
+      className="grid place-items-center w-9 h-9 rounded-full bg-bg-alt border border-border text-fg-alt cursor-pointer transition-colors duration-200 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
       <Icon className="w-4 h-4" aria-hidden="true" />
     </button>

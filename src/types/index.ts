@@ -1,5 +1,6 @@
 ﻿import type { LucideIcon } from 'lucide-react'
 import type { YearMonth } from '@/lib/date'
+import type { FlowSpec } from '@/components/DeepDive/FlowDiagram'
 
 export interface Header {
   homepage: string
@@ -59,8 +60,14 @@ export interface HighlightItem {
 /** A single concept inside a "My Stuff" topic card */
 export interface MyStuffNote {
   term: string
-  detail: string
+  tldr: string
   section?: string
+  why?: string
+  diagram?: FlowSpec
+  example?: string
+  items?: { label: string; code?: string }[]
+  analogy?: string
+  rule?: string
 }
 
 /** One themed card in the "My Stuff" field-notes carousel */

@@ -270,7 +270,7 @@ button {
   background-color: var(--clr-bg-alt);
   border: 1px solid var(--clr-border);
   color: var(--clr-fg-alt);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 0.78rem;
   font-weight: 400;
   padding: 0.4em 0.8em;
@@ -546,7 +546,7 @@ li:hover .highlight-sweep::after {
   align-items: center;
   gap: 0.35em;
   padding: 0.2em 0.7em;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;

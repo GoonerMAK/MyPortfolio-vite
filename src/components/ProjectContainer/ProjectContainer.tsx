@@ -49,7 +49,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
         {/* Header row: incident number + status */}
         <div className="flex items-center justify-between mb-3">
           <span
-            className="font-['JetBrains_Mono'] text-xs tracking-wider"
+            className="font-['DM_Mono'] text-xs tracking-wider"
             style={{ color: borderColor }}
           >
             #{incidentNum}
@@ -85,7 +85,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
                     {Icon && (
                       <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
                     )}
-                    <span className="text-[12px] font-['JetBrains_Mono'] text-[var(--clr-fg-alt)] leading-none">
+                    <span className="text-[12px] font-['DM_Mono'] text-[var(--clr-fg-alt)] leading-none">
                       {item}
                     </span>
                   </span>

@@ -40,7 +40,7 @@ export function About() {
             transition={{ duration: 0.6 }}
           >
             <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-green)] shadow-[0_0_8px_var(--clr-accent-green)]" />
-            <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-green)] uppercase tracking-widest">
+            <span className="font-['DM_Mono'] text-xs text-[var(--clr-accent-green)] uppercase tracking-widest">
               Online
             </span>
           </m.div>
@@ -63,8 +63,8 @@ export function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
             >
-              <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase tracking-wider">Designation:</span>
-              <span className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)]">{role}</span>
+              <span className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] uppercase tracking-wider">Designation:</span>
+              <span className="font-['DM_Mono'] text-base text-[var(--clr-primary)]">{role}</span>
             </m.div>
           )}
 

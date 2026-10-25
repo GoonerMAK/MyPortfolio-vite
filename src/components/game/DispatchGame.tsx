@@ -192,13 +192,13 @@ export function DispatchGame() {
             </p>
             <div className="flex justify-center gap-4 my-6 flex-wrap">
               {UNITS.map((u) => (
-                <div key={u.type} className="flex items-center gap-1.5 text-xs font-['JetBrains_Mono']" style={{ color: u.color }}>
+                <div key={u.type} className="flex items-center gap-1.5 text-xs font-['DM_Mono']" style={{ color: u.color }}>
                   <u.icon className="w-3.5 h-3.5" />
                   {u.label}
                 </div>
               ))}
             </div>
-            <p className="text-xs text-[var(--clr-fg)] mb-6 font-['JetBrains_Mono']">
+            <p className="text-xs text-[var(--clr-fg)] mb-6 font-['DM_Mono']">
               Score = 100 base + time bonus + streak bonus
             </p>
             <m.button
@@ -232,25 +232,25 @@ export function DispatchGame() {
           <div className="pt-2">
             <Trophy className="w-14 h-14 mx-auto mb-4" style={{ color: gradeColor }} />
             <h3 className="text-2xl mb-1">Simulation Complete</h3>
-            <p className="font-['JetBrains_Mono'] text-4xl font-bold my-4" style={{ color: gradeColor }}>
+            <p className="font-['DM_Mono'] text-4xl font-bold my-4" style={{ color: gradeColor }}>
               {grade}
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
               <div className="panel p-3">
-                <p className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase">Score</p>
+                <p className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] uppercase">Score</p>
                 <p className="font-['Anton'] text-2xl text-[var(--clr-fg-alt)]">{gameState.score}</p>
               </div>
               <div className="panel p-3">
-                <p className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase">Accuracy</p>
+                <p className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] uppercase">Accuracy</p>
                 <p className="font-['Anton'] text-2xl text-[var(--clr-fg-alt)]">{accuracy}%</p>
               </div>
               <div className="panel p-3">
-                <p className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase">Correct</p>
+                <p className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] uppercase">Correct</p>
                 <p className="font-['Anton'] text-2xl text-[var(--clr-accent-green)]">{gameState.totalCorrect}/{gameState.totalAnswered}</p>
               </div>
               <div className="panel p-3">
-                <p className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase">Best Streak</p>
+                <p className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] uppercase">Best Streak</p>
                 <p className="font-['Anton'] text-2xl text-[var(--clr-accent-gold)]">{gameState.bestStreak}</p>
               </div>
             </div>
@@ -277,15 +277,15 @@ export function DispatchGame() {
       {/* HUD Bar */}
       <div className="flex flex-wrap items-center justify-between mb-4 gap-3">
         <div className="flex items-center gap-4">
-          <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)]">
+          <span className="font-['DM_Mono'] text-xs text-[var(--clr-fg)]">
             INCIDENT {gameState.currentIndex + 1}/{emergencies.length}
           </span>
-          <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-gold)]">
+          <span className="font-['DM_Mono'] text-xs text-[var(--clr-accent-gold)]">
             <Zap className="w-3.5 h-3.5 inline mr-1" />
             {gameState.score} PTS
           </span>
           {gameState.streak > 1 && (
-            <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-green)]">
+            <span className="font-['DM_Mono'] text-xs text-[var(--clr-accent-green)]">
               x{gameState.streak} STREAK
             </span>
           )}
@@ -293,7 +293,7 @@ export function DispatchGame() {
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4" style={{ color: timerPct < 30 ? 'var(--clr-accent-red)' : 'var(--clr-primary)' }} />
           <span
-            className="font-['JetBrains_Mono'] text-sm font-bold"
+            className="font-['DM_Mono'] text-sm font-bold"
             style={{ color: timerPct < 30 ? 'var(--clr-accent-red)' : 'var(--clr-primary)' }}
           >
             {gameState.timeLeft}s
@@ -359,7 +359,7 @@ export function DispatchGame() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className={`text-center mb-4 py-3 rounded font-['JetBrains_Mono'] text-sm font-bold uppercase tracking-wider border-2 ${
+            className={`text-center mb-4 py-3 rounded font-['DM_Mono'] text-sm font-bold uppercase tracking-wider border-2 ${
               gameState.feedback === 'correct'
                 ? 'border-[var(--clr-accent-green)] text-[var(--clr-accent-green)] bg-[rgba(0,224,150,0.06)]'
                 : 'border-[var(--clr-accent-red)] text-[var(--clr-accent-red)] bg-[rgba(255,61,113,0.06)]'
@@ -396,7 +396,7 @@ export function DispatchGame() {
             whileTap={!gameState.feedback ? { scale: 0.98 } : {}}
           >
             <unit.icon className="w-6 h-6" style={{ color: unit.color }} />
-            <span className="font-['JetBrains_Mono'] text-xs uppercase tracking-wider font-semibold" style={{ color: unit.color }}>
+            <span className="font-['DM_Mono'] text-xs uppercase tracking-wider font-semibold" style={{ color: unit.color }}>
               Dispatch {unit.label}
             </span>
           </m.button>

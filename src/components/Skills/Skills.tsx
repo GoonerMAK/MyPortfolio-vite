@@ -47,7 +47,7 @@ export function Skills() {
           >
             <div className="relative inline-block self-start mb-5">
               <h4
-                className="text-sm pt-1 font-['JetBrains_Mono'] tracking-widest"
+                className="text-sm pt-1 font-['DM_Mono'] tracking-widest"
                 style={{ color: 'var(--clr-primary)' }}
               >
                 {skillGroup.title}
@@ -77,7 +77,7 @@ export function Skills() {
                           className="w-8 h-8 transition-all duration-300 skill-icon"
                         />
                       )}
-                      <span className="text-center text-[13px] font-['JetBrains_Mono'] font-medium leading-tight break-words text-[var(--clr-fg-alt)]">
+                      <span className="text-center text-[13px] font-['DM_Mono'] font-medium leading-tight break-words text-[var(--clr-fg-alt)]">
                         {skill}
                       </span>
                     </span>

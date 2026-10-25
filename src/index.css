@@ -102,6 +102,11 @@ ul {
     text-decoration: none;
     color: inherit;
   }
+
+  /* Default weight for M PLUS Rounded text; font-* utilities still override */
+  .font-\[\'M_PLUS_Rounded_1c\'\] {
+    font-weight: 500;
+  }
 }
 
 button {
@@ -271,8 +276,8 @@ button {
   border: 1px solid var(--clr-border);
   color: var(--clr-fg-alt);
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 500;
   padding: 0.4em 0.8em;
 }
 
@@ -548,7 +553,7 @@ li:hover .highlight-sweep::after {
   padding: 0.2em 0.7em;
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-size: 0.65rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: 2px;

@@ -40,11 +40,11 @@ export function Contact() {
         transition={{ duration: 0.6, delay: 0.1 }}
       >
         <div className="pt-2">
-          <p className="font-['JetBrains_Mono'] text-sm text-[var(--clr-fg)] mb-1 uppercase tracking-wider">
+          <p className="font-['DM_Mono'] text-sm text-[var(--clr-fg)] mb-1 uppercase tracking-wider">
             Get in Touch
           </p>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <p className="font-['JetBrains_Mono'] text-base text-[var(--clr-primary)]">
+            <p className="font-['DM_Mono'] text-base text-[var(--clr-primary)]">
               {contact.email}
             </p>
             <button

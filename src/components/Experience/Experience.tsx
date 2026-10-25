@@ -80,7 +80,7 @@ export function Experience() {
                   ) : company.name}
                 </h3>
                 {/* Company tenure (earliest start → latest end), if re-enabled:
-                <span className="text-xs text-[var(--clr-fg)] font-['JetBrains_Mono']">
+                <span className="text-xs text-[var(--clr-fg)] font-['DM_Mono']">
                   {formatDuration(monthsBetween(company.roles.at(-1)!.start, company.roles[0].end))}
                 </span> */}
               </div>
@@ -112,7 +112,7 @@ export function Experience() {
                   <h4 className="text-sm font-semibold !text-[var(--clr-primary)] font-['IBM_Plex_Sans'] normal-case tracking-normal leading-tight">
                     {role.title}
                   </h4>
-                  <p className="text-xs text-[var(--clr-fg)] mt-0.5 font-['JetBrains_Mono']">
+                  <p className="text-xs text-[var(--clr-fg)] mt-0.5 font-['DM_Mono']">
                     {formatDateRange(role.start, role.end)} · {formatDuration(monthsBetween(role.start, role.end))}
                   </p>
 
@@ -143,7 +143,7 @@ export function Experience() {
                                   {Icon && (
                                     <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
                                   )}
-                                  <span className="text-[12px] font-['JetBrains_Mono'] text-[var(--clr-fg-alt)] leading-none">
+                                  <span className="text-[12px] font-['DM_Mono'] text-[var(--clr-fg-alt)] leading-none">
                                     {skill}
                                   </span>
                                 </span>

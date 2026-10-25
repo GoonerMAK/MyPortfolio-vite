@@ -15,7 +15,7 @@ function LoadingSpinner() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <div className="animate-spin rounded-full h-10 w-10 border-2 border-[var(--clr-border)] border-t-[var(--clr-primary)]"></div>
-        <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-fg)] uppercase tracking-widest">
+        <span className="font-['DM_Mono'] text-xs text-[var(--clr-fg)] uppercase tracking-widest">
           Connecting...
         </span>
       </div>

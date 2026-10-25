@@ -28,7 +28,7 @@ export function NotFoundPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="font-['JetBrains_Mono'] text-[8rem] md:text-[12rem] leading-none font-bold text-[var(--clr-primary)] opacity-20 select-none">
+          <span className="font-['DM_Mono'] text-[8rem] md:text-[12rem] leading-none font-bold text-[var(--clr-primary)] opacity-20 select-none">
             404
           </span>
         </m.div>
@@ -41,7 +41,7 @@ export function NotFoundPage() {
         >
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-red)] shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
-            <span className="font-['JetBrains_Mono'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
+            <span className="font-['DM_Mono'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
               Signal Lost
             </span>
           </div>

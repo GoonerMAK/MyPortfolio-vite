@@ -61,7 +61,7 @@ export function Highlights() {
   return (
     <section aria-labelledby="highlights-heading" className="mt-14 mb-4">
       <div className="text-center mb-8">
-        <span className="font-['DM_Mono'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
+        <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-primary)] uppercase tracking-[0.3em]">
           // Highlights
         </span>
         <h2 id="highlights-heading" className="text-2xl md:text-3xl mt-2">
@@ -95,7 +95,7 @@ export function Highlights() {
                 aria-controls={`highlights-panel-${t.id}`}
                 tabIndex={active ? 0 : -1}
                 onClick={() => setIndex(i)}
-                className={`relative isolate inline-flex items-center gap-2 px-3.5 py-2 rounded-[4px] text-[12px] font-['DM_Mono'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
+                className={`relative isolate inline-flex items-center gap-2 px-3.5 py-2 rounded-[4px] text-[12px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider whitespace-nowrap cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--clr-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--clr-bg)] ${
                   active
                     ? 'text-[var(--clr-bg)] font-semibold border border-transparent'
                     : 'text-[var(--clr-fg)] hover:text-[var(--clr-fg-alt)] hover:bg-[var(--clr-bg-alt)] border border-[var(--clr-border)]'
@@ -145,7 +145,7 @@ function HighlightRow({ item, rank, accent }: { item: HighlightItem; rank: numbe
   return (
     <li className="flex gap-4">
       <span
-        className="shrink-0 font-['DM_Mono'] text-sm font-semibold tabular-nums leading-6"
+        className="shrink-0 font-['M_PLUS_Rounded_1c'] text-sm font-semibold tabular-nums leading-6"
         style={{ color: rowAccent }}
         aria-hidden="true"
       >
@@ -159,7 +159,7 @@ function HighlightRow({ item, rank, accent }: { item: HighlightItem; rank: numbe
           </h3>
           {item.category && (
             <span
-              className="px-2 py-0.5 rounded-[3px] border text-[10px] font-['DM_Mono'] uppercase tracking-wider"
+              className="px-2 py-0.5 rounded-[3px] border text-[10px] font-['M_PLUS_Rounded_1c'] uppercase tracking-wider"
               style={{
                 color: rowAccent,
                 borderColor: rowAccent,
@@ -182,7 +182,7 @@ function HighlightRow({ item, rank, accent }: { item: HighlightItem; rank: numbe
                   style={{ '--icon-color': skillColorMap[skill] || 'var(--clr-fg-alt)' } as React.CSSProperties}
                 >
                   {Icon && <Icon className="w-3.5 h-3.5 transition-all duration-300 skill-icon" />}
-                  <span className="text-[11px] font-['DM_Mono'] text-[var(--clr-fg-alt)] leading-none">
+                  <span className="text-[11px] font-['M_PLUS_Rounded_1c'] text-[var(--clr-fg-alt)] leading-none">
                     {skill}
                   </span>
                 </span>

@@ -34,7 +34,7 @@ export function DeepDivePage() {
         </Link>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[var(--clr-primary)] shadow-[0_0_8px_var(--clr-primary)] animate-pulse" />
-          <span className="font-['DM_Mono'] text-xs text-[var(--clr-primary)] uppercase tracking-widest">
+          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-primary)] uppercase tracking-widest">
             Deep Dive
           </span>
         </div>

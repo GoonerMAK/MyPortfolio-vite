@@ -1,6 +1,7 @@
 ﻿import { m } from 'motion/react'
 import { skills } from '@/data/portfolio'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
+import { clr, iconColor } from '@/lib/colors'
 
 // Animation: stagger each skill item as it appears
 const containerVariants = {
@@ -39,7 +40,7 @@ export function Skills() {
           <m.div
             key={skillGroup.title}
             className="panel p-6 flex flex-col"
-            style={{ borderLeftWidth: '4px', borderLeftColor: 'var(--clr-primary)' }}
+            style={{ borderLeftWidth: '4px', borderLeftColor: clr.primary }}
             initial={{ opacity: 0, x: -15 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -48,12 +49,12 @@ export function Skills() {
             <div className="relative inline-block self-start mb-5">
               <h4
                 className="text-sm pt-1 font-['M_PLUS_Rounded_1c'] tracking-widest"
-                style={{ color: 'var(--clr-primary)' }}
+                style={{ color: clr.primary }}
               >
                 {skillGroup.title}
               </h4>
-              <div className="absolute -bottom-1 left-0 w-full h-[2px] border-b border-dotted border-[var(--clr-primary)]/20 overflow-hidden">
-                <div className="h-full w-full bg-[var(--clr-primary)] animate-sweep" />
+              <div className="absolute -bottom-1 left-0 w-full h-[2px] border-b border-dotted border-primary/20 overflow-hidden">
+                <div className="h-full w-full bg-primary animate-sweep" />
               </div>
             </div>
             <m.ul
@@ -69,15 +70,15 @@ export function Skills() {
                 return (
                   <m.li key={skill} variants={itemVariants} className="flex">
                     <span 
-                      className="btn btn--plain cursor-default flex flex-col items-center justify-center gap-3 w-full aspect-square p-3 border-[var(--clr-border)] hover:border-[var(--clr-primary)] hover:shadow-[0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300 group"
-                      style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                      className="btn btn--plain cursor-default flex flex-col items-center justify-center gap-3 w-full aspect-square p-3 border-border hover:border-primary hover:shadow-[0_0_15px_color-mix(in_srgb,var(--clr-primary)_10%,transparent)] transition-all duration-300 group"
+                      style={iconColor(brandColor)}
                     >
                       {Icon && (
                         <Icon 
                           className="w-8 h-8 transition-all duration-300 skill-icon"
                         />
                       )}
-                      <span className="text-center text-[13px] font-['M_PLUS_Rounded_1c'] font-medium leading-tight break-words text-[var(--clr-fg-alt)]">
+                      <span className="text-center text-[13px] font-['M_PLUS_Rounded_1c'] font-medium leading-tight break-words text-fg-alt">
                         {skill}
                       </span>
                     </span>

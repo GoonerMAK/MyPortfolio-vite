@@ -9,7 +9,7 @@
 /** Header bar shared by both pages: back-link left, status pill right. */
 function HeaderSkeleton() {
   return (
-    <div className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]">
+    <div className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-border">
       <div className="skeleton h-4 w-32" />
       <div className="flex items-center gap-2">
         <div className="skeleton h-2 w-2 rounded-full" />
@@ -82,7 +82,7 @@ export function DeepDiveSkeleton() {
                 <div className="skeleton h-4 w-full mt-2" />
                 <div className="skeleton h-4 w-5/6" />
               </div>
-              <div className="flex flex-col gap-5 border-t border-[var(--clr-border)] pt-5">
+              <div className="flex flex-col gap-5 border-t border-border pt-5">
                 {Array.from({ length: 2 }).map((__, j) => (
                   <div key={j} className="flex flex-col gap-3">
                     <div className="skeleton h-4 w-full" />

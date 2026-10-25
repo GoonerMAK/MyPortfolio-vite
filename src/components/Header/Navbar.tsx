@@ -67,7 +67,7 @@ export function Navbar() {
         aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
         aria-controls="mobile-menu"
-        className="md:hidden inline-flex items-center justify-center p-2 text-[var(--clr-fg-alt)] hover:text-[var(--clr-primary)] transition-colors"
+        className="md:hidden inline-flex items-center justify-center p-2 text-fg-alt hover:text-primary transition-colors"
       >
         {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
@@ -81,7 +81,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-[var(--clr-bg)]/95 backdrop-blur-md border-b-2 border-[var(--clr-border)]"
+            className="md:hidden absolute top-full left-0 right-0 bg-bg/95 backdrop-blur-md border-b-2 border-border"
           >
             <ul className="max-w-[1200px] w-[95%] mx-auto flex flex-col py-4">
               {navLinks.map((link) => (

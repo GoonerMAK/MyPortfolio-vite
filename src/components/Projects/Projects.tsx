@@ -2,6 +2,7 @@
 import { m, type Variants } from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { projects } from '@/data/portfolio'
+import { usePrefersReducedMotion } from '@/hooks/useMediaQuery'
 import { ProjectContainer } from '../ProjectContainer/ProjectContainer'
 
 const CARD_GAP = 24
@@ -40,16 +41,7 @@ export function Projects() {
   const [isPaused, setIsPaused] = useState(false)
   const [autoplayKey, setAutoplayKey] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  )
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const onChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   // Resize effect: update the number of items per view based on container width
   useEffect(() => {
@@ -159,7 +151,7 @@ export function Projects() {
             <button
               type="button"
               onClick={() => scrollTo('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-bg-alt border border-border text-fg hover:border-primary hover:text-primary transition-colors cursor-pointer"
               aria-label="Previous project"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -168,7 +160,7 @@ export function Projects() {
             <button
               type="button"
               onClick={() => scrollTo('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[var(--clr-bg-alt)] border border-[var(--clr-border)] text-[var(--clr-fg)] hover:border-[var(--clr-primary)] hover:text-[var(--clr-primary)] transition-colors cursor-pointer"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-bg-alt border border-border text-fg hover:border-primary hover:text-primary transition-colors cursor-pointer"
               aria-label="Next project"
             >
               <ChevronRight className="w-5 h-5" />
@@ -231,8 +223,8 @@ export function Projects() {
               }}
               className={`w-2 h-2 rounded-full transition-all duration-200 cursor-pointer ${
                 index === currentIndex
-                  ? 'bg-[var(--clr-primary)] w-6'
-                  : 'bg-[var(--clr-border)] hover:bg-[var(--clr-fg-alt)]'
+                  ? 'bg-primary w-6'
+                  : 'bg-border hover:bg-fg-alt'
               }`}
               aria-label={`Go to ${projects[index]?.name ?? `project ${index + 1}`}`}
               aria-current={index === currentIndex ? 'true' : undefined}

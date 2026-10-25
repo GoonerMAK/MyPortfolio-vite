@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { m, AnimatePresence } from 'motion/react'
 import { Monitor, Database, Cloud, Shield, Zap, Clock, Trophy, RotateCcw, Radio } from 'lucide-react'
+import { clr, tint } from '@/lib/colors'
 
 type UnitType = 'frontend' | 'backend' | 'devops' | 'security'
 
@@ -26,10 +27,10 @@ interface GameState {
 }
 
 const UNITS: { type: UnitType; label: string; icon: typeof Shield; color: string }[] = [
-  { type: 'frontend', label: 'Frontend', icon: Monitor, color: 'var(--clr-primary)' },
-  { type: 'backend', label: 'Backend', icon: Database, color: 'var(--clr-accent-red)' },
-  { type: 'devops', label: 'DevOps', icon: Cloud, color: 'var(--clr-accent-green)' },
-  { type: 'security', label: 'Security', icon: Shield, color: 'var(--clr-accent-gold)' },
+  { type: 'frontend', label: 'Frontend', icon: Monitor, color: clr.primary },
+  { type: 'backend', label: 'Backend', icon: Database, color: clr.red },
+  { type: 'devops', label: 'DevOps', icon: Cloud, color: clr.green },
+  { type: 'security', label: 'Security', icon: Shield, color: clr.gold },
 ]
 
 const EMERGENCIES: Emergency[] = [
@@ -65,10 +66,10 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 const SEVERITY_COLORS: Record<string, string> = {
-  low: 'var(--clr-fg)',
-  medium: 'var(--clr-accent-gold)',
-  high: 'var(--clr-accent-red)',
-  critical: 'var(--clr-accent-red)',
+  low: clr.fg,
+  medium: clr.gold,
+  high: clr.red,
+  critical: clr.red,
 }
 
 const ROUNDS = 10
@@ -184,10 +185,10 @@ export function DispatchGame() {
           transition={{ duration: 0.6 }}
         >
           <div className="pt-2">
-            <Radio className="w-12 h-12 mx-auto mb-4 text-[var(--clr-primary)]" />
+            <Radio className="w-12 h-12 mx-auto mb-4 text-primary" />
             <h3 className="text-xl mb-2">Tech Dispatch Simulation</h3>
-            <p className="text-sm text-[var(--clr-fg)] mb-2 max-w-md mx-auto">
-              You will receive <strong className="text-[var(--clr-fg-alt)]">{ROUNDS} requirement calls</strong>. 
+            <p className="text-sm text-fg mb-2 max-w-md mx-auto">
+              You will receive <strong className="text-fg-alt">{ROUNDS} requirement calls</strong>. 
               For each one, dispatch the correct response unit before time expires.
             </p>
             <div className="flex justify-center gap-4 my-6 flex-wrap">
@@ -198,7 +199,7 @@ export function DispatchGame() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-[var(--clr-fg)] mb-6 font-['M_PLUS_Rounded_1c']">
+            <p className="text-xs text-fg mb-6 font-['M_PLUS_Rounded_1c']">
               Score = 100 base + time bonus + streak bonus
             </p>
             <m.button
@@ -220,7 +221,7 @@ export function DispatchGame() {
   if (gameState.phase === 'complete') {
     const accuracy = Math.round((gameState.totalCorrect / gameState.totalAnswered) * 100)
     const grade = accuracy >= 90 ? 'S' : accuracy >= 70 ? 'A' : accuracy >= 50 ? 'B' : 'C'
-    const gradeColor = accuracy >= 90 ? 'var(--clr-accent-gold)' : accuracy >= 70 ? 'var(--clr-accent-green)' : accuracy >= 50 ? 'var(--clr-primary)' : 'var(--clr-accent-red)'
+    const gradeColor = accuracy >= 90 ? clr.gold : accuracy >= 70 ? clr.green : accuracy >= 50 ? clr.primary : clr.red
 
     return (
       <div className="max-w-2xl mx-auto">
@@ -238,20 +239,20 @@ export function DispatchGame() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
               <div className="panel p-3">
-                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] uppercase">Score</p>
-                <p className="font-['Anton'] text-2xl text-[var(--clr-fg-alt)]">{gameState.score}</p>
+                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-fg uppercase">Score</p>
+                <p className="font-['Anton'] text-2xl text-fg-alt">{gameState.score}</p>
               </div>
               <div className="panel p-3">
-                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] uppercase">Accuracy</p>
-                <p className="font-['Anton'] text-2xl text-[var(--clr-fg-alt)]">{accuracy}%</p>
+                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-fg uppercase">Accuracy</p>
+                <p className="font-['Anton'] text-2xl text-fg-alt">{accuracy}%</p>
               </div>
               <div className="panel p-3">
-                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] uppercase">Correct</p>
-                <p className="font-['Anton'] text-2xl text-[var(--clr-accent-green)]">{gameState.totalCorrect}/{gameState.totalAnswered}</p>
+                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-fg uppercase">Correct</p>
+                <p className="font-['Anton'] text-2xl text-accent-green">{gameState.totalCorrect}/{gameState.totalAnswered}</p>
               </div>
               <div className="panel p-3">
-                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] uppercase">Best Streak</p>
-                <p className="font-['Anton'] text-2xl text-[var(--clr-accent-gold)]">{gameState.bestStreak}</p>
+                <p className="font-['M_PLUS_Rounded_1c'] text-xs text-fg uppercase">Best Streak</p>
+                <p className="font-['Anton'] text-2xl text-accent-gold">{gameState.bestStreak}</p>
               </div>
             </div>
 
@@ -277,24 +278,24 @@ export function DispatchGame() {
       {/* HUD Bar */}
       <div className="flex flex-wrap items-center justify-between mb-4 gap-3">
         <div className="flex items-center gap-4">
-          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)]">
+          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-fg">
             INCIDENT {gameState.currentIndex + 1}/{emergencies.length}
           </span>
-          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-gold)]">
+          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-gold">
             <Zap className="w-3.5 h-3.5 inline mr-1" />
             {gameState.score} PTS
           </span>
           {gameState.streak > 1 && (
-            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-green)]">
+            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-green">
               x{gameState.streak} STREAK
             </span>
           )}
         </div>
         <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4" style={{ color: timerPct < 30 ? 'var(--clr-accent-red)' : 'var(--clr-primary)' }} />
+          <Clock className="w-4 h-4" style={{ color: timerPct < 30 ? clr.red : clr.primary }} />
           <span
             className="font-['M_PLUS_Rounded_1c'] text-sm font-bold"
-            style={{ color: timerPct < 30 ? 'var(--clr-accent-red)' : 'var(--clr-primary)' }}
+            style={{ color: timerPct < 30 ? clr.red : clr.primary }}
           >
             {gameState.timeLeft}s
           </span>
@@ -302,12 +303,12 @@ export function DispatchGame() {
       </div>
 
       {/* Timer bar */}
-      <div className="w-full h-1 bg-[var(--clr-border)] mb-6 rounded-full overflow-hidden">
+      <div className="w-full h-1 bg-border mb-6 rounded-full overflow-hidden">
         <m.div
           className="h-full rounded-full"
           style={{
-            background: timerPct < 30 ? 'var(--clr-accent-red)' : 'var(--clr-primary)',
-            boxShadow: timerPct < 30 ? '0 0 8px var(--clr-accent-red)' : '0 0 8px var(--clr-primary)',
+            background: timerPct < 30 ? clr.red : clr.primary,
+            boxShadow: `0 0 8px ${timerPct < 30 ? clr.red : clr.primary}`,
           }}
           animate={{ width: `${timerPct}%` }}
           transition={{ duration: 0.6 }}
@@ -336,7 +337,7 @@ export function DispatchGame() {
                   style={{
                     color: SEVERITY_COLORS[currentEmergency.severity],
                     borderColor: SEVERITY_COLORS[currentEmergency.severity],
-                    background: `color-mix(in srgb, ${SEVERITY_COLORS[currentEmergency.severity]} 8%, transparent)`,
+                    background: tint(SEVERITY_COLORS[currentEmergency.severity], 8),
                   }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-current" />
@@ -344,7 +345,7 @@ export function DispatchGame() {
                 </span>
               </div>
               <h3 className="text-xl mb-2">{currentEmergency.title}</h3>
-              <p className="text-sm text-[var(--clr-fg)] leading-relaxed">
+              <p className="text-sm text-fg leading-relaxed">
                 {currentEmergency.description}
               </p>
             </div>
@@ -361,8 +362,8 @@ export function DispatchGame() {
             exit={{ opacity: 0 }}
             className={`text-center mb-4 py-3 rounded font-['M_PLUS_Rounded_1c'] text-sm font-bold uppercase tracking-wider border-2 ${
               gameState.feedback === 'correct'
-                ? 'border-[var(--clr-accent-green)] text-[var(--clr-accent-green)] bg-[rgba(0,224,150,0.06)]'
-                : 'border-[var(--clr-accent-red)] text-[var(--clr-accent-red)] bg-[rgba(255,61,113,0.06)]'
+                ? 'border-accent-green text-accent-green bg-accent-green/6'
+                : 'border-accent-red text-accent-red bg-accent-red/6'
             }`}
           >
             {gameState.feedback === 'correct'
@@ -384,13 +385,13 @@ export function DispatchGame() {
             style={{
               borderColor: gameState.feedback
                 ? unit.type === currentEmergency?.correctUnit
-                  ? 'var(--clr-accent-green)'
-                  : 'var(--clr-border)'
-                : 'var(--clr-border)',
+                  ? clr.green
+                  : clr.border
+                : clr.border,
             }}
             whileHover={!gameState.feedback ? {
               borderColor: unit.color,
-              boxShadow: `0 0 16px ${unit.color}22`,
+              boxShadow: `0 0 16px ${tint(unit.color, 13)}`,
               scale: 1.02,
             } : {}}
             whileTap={!gameState.feedback ? { scale: 0.98 } : {}}

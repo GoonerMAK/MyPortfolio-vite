@@ -39,8 +39,8 @@ export function About() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-green)] shadow-[0_0_8px_var(--clr-accent-green)]" />
-            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-green)] uppercase tracking-widest">
+            <span className="w-2 h-2 rounded-full bg-accent-green shadow-[0_0_8px_var(--clr-accent-green)]" />
+            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-green uppercase tracking-widest">
               Online
             </span>
           </m.div>
@@ -63,13 +63,13 @@ export function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
             >
-              <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-fg)] uppercase tracking-wider">Designation:</span>
-              <span className="font-['M_PLUS_Rounded_1c'] text-base text-[var(--clr-primary)]">{role}</span>
+              <span className="font-['M_PLUS_Rounded_1c'] text-xs text-fg uppercase tracking-wider">Designation:</span>
+              <span className="font-['M_PLUS_Rounded_1c'] text-base text-primary">{role}</span>
             </m.div>
           )}
 
           <m.p
-            className="mt-6 max-w-[1050px] text-base leading-relaxed text-[var(--clr-fg)]"
+            className="mt-6 max-w-[1050px] text-base leading-relaxed text-fg"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
@@ -95,7 +95,7 @@ export function About() {
                   <m.a
                     href={social.github}
                     aria-label="GitHub profile"
-                    className="text-[var(--clr-fg)] hover:text-[var(--clr-primary)] focus-visible:text-[var(--clr-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors duration-150"
+                    className="text-fg hover:text-primary focus-visible:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors duration-150"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
@@ -109,7 +109,7 @@ export function About() {
                   <m.a
                     href={social.linkedin}
                     aria-label="LinkedIn profile"
-                    className="text-[var(--clr-fg)] hover:text-[var(--clr-primary)] focus-visible:text-[var(--clr-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors duration-150"
+                    className="text-fg hover:text-primary focus-visible:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors duration-150"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}

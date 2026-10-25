@@ -40,18 +40,18 @@ export function Contact() {
         transition={{ duration: 0.6, delay: 0.1 }}
       >
         <div className="pt-2">
-          <p className="font-['M_PLUS_Rounded_1c'] text-sm text-[var(--clr-fg)] mb-1 uppercase tracking-wider">
+          <p className="font-['M_PLUS_Rounded_1c'] text-sm text-fg mb-1 uppercase tracking-wider">
             Get in Touch
           </p>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <p className="font-['M_PLUS_Rounded_1c'] text-base text-[var(--clr-primary)]">
+            <p className="font-['M_PLUS_Rounded_1c'] text-base text-primary">
               {contact.email}
             </p>
             <button
               type="button"
               onClick={handleCopy}
               aria-label={copied ? 'Email copied!' : 'Copy email'}
-              className="p-1 rounded hover:bg-[var(--clr-border)] transition-colors text-[var(--clr-fg-alt)] hover:text-[var(--clr-primary)]"
+              className="p-1 rounded hover:bg-border transition-colors text-fg-alt hover:text-primary"
               title={copied ? 'Copied!' : 'Copy to clipboard'}
             >
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}

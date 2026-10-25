@@ -38,8 +38,6 @@ export interface ExperienceRole {
   mode: string
   achievements: string[]
   highlights?: string[][]
-  /** Related skills per achievement (parallel to `achievements`).
-   *  Names must match keys in `skillIconMap`. */
   skills?: string[][]
 }
 
@@ -49,45 +47,70 @@ export interface ExperienceCompany {
   roles: ExperienceRole[]
 }
 
-export type DecisionCategory = 'Architectural' | 'Product' | 'Technical' | 'Workflow'
+export const DECISION_CATEGORIES = ['Architectural', 'Product', 'Technical', 'Workflow'] as const
+export type DecisionCategory = (typeof DECISION_CATEGORIES)[number]
 
 export interface HighlightItem {
   title: string
   detail: string
   category?: DecisionCategory
   skills?: string[]
+  diagram?: FlowSpec
 }
 
-/** A single concept inside a "My Stuff" topic card */
-export interface MyStuffNote {
-  /** Short concept name, rendered emphasised */
-  term: string
-  /** Plain-English explainer. Wrap inline code in backticks — the carousel
-   *  renders `…` segments as styled <code> chips. */
-  detail: string
-  /** Groups notes under an in-card subsection tab. Notes sharing the same
-   *  string render together; omitting it on every note in a topic keeps
-   *  today's single ungrouped grid. */
-  section?: string
-}
+export type Tone = 'primary' | 'green' | 'red' | 'gold' | 'purple' | 'muted'
 
-/** One themed card in the "My Stuff" field-notes carousel */
-export interface MyStuffTopic {
-  /** Stable id — also used to wire up tab/tabpanel aria attributes */
+export interface FlowNode {
   id: string
-  /** Short label shown on the pill / tab */
   label: string
-  /** Card headline */
+  col: number
+  row: number
+  tone?: Tone
+}
+
+export interface FlowEdge {
+  from: string
+  to: string
+  label?: string
+  tone?: Tone
+  dashed?: boolean
+  back?: boolean
+}
+
+export interface FlowGroup {
+  label: string
+  cols: [number, number]
+  rows: [number, number]
+  tone?: Tone
+}
+
+export interface FlowSpec {
+  nodes: FlowNode[]
+  edges: FlowEdge[]
+  groups?: FlowGroup[]
+  caption?: string
+}
+
+export interface MyStuffNote {
+  term: string
+  tldr: string
+  section?: string
+  why?: string
+  diagram?: FlowSpec
+  example?: string
+  items?: { label: string; code?: string }[]
+  analogy?: string
+  rule?: string
+}
+
+export interface MyStuffTopic {
+  id: string
+  label: string
   title: string
-  /** One-line intro under the headline */
   blurb: string
-  /** Lucide glyph representing the topic */
   icon: LucideIcon
-  /** Accent colour (any valid CSS colour value, incl. CSS vars) */
   accent: string
-  /** The concepts grouped under this topic */
   notes: MyStuffNote[]
-  /** Related skills — names must match keys in `skillIconMap` */
   skills: string[]
 }
 

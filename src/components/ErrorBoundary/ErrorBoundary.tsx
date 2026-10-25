@@ -44,21 +44,21 @@ export class ErrorBoundary extends Component<
         className="min-h-screen flex flex-col items-center justify-center gap-6 px-4 text-center"
       >
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-red)] shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
-          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
+          <span className="w-2 h-2 rounded-full bg-accent-red shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
+          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-red uppercase tracking-widest">
             System Fault
           </span>
         </div>
 
         <h1 className="text-2xl md:text-3xl">Something broke</h1>
-        <p className="text-[var(--clr-fg)] max-w-sm text-base opacity-70">
+        <p className="text-fg max-w-sm text-base opacity-70">
           An unexpected error knocked out this view. A reload usually clears it.
         </p>
 
         <button
           type="button"
           onClick={this.handleReload}
-          className="inline-flex items-center gap-2.5 text-sm uppercase tracking-wider text-[var(--clr-primary)] border border-[var(--clr-border)] px-7 py-3.5 rounded-lg hover:border-[var(--clr-primary)] transition-colors"
+          className="inline-flex items-center gap-2.5 text-sm uppercase tracking-wider text-primary border border-border px-7 py-3.5 rounded-lg hover:border-primary transition-colors"
         >
           <RotateCcw className="w-4 h-4" />
           Reload

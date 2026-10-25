@@ -127,11 +127,11 @@ export function MemoryGame() {
       <div className="flex flex-wrap items-center justify-between mb-8 gap-4">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-[var(--clr-primary)]" />
+            <Clock className="w-5 h-5 text-primary" />
             <span className="text-lg font-mono">{formatTime(time)}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Zap className="w-5 h-5 text-[var(--clr-primary)]" />
+            <Zap className="w-5 h-5 text-primary" />
             <span className="text-lg font-mono">{moves} moves</span>
           </div>
         </div>
@@ -152,7 +152,7 @@ export function MemoryGame() {
           <m.button
             key={card.id}
             onClick={() => handleCardClick(card.id)}
-            className={`aspect-square rounded-xl text-3xl flex items-center justify-center transition-all duration-300 ${card.isFlipped || card.isMatched ? 'bg-[var(--clr-bg-alt)]' : 'bg-[var(--clr-primary)]'}`}
+            className={`aspect-square rounded-xl text-3xl flex items-center justify-center transition-all duration-300 ${card.isFlipped || card.isMatched ? 'bg-bg-alt' : 'bg-primary'}`}
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -185,13 +185,13 @@ export function MemoryGame() {
             className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
           >
             <m.div
-              className="bg-[var(--clr-bg)] p-8 rounded-2xl shadow-[var(--shadow)] text-center max-w-sm mx-4"
+              className="bg-bg p-8 rounded-2xl shadow-[var(--shadow)] text-center max-w-sm mx-4"
               initial={{ y: 20 }}
               animate={{ y: 0 }}
             >
               <Trophy className="w-16 h-16 mx-auto mb-4 text-yellow-500" />
               <h3 className="text-2xl mb-2">Victory!</h3>
-              <p className="text-[var(--clr-fg-alt)] mb-6">
+              <p className="text-fg-alt mb-6">
                 Completed in {formatTime(time)} with {moves} moves
               </p>
               <m.button

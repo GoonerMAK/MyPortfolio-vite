@@ -1,15 +1,16 @@
 ﻿import { m } from 'motion/react'
 import { ExternalLink, Github } from 'lucide-react'
 import { skillIconMap, skillColorMap } from '@/data/skillIcons'
+import { clr, iconColor, tint } from '@/lib/colors'
 import type { Project } from '@/types'
 
 const PRIORITY_COLORS = [
-  'var(--clr-primary)',
-  'var(--clr-accent-red)',
-  'var(--clr-accent-green)',
-  'var(--clr-accent-gold)',
-  'var(--clr-accent-purple)',
-  'var(--clr-primary)',
+  clr.primary,
+  clr.red,
+  clr.green,
+  clr.gold,
+  clr.purple,
+  clr.primary,
 ]
 
 function getStatusBadge(status?: string) {
@@ -41,7 +42,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
       style={{ borderLeftWidth: '4px', borderLeftColor: borderColor }}
       whileHover={{
         scale: 1.02,
-        boxShadow: `0 0 20px ${borderColor}22`,
+        boxShadow: `0 0 20px ${tint(borderColor, 13)}`,
         transition: { duration: 0.15 },
       }}
     >
@@ -66,7 +67,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
         </h3>
 
         {/* Description */}
-        <p className="text-base text-[var(--clr-fg)] leading-relaxed mb-4 flex-1">
+        <p className="text-base text-fg leading-relaxed mb-4 flex-1">
           {project.description}
         </p>
 
@@ -80,12 +81,12 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
                 <li key={item}>
                   <span
                     className="btn btn--plain cursor-default inline-flex items-center gap-2 group !py-1.5 !px-2.5"
-                    style={{ '--icon-color': brandColor || 'var(--clr-fg-alt)' } as React.CSSProperties}
+                    style={iconColor(brandColor)}
                   >
                     {Icon && (
                       <Icon className="w-4 h-4 transition-all duration-300 skill-icon" />
                     )}
-                    <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-[var(--clr-fg-alt)] leading-none">
+                    <span className="text-[12px] font-['M_PLUS_Rounded_1c'] text-fg-alt leading-none">
                       {item}
                     </span>
                   </span>
@@ -96,12 +97,12 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
         )}
 
         {/* Action buttons */}
-        <div className="flex items-center gap-3 pt-2 border-t border-[var(--clr-border)]">
+        <div className="flex items-center gap-3 pt-2 border-t border-border">
           {project.sourceCode && (
             <m.a
               href={project.sourceCode}
               aria-label={`${project.name} source code`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-primary)] focus-visible:text-[var(--clr-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-primary)] transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-fg hover:text-primary focus-visible:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors duration-150"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 2 }}
@@ -116,7 +117,7 @@ export function ProjectContainer({ project, index }: ProjectContainerProps) {
             <m.a
               href={project.livePreview}
               aria-label={`${project.name} live preview`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--clr-fg)] hover:text-[var(--clr-accent-green)] focus-visible:text-[var(--clr-accent-green)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--clr-accent-green)] transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-fg hover:text-accent-green focus-visible:text-accent-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-green transition-colors duration-150"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 2 }}

@@ -8,7 +8,7 @@ export function NotFoundPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <m.header
-        className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center border-b-2 border-[var(--clr-border)]"
+        className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center border-b-2 border-border"
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -28,7 +28,7 @@ export function NotFoundPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="font-['M_PLUS_Rounded_1c'] text-[8rem] md:text-[12rem] leading-none font-bold text-[var(--clr-primary)] opacity-20 select-none">
+          <span className="font-['M_PLUS_Rounded_1c'] text-[8rem] md:text-[12rem] leading-none font-bold text-primary opacity-20 select-none">
             404
           </span>
         </m.div>
@@ -40,13 +40,13 @@ export function NotFoundPage() {
           transition={{ duration: 0.5, delay: 0.25 }}
         >
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-red)] shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
-            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
+            <span className="w-2 h-2 rounded-full bg-accent-red shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
+            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-red uppercase tracking-widest">
               Signal Lost
             </span>
           </div>
           <h1 className="text-2xl md:text-3xl">Page not found</h1>
-          <p className="text-[var(--clr-fg)] max-w-sm text-base opacity-70">
+          <p className="text-fg max-w-sm text-base opacity-70">
             This sector doesn't exist in the system. Double-check the URL or head back to base.
           </p>
         </m.div>
@@ -58,7 +58,7 @@ export function NotFoundPage() {
         >
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-[var(--clr-primary)]! border border-[var(--clr-border)] px-5 py-2.5 rounded-lg hover:border-[var(--clr-primary)] transition-colors"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-primary! border border-border px-5 py-2.5 rounded-lg hover:border-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to HQ

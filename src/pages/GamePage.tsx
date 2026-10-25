@@ -9,7 +9,7 @@ export function GamePage() {
   return (
     <div className="min-h-screen">
       <m.header
-        className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-[var(--clr-border)]"
+        className="h-20 md:h-24 max-w-[1400px] w-[95%] mx-auto flex items-center justify-between border-b-2 border-border"
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -22,8 +22,8 @@ export function GamePage() {
           Return to HQ
         </a>
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[var(--clr-accent-red)] shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
-          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-[var(--clr-accent-red)] uppercase tracking-widest">
+          <span className="w-2 h-2 rounded-full bg-accent-red shadow-[0_0_8px_var(--clr-accent-red)] animate-pulse" />
+          <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-red uppercase tracking-widest">
             Simulation Active
           </span>
         </div>
@@ -39,7 +39,7 @@ export function GamePage() {
           <h1 className="text-3xl md:text-4xl mb-3">
             Tech Dispatch
           </h1>
-          <p className="text-[var(--clr-fg)] max-w-xl mx-auto text-base">
+          <p className="text-fg max-w-xl mx-auto text-base">
             Incoming requirements require your immediate response. Triage each incident by selecting the correct response unit before time runs out.
           </p>
         </m.div>

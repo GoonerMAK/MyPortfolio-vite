@@ -131,7 +131,7 @@ export const experience: ExperienceCompany[] = [
     logo: gainSolutionsLogo,
     roles: [
       {
-        title: 'Backend Developer',
+        title: 'Software Engineer',
         type: 'Full-time',
         start: '2026-01',
         mode: 'On-site',

@@ -104,7 +104,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'AWS & Infrastructure',
     blurb: 'Domains, certificates, and how a custom URL actually reaches your app.',
     icon: Cloud,
-    accent: clr.gold,
+    accent: clr.primary,
     skills: ['AWS', 'Node.js'],
     notes: [
       {
@@ -185,7 +185,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'Realtime & Events',
     blurb: 'Subscriptions, webhooks, and the gotchas of publishing live data.',
     icon: Radio,
-    accent: clr.purple,
+    accent: clr.primary,
     skills: ['GraphQL', 'Apollo-GraphQL', 'Node.js'],
     notes: [
       {
@@ -222,7 +222,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'Performance & Scale',
     blurb: 'Keeping interfaces and APIs fast as the data grows.',
     icon: Gauge,
-    accent: clr.green,
+    accent: clr.primary,
     skills: ['React', 'Redis', 'Node.js'],
     notes: [
       {
@@ -264,7 +264,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'AI / LLM Integration',
     blurb: 'Wiring LLMs into a real backend without losing state.',
     icon: Sparkles,
-    accent: clr.purple,
+    accent: clr.primary,
     skills: ['Claude Code', 'Google Gemini', 'GitHub Copilot'],
     notes: [
       {
@@ -313,7 +313,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'Email & Deliverability',
     blurb: 'Why your emails land — or bounce.',
     icon: Mail,
-    accent: clr.gold,
+    accent: clr.primary,
     skills: ['Node.js'],
     notes: [
       {
@@ -361,7 +361,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'Security & Auth',
     blurb: 'Trust the server, never the client.',
     icon: ShieldCheck,
-    accent: clr.red,
+    accent: clr.primary,
     skills: ['Zod', 'Node.js'],
     notes: [
       {
@@ -689,7 +689,7 @@ export const myStuff: MyStuffTopic[] = [
     title: 'DevOps & CI/CD',
     blurb: 'Hooks, pipelines, and reading the build.',
     icon: GitBranch,
-    accent: clr.green,
+    accent: clr.primary,
     skills: ['Git', 'GitHub Actions', 'Docker'],
     notes: [
       {

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { AnimatePresence, m } from 'motion/react'
-import { Scale, Trophy, Workflow } from 'lucide-react'
+import { Workflow } from 'lucide-react'
 import { FlowDiagram } from '@/components/DeepDive/FlowDiagram'
 import { decisions, proudOf } from '@/data/highlights'
 import { skillColorMap, skillIconMap } from '@/data/skillIcons'
@@ -11,8 +11,8 @@ import { DECISION_CATEGORIES } from '@/types'
 import type { DecisionCategory, HighlightItem } from '@/types'
 
 const TABS = [
-  { id: 'built', label: 'Features Built', icon: Trophy, items: proudOf },
-  { id: 'decisions', label: 'Decisions Taken', icon: Scale, items: decisions },
+  { id: 'built', label: 'Features Built', items: proudOf },
+  { id: 'decisions', label: 'Decisions Taken', items: decisions },
 ]
 
 type Filter = 'All' | DecisionCategory
@@ -129,7 +129,6 @@ export function Highlights() {
                     transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 34 }}
                   />
                 )}
-                <t.icon className="w-4 h-4 shrink-0" aria-hidden="true" />
                 {t.label}
                 <span className="tabular-nums opacity-70">{String(t.items.length).padStart(2, '0')}</span>
               </button>

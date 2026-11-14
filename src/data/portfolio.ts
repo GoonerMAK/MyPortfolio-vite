@@ -40,7 +40,7 @@ export const projects: Project[] = [
   {
     name: 'CoGraph',
     description:
-      'VS code extension that renders your project as a live call graph inside VS Code — updating in real-time as AI agents rewrite your codebase. Making the invisible visible.',
+      'VS code extension that renders your project as a live call graph inside VS Code — updating in real-time as AI agents rewrite your codebase. Making the invisible visible. Open source contribution supporting 5 languages.',
     stack: ['Node.js', 'TypeScript', 'Python', 'HTML & CSS', 'JavaScript'],
     sourceCode: 'https://github.com/thraenbe/cograph',
     livePreview: 'https://www.cograph.co/',
@@ -137,13 +137,13 @@ export const experience: ExperienceCompany[] = [
         mode: 'On-site',
         achievements: [
           'Led AI-augmented development of the customer support side of a unified helpdesk and Customer Relationship Management (CRM) SaaS, owning feature delivery for both its helpdesk and CRM modules from requirements to release',
-          'Developed a RAG knowledge capture system that turned resolved customer conversations across 3+ helpdesk modules into chatbot answers, using Gemini structured output (LangChain & Zod) for PII-free extraction, pgvector embeddings, and an LLM contradiction check that holds conflicting answers for human review',
+          'Developed a RAG knowledge capture system that turned resolved customer conversations across 3+ helpdesk modules into chatbot answers, using Gemini structured output (LangChain & Zod) for PII-free extraction, pgvector embeddings, and an LLM contradiction check that holds conflicting answers for human review, and also turned crawled webpages into searchable knowledge for an AI agent to look up via tool calling',
           'Integrated a two stage (local + deployed) pre-QA verification process into an AI-native workflow built on an agentic harness, using Jest unit tests, API tests, DB query checks and Playwright E2E tests, plus structured logging and AWS CloudWatch monitoring, which sped up debugging and reduced post-QA bugs',
           'Improved the performance of data-heavy interfaces by combining Next.js list virtualization, lazy loading and debounced GraphQL queries with parallelized, memory-light PostgreSQL reads in Node.js, which reduced server RAM load and lowered render time by 150ms on average',
-          'Adopted a multi-agent AI workflow with planning, developer, QA & adversarial reviewer agents, merging 4+ PRs a day',
+          'Adopted a multi-agent AI workflow with planning, developer, QA & adversarial reviewer agents followed by peer code reviews, merging 4+ PRs a day',
           'Built features on a microservice architecture utilizing 6+ AWS Lambda workers and event-driven AWS SQS pipelines that ran background operations (billing, email events, automated workflows) without slowing down the core API server',
           'Re-engineered Stripe subscription billing for two SaaS products from tiered plans to flat-rate per-seat pricing, with prorated mid-cycle upgrades and scheduled downgrades, allowing revenue to scale as teams grow',
-          'Extended role based access control (RBAC) in a multi-tenant SaaS with 2+ new roles & GraphQL authorization checks',
+          'Extended role based access control (RBAC) in a multi-tenant SaaS with 2+ new roles & GraphQL authorization checks, limiting what each role can access and do',
         ],
         highlights: [
           ['Led AI-augmented development', 'unified helpdesk and Customer Relationship Management (CRM) SaaS', 'from requirements to release'],

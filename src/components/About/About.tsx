@@ -32,19 +32,6 @@ export function About() {
         </svg>
         
         <div className="pt-2">
-          {/* Status indicator */}
-          <m.div
-            className="flex items-center gap-2 mb-6"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="w-2 h-2 rounded-full bg-accent-green shadow-[0_0_8px_var(--clr-accent-green)]" />
-            <span className="font-['M_PLUS_Rounded_1c'] text-xs text-accent-green uppercase tracking-widest">
-              Online
-            </span>
-          </m.div>
-
           {name && (
             <m.h1
               className="text-left"
